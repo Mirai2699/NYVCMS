@@ -20,7 +20,7 @@
 			<!-- begin page-header -->
 			<h1 class="page-header">Venue</h1>
 			<!-- end page-header -->
-			
+			<div class="row" style="padding: 1px; background-color: #262626; margin: 5px; display: none"></div>
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-12 -->

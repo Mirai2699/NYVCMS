@@ -121,7 +121,8 @@
 	                                          		<div class="col-md-2">
 														<div class="form-group">
 		                                  				  <label class="col-md-3">Gender:</label>
-		                                  				 		<select required data-parsley-group="wizard-step-2" class="form-control" id="dd_gender"	>
+		                                  				 		<select data-parsley-group="wizard-step-2" class="form-control" id="dd_gender"	required="">
+		                                  				 			<option value="" selected disabled>-- Select Gender--</option>
 			                                           				<option value="Male">Male</option>
 			                                          				<option value="Female">Female</option>
 		                                     				   </select>
@@ -175,7 +176,8 @@
 													<div class="col-md-4">
 														<div class="form-group">
 		                                  				  <label class="col-md-3">Region</label>
-		                                  				 		<select required data-parsley-group="wizard-step-2" class="form-control" id="dd_region">
+		                                  				 		<select data-parsley-group="wizard-step-2" class="form-control" id="dd_region" required="">
+			                                           				<option value="" selected disabled>-- Select Region --</option>
 			                                           				<option value="Ilocos Region">Ilocos Region</option>
 			                                          				<option value="Cagayan Valley">Cagayan Valley</option>
 			                                          				<option value="Central Luzon">Central Luzon</option>
