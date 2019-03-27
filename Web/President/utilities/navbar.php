@@ -5,9 +5,9 @@
 				<!-- begin sidebar user -->
 				<ul class="nav">
 					<li class="nav-profile">
-						<!-- <div class="image">
-							<a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
-						</div> -->
+						<div class="image">
+							<a href="javascript:;"><img src="../../../resources/assets/img/user-11.jpg" alt="" /></a>
+						</div>
 						<div class="info">
 							Juan Dela Cruz
 							<small>President</small>
@@ -18,10 +18,15 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
 					<li class="nav-header">Navigation</li>
-					<li><a href="dashboard.php"><span>Dashboard</span></a></li>
+					<li><a href="dashboard.php">
+							<i class="fa fa-dashboard"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
 					<!-- <li><a href="calendar.php"><span>Calendar</span></a></li> -->
 					<li class="has-sub">
 						<a href="javascript:;">
+							<i class="fa fa-calendar"></i>
 						    <b class="caret pull-right"></b>
 						    <span>Event Management</span> 
 						</a>
@@ -33,7 +38,10 @@
 							<li><a href="logistics.php">Logistics</a></li>
 						</ul>
 					</li>
-					<li class="has-sub"><a href="#"><span>Reports</span>
+					<li class="has-sub">
+						<a href="#">
+							<i class="fa fa-copy"></i>
+							<span>Reports</span>
 						<b class="caret pull-right"></b>
 					 </a>
 						<ul class="sub-menu">
