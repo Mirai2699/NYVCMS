@@ -54,8 +54,7 @@
 				<li class="current"><a class="smoothscroll" href="#home" title="">Home</a></li>
 				<li><a class="smoothscroll" href="#about" title="">About</a></li>
 				<li><a class="smoothscroll" href="#contact" title="">Contact</a></li>
-				<li><a href="event_list.php" title="">Events</a></li>
-				<li><a href="Reg_non_member.php" title="">Event Registration</a></li>						
+				<li><a href="login.php" title="">Log In</a></li>						
 			</ul>	
 		
 
@@ -96,11 +95,11 @@
                      <br>
                      <br>
 				  			<div class="more animate-intro">
-				  				<a class="button stroke" href="login.php">
-                           Log In
+                        <a class="button stroke" href="event_list.php">
+                           Event Registration
                         </a>
                         <a class="button stroke" href="guidelines.php">
-                           Register
+                           Membership
                         </a>
 				  			</div>							
 

@@ -25,23 +25,23 @@
 			    <!-- begin col-6 -->
 			    <div class="col-md-12">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="ui_tabs_accordions.html#default-tab-1" data-toggle="tab">Member</a></li>
-						<li class=""><a href="ui_tabs_accordions.html#default-tab-2" data-toggle="tab">Non-Member</a></li>
+						<li class="active"><a href="ui_tabs_accordions.html#default-tab-1" data-toggle="tab">Member (Bank)</a></li>
+						<li class=""><a href="ui_tabs_accordions.html#default-tab-2" data-toggle="tab">Member (On Site)</a></li>
+						<li class=""><a href="ui_tabs_accordions.html#default-tab-3" data-toggle="tab">Non-Member (Bank)</a></li>
+						<li class=""><a href="ui_tabs_accordions.html#default-tab-4" data-toggle="tab">Non-Member (On Site)</a></li>
 					</ul>
 					<div class="tab-content">
 
-						<!-- Membership Indiv -->
+						<!-- Member (Bank) -->
 						<div class="tab-pane fade active in" id="default-tab-1">
 							<!-- <h3 class="m-t-10"><i class="fa fa-cog"></i> Lorem ipsum dolor sit amet</h3> -->
 						<ul class="nav nav-pills">
-							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-1" data-toggle="tab">Bank</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-2" data-toggle="tab">On Site</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-3" data-toggle="tab">Paid (Bank)</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-4" data-toggle="tab">Paid (On Site)</a></li>
+							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-1" data-toggle="tab">Pending</a></li>
+							<li><a href="ui_tabs_accordions.html#nav-pills-tab-2" data-toggle="tab">Paid</a></li>
 						</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="nav-pills-tab-1">
-								    <h3 class="m-t-10">Bank</h3>
+								    <h3 class="m-t-10">Pending</h3>
 									<!-- begin panel -->
 				                    <div class="panel panel-inverse">
 				                        <div class="panel-body">
@@ -132,16 +132,28 @@
 																                                    </div>
 																                                </div>
 																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Received By</label>
+																                                    <label class='col-md-3 control-label'>Bank</label>
 																                                    <div class='col-md-9'>
-																                                        <input type='text' value='' id='txt_rmembank' class='form-control' placeholder='Name'/>
+																                                        <input type='text' value='' id='txt_membank' class='form-control' placeholder='Bank'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Branch</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_membranch' class='form-control' placeholder='Branch'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Control No</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_memcontrolno' class='form-control' placeholder='Control No'/>
 																                                    </div>
 																                                </div>
 																                                <div class='form-group'>
 																                                    <label class='col-md-3 control-label'>Date</label>
 																                                    <div class='col-md-9'>
 																                                    	<div class='input-group'>
-																                                            <input type='date' id='date_rmemdatebank' class='form-control' placeholder='Date of Payment' />
+																                                            <input type='date' id='date_membank' class='form-control' placeholder='Date of Payment' />
 																                                        </div>
 																                                    </div>
 																                                </div>
@@ -150,7 +162,7 @@
 																					</div>
 																					<div class='modal-footer'>
 																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																						<a href='javascript:;' onclick='btn_upeventregmembank(".$id.")' class='btn btn-sm btn-success'>Submit</a>
+																						<a href='javascript:;' onclick='btn_eregmembank(".$id.")' class='btn btn-sm btn-success'>Submit</a>
 																					</div>
 																				</div>
 																			</div>
@@ -169,129 +181,7 @@
 								</div> 
 
 								<div class="tab-pane fade" id="nav-pills-tab-2">
-								    <h3 class="m-t-10">On Site</h3>
-									<!-- begin panel -->
-				                    <div class="panel panel-inverse">
-				                        <div class="panel-body">
-				                            <div class="table-responsive">
-				                                <table id="data-table" class="table table-striped table-bordered">
-				                                    <thead>
-				                                        <tr>
-				                                            <th>Name</th>
-				                                            <th>Event</th>
-				                                            <th>Transaction Code</th>
-				                                            <th>Amount</th>
-				                                            <th>Date</th>
-				                                            <th>Action</th>
-				                                        </tr>
-				                                    </thead>
-				                                    <tbody>
-
-				                                    	<?php
-
-				                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  
-					                                    		INNER JOIN ems_r_individual_info AS I 
-					                                    		ON M.tim_individ = I.rii_individ 
-					                                    		INNER JOIN ems_t_eventreg_mem AS R
-					                                    		ON R.term_indivmemid = M.tim_indivmemid
-					                                    		INNER JOIN ems_r_event AS E
-					                                    		ON E.re_event_id = R.term_eventid
-					                                    			WHERE M.tim_status = 'Paid'
-					                                    			AND R.term_status = 'Pending'
-					                                    			AND R.term_paymenttype = 'On Site'
-					                                    			AND M.tim_activeflag = 1";
-
-				                                    		$runquery = mysqli_query($connection, $query);
-
-				                                    		while ($row = mysqli_fetch_assoc($runquery)){
-
-				                                    			$name = $row['rii_name'];
-				                                    			$event = $row['re_event_name'];
-				                                    			$transno = $row['term_transcode'];
-				                                    			$amount = $row['re_regfee_mem'];
-				                                    			$date = $row['term_date'];
-				                                    			$id = $row['term_regid'];	
-
-				                                    			echo "<tr>
-				                                    					<td>".$name."</td>
-				                                    					<td>".$event."</td>
-				                                    					<td>".$transno."</td>
-				                                    					<td>".$amount."</td>
-				                                    					<td>".$date."</td>
-				                                    					<td>
-							                                            	<a href='ui_modal_notification.html#modal-edit1".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-check'></i></a>
-							                                            	<a href='javascript:;' onclick='btn_areventype".$id."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
-							                                            </td>
-				                                    				  </tr>
-
-				                                    				  	<div class='col-md-12'>
-					                                  					<div class='modal fade' id='modal-edit1".$id."'>
-																			<div class='modal-dialog'>
-																				<div class='modal-content'>
-																					<div class='modal-header'>
-																						<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-																						<h4 class='modal-title'>Payment</h4>
-																					</div>
-																					<div class='modal-body'>
-																						<div class='panel-body'>
-																                            <form class='form-horizontal'>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Name</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$name."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Transaction No.</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$transno."' id='txt_trans_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Amount</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$amount."' id='txt_amount_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Received By</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='' id='txt_rmemrbsite' class='form-control' placeholder='Name'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Date</label>
-																                                    <div class='col-md-9'>
-																                                    	<div class='input-group'>
-																                                            <input type='date' id='date_rmemdatesite' class='form-control' placeholder='Date of Payment' />
-																                                        </div>
-																                                    </div>
-																                                </div>
-																                            </form>
-																                        </div>
-																					</div>
-																					<div class='modal-footer'>
-																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																						<a href='javascript:;' onclick='btn_upeventregmemsite(".$id.")' class='btn btn-sm btn-success'>Submit</a>
-																					</div>
-																				</div>
-																			</div>
-																		</div> 	
-																		</div>	
-					                                    			 ";
-				                                    		}
-
-				                                    	?>
-				                                    </tbody>
-				                                </table>
-											</div>
-				                        </div>
-				                    </div>
-				                    <!-- end panel -->
-								</div>
-
-								<div class="tab-pane fade" id="nav-pills-tab-3">
-								    <h3 class="m-t-10">Paid (Bank)</h3>
+								    <h3 class="m-t-10">Paid</h3>
 									<!-- begin panel -->
 				                    <div class="panel panel-inverse">
 				                        <div class="panel-body">
@@ -339,9 +229,11 @@
 				                                    			$bank = $row['tpeb_bank'];
 				                                    			$branch = $row['tpeb_branch'];
 				                                    			$date = $row['tpeb_date'];
+				                                    			$id = $row['term_regid'];
 
 				                                    			echo "<tr>
 				                                    					<td>".$name."</td>
+				                                    					<td>".$event."</td>
 				                                    					<td>".$transno."</td>
 				                                    					<td>".$amount."</td>
 				                                    					<td>".$controlno."</td>
@@ -359,8 +251,148 @@
 				                    </div>
 				                    <!-- end panel -->
 								</div>
-								<div class="tab-pane fade" id="nav-pills-tab-4">
-								    <h3 class="m-t-10">Paid (On Site)</h3>
+							</div>
+						</div>
+						<!-- Member (Bank) -->
+
+
+
+						<!-- Member (On Site) -->
+						<div class="tab-pane fade" id="default-tab-2">
+							<ul class="nav nav-pills">
+							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-11" data-toggle="tab">Pending</a></li>
+							<li><a href="ui_tabs_accordions.html#nav-pills-tab-22" data-toggle="tab">Paid</a></li>
+						</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade active in" id="nav-pills-tab-11">
+								    <h3 class="m-t-10">Pending</h3>
+									<!-- begin panel -->
+				                    <div class="panel panel-inverse">
+				                        <div class="panel-body">
+				                            <div class="table-responsive">
+				                                <table id="data-table" class="table table-striped table-bordered">
+				                                    <thead>
+				                                        <tr>
+				                                            <th>Name</th>
+				                                            <th>Event</th>
+				                                            <th>Transaction Code</th>
+				                                            <th>Amount</th>
+				                                            <th>Date</th>
+				                                            <th>Action</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+
+				                                    	<?php
+
+				                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  
+					                                    		INNER JOIN ems_r_individual_info AS I 
+					                                    		ON M.tim_individ = I.rii_individ 
+					                                    		INNER JOIN ems_t_eventreg_mem AS R
+					                                    		ON R.term_indivmemid = M.tim_indivmemid
+					                                    		INNER JOIN ems_r_event AS E
+					                                    		ON E.re_event_id = R.term_eventid
+					                                    			WHERE M.tim_status = 'Paid'
+					                                    			AND R.term_status = 'Pending'
+					                                    			AND R.term_paymenttype = 'Onsite'
+					                                    			AND M.tim_activeflag = 1";
+
+				                                    		$runquery = mysqli_query($connection, $query);
+
+				                                    		while ($row = mysqli_fetch_assoc($runquery)){
+
+				                                    			$name = $row['rii_name'];
+				                                    			$event = $row['re_event_name'];
+				                                    			$transno = $row['term_transcode'];
+				                                    			$amount = $row['re_regfee_mem'];
+				                                    			$date = $row['term_date'];
+				                                    			$id = $row['term_regid'];	
+
+				                                    			echo "<tr>
+				                                    					<td>".$name."</td>
+				                                    					<td>".$event."</td>
+				                                    					<td>".$transno."</td>
+				                                    					<td>".$amount."</td>
+				                                    					<td>".$date."</td>
+				                                    					<td>
+							                                            	<a href='ui_modal_notification.html#modal-edit1".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-check'></i></a>
+							                                            	<a href='javascript:;' onclick='btn_areventype".$id."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
+							                                            </td>
+				                                    				  </tr>
+
+				                                    				  	<div class='col-md-12'>
+					                                  					<div class='modal fade' id='modal-edit1".$id."'>
+																			<div class='modal-dialog'>
+																				<div class='modal-content'>
+																					<div class='modal-header'>
+																						<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+																						<h4 class='modal-title'>Payment</h4>
+																					</div>
+																					<div class='modal-body'>
+																						<div class='panel-body'>
+																                            <form class='form-horizontal'>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Name</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$name."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Name</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$event."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Transaction No.</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$transno."' id='txt_trans_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Amount</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$amount."' id='txt_amount_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Received By</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_rbmemsite' class='form-control' placeholder='Name'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Date</label>
+																                                    <div class='col-md-9'>
+																                                    	<div class='input-group'>
+																                                            <input type='date' id='date_memsite' class='form-control' placeholder='Date of Payment' />
+																                                        </div>
+																                                    </div>
+																                                </div>
+																                            </form>
+																                        </div>
+																					</div>
+																					<div class='modal-footer'>
+																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
+																						<a href='javascript:;' onclick='btn_eregmemsite(".$id.")' class='btn btn-sm btn-success'>Submit</a>
+																					</div>
+																				</div>
+																			</div>
+																		</div> 	
+																		</div>	
+					                                    			 ";
+				                                    		}
+
+				                                    	?>
+				                                    </tbody>
+				                                </table>
+											</div>
+				                        </div>
+				                    </div>
+				                    <!-- end panel -->
+								</div>
+								<div class="tab-pane fade" id="nav-pills-tab-22">
+								    <h3 class="m-t-10">Paid</h3>
 									<!-- begin panel -->
 				                    <div class="panel panel-inverse">
 				                        <div class="panel-body">
@@ -391,7 +423,7 @@
 					                                    		ON P.tpeo_regid = R.term_regid
 					                                    			WHERE M.tim_status = 'Paid'
 					                                    			AND R.term_status = 'Paid'
-					                                    			AND R.term_paymenttype = 'On Site'
+					                                    			AND R.term_paymenttype = 'Onsite'
 					                                    			AND M.tim_activeflag = 1";
 
 				                                    		$runquery = mysqli_query($connection, $query);
@@ -403,13 +435,14 @@
 				                                    			$transno = $row['term_transcode'];
 				                                    			$amount = $row['re_regfee_mem'];
 				                                    			$receivedby = $row['tpeo_receivedby'];
-				                                    			$date = $row['tpeo_date'];	
+				                                    			$date = $row['tpeo_date'];
 
 				                                    			echo "<tr>
 				                                    					<td>".$name."</td>
 				                                    					<td>".$event."</td>
 				                                    					<td>".$transno."</td>
 				                                    					<td>".$amount."</td>
+				                                    					<td>".$receivedby."</td>
 				                                    					<td>".$date."</td>
 				                                    				  </tr>";
 				                                    		}
@@ -424,19 +457,17 @@
 								</div>
 							</div>
 						</div>
-						<!-- Membership Indiv -->
+						<!-- Member (On Site) -->
 
-						<!-- Membership Org -->
-						<div class="tab-pane fade" id="default-tab-2">
+						<!-- Non-member (Bank) -->
+						<div class="tab-pane fade" id="default-tab-3">
 							<ul class="nav nav-pills">
-							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-11" data-toggle="tab">Bank</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-22" data-toggle="tab">On Site</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-33" data-toggle="tab">Paid (Bank)</a></li>
-							<li><a href="ui_tabs_accordions.html#nav-pills-tab-44" data-toggle="tab">Paid (On Site)</a></li>
+							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-111" data-toggle="tab">Pending</a></li>
+							<li><a href="ui_tabs_accordions.html#nav-pills-tab-222" data-toggle="tab">Paid</a></li>
 						</ul>
 							<div class="tab-content">
-								<div class="tab-pane fade active in" id="nav-pills-tab-11">
-								    <h3 class="m-t-10">Bank</h3>
+								<div class="tab-pane fade active in" id="nav-pills-tab-111">
+								    <h3 class="m-t-10">Pending</h3>
 									<!-- begin panel -->
 				                    <div class="panel panel-inverse">
 				                        <div class="panel-body">
@@ -460,18 +491,227 @@
 					                                    		INNER JOIN ems_r_event AS E
 					                                    		ON E.re_event_id = R.nmr_event_id
 					                                    			WHERE R.nmr_status = 'Pending'
-					                                    			AND R.term_paymenttype = 'Bank'";
+					                                    			AND R.nmr_paymenttype = 'Bank'";
 
 				                                    		$runquery = mysqli_query($connection, $query);
 
 				                                    		while ($row = mysqli_fetch_assoc($runquery)){
 
-				                                    			$name = $row['rii_name'];
+				                                    			$name = $row['nmr_name'];
 				                                    			$event = $row['re_event_name'];
-				                                    			$transno = $row['term_transcode'];
-				                                    			$amount = $row['re_regfee_mem'];
-				                                    			$date = $row['term_date'];
-				                                    			$id = $row['term_regid'];	
+				                                    			$transno = $row['nmr_transcode'];
+				                                    			$amount = $row['re_regfee_nonmem'];
+				                                    			$date = $row['nmr_datereg'];
+				                                    			$id = $row['nmr_id'];	
+
+				                                    			echo "<tr>
+				                                    					<td>".$name."</td>
+				                                    					<td>".$event."</td>
+				                                    					<td>".$transno."</td>
+				                                    					<td>".$amount."</td>
+				                                    					<td>".$date."</td>
+				                                    					<td>
+							                                            	<a href='ui_modal_notification.html#modal-edit2".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-check'></i></a>
+							                                            	<a href='javascript:;' onclick='btn_areventype".$id."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
+							                                            </td>
+				                                    				  </tr>
+
+				                                    				  	<div class='col-md-12'>
+					                                  					<div class='modal fade' id='modal-edit2".$id."'>
+																			<div class='modal-dialog'>
+																				<div class='modal-content'>
+																					<div class='modal-header'>
+																						<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+																						<h4 class='modal-title'>Payment</h4>
+																					</div>
+																					<div class='modal-body'>
+																						<div class='panel-body'>
+																                            <form class='form-horizontal'>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Name</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$name."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Name</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$event."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Transaction No.</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$transno."' id='txt_trans_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Amount</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='".$amount."' id='txt_amount_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Bank</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_nonmembank' class='form-control' placeholder='Bank'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Branch</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_nonmembranch' class='form-control' placeholder='Branch'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Control No</label>
+																                                    <div class='col-md-9'>
+																                                        <input type='text' value='' id='txt_nonmemconno' class='form-control' placeholder='Control No'/>
+																                                    </div>
+																                                </div>
+																                                <div class='form-group'>
+																                                    <label class='col-md-3 control-label'>Date</label>
+																                                    <div class='col-md-9'>
+																                                    	<div class='input-group'>
+																                                            <input type='date' id='date_nonmembank' class='form-control' placeholder='Date of Payment' />
+																                                        </div>
+																                                    </div>
+																                                </div>
+																                            </form>
+																                        </div>
+																					</div>
+																					<div class='modal-footer'>
+																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
+																						<a href='javascript:;' onclick='btn_eregnonmembank(".$id.")' class='btn btn-sm btn-success'>Submit</a>
+																					</div>
+																				</div>
+																			</div>
+																		</div> 	
+																		</div>	
+					                                    			 ";
+				                                    		}
+
+				                                    	?>
+				                                    </tbody>
+				                                </table>
+											</div>
+				                        </div>
+				                    </div>
+				                    <!-- end panel -->
+								</div>
+								<div class="tab-pane fade" id="nav-pills-tab-222">
+								    <h3 class="m-t-10">Paid</h3>
+									<!-- begin panel -->
+				                    <div class="panel panel-inverse">
+				                        <div class="panel-body">
+				                            <div class="table-responsive">
+				                                <table id="data-table" class="table table-striped table-bordered">
+				                                    <thead>
+				                                        <tr>
+				                                            <th>Name</th>
+				                                            <th>Event</th>
+				                                            <th>Transaction Code</th>
+				                                            <th>Amount</th>
+				                                            <th>Control No.</th>
+				                                            <th>Bank</th>
+				                                            <th>Branch</th>
+				                                            <th>Date of Payment</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+
+				                                    	<?php
+
+				                                    		$query = "SELECT * FROM ems_t_eventreg_nonmem AS R
+					                                    		INNER JOIN ems_r_event AS E
+					                                    		ON E.re_event_id = R.nmr_event_id
+					                                    		INNER JOIN ems_t_payment_eventregnonmem_bank AS P
+					                                    		ON P.tpnb_regid = R.nmr_id
+					                                    			WHERE R.nmr_status = 'Paid'
+					                                    			AND R.nmr_paymenttype = 'Bank'"	;
+
+				                                    		$runquery = mysqli_query($connection, $query);
+
+				                                    		while ($row = mysqli_fetch_assoc($runquery)){
+
+				                                    			$name = $row['nmr_name'];
+				                                    			$event = $row['re_event_name'];
+				                                    			$transno = $row['nmr_transcode'];
+				                                    			$amount = $row['re_regfee_nonmem'];
+				                                    			$controlno = $row['tpnb_controlno'];
+				                                    			$bank = $row['tpnb_bank'];
+				                                    			$branch = $row['tpnb_branch'];
+				                                    			$date = $row['tpnb_date'];
+				                                    			$id = $row['nmr_id'];	
+
+				                                    			echo "<tr>
+				                                    					<td>".$name."</td>
+				                                    					<td>".$event."</td>
+				                                    					<td>".$transno."</td>
+				                                    					<td>".$amount."</td>
+				                                    					<td>".$controlno."</td>
+				                                    					<td>".$bank."</td>
+				                                    					<td>".$branch."</td>
+				                                    					<td>".$date."</td>
+				                                    				  </tr>";
+				                                    		}
+
+				                                    	?>
+				                                    </tbody>
+				                                </table>
+											</div>
+				                        </div>
+				                    </div>
+				                    <!-- end panel -->
+								</div>
+							</div>
+						</div>
+						<!-- Non-member (Bank) -->
+
+						<!-- Non-member (On SIte) -->
+						<div class="tab-pane fade" id="default-tab-4">
+							<ul class="nav nav-pills">
+							<li class="active"><a href="ui_tabs_accordions.html#nav-pills-tab-1111" data-toggle="tab">Pending</a></li>
+							<li><a href="ui_tabs_accordions.html#nav-pills-tab-2222" data-toggle="tab">Paid</a></li>
+						</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade active in" id="nav-pills-tab-1111">
+								    <h3 class="m-t-10">Pending</h3>
+									<!-- begin panel -->
+				                    <div class="panel panel-inverse">
+				                        <div class="panel-body">
+				                            <div class="table-responsive">
+				                                <table id="data-table" class="table table-striped table-bordered">
+				                                    <thead>
+				                                        <tr>
+				                                            <th>Name</th>
+				                                            <th>Event</th>
+				                                            <th>Transaction Code</th>
+				                                            <th>Amount</th>
+				                                            <th>Date</th>
+				                                            <th>Action</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+
+				                                    	<?php
+
+				                                    		$query = "SELECT * FROM ems_t_eventreg_nonmem AS R
+					                                    		INNER JOIN ems_r_event AS E
+					                                    		ON E.re_event_id = R.nmr_event_id
+					                                    			WHERE R.nmr_status = 'Pending'
+					                                    			AND R.nmr_paymenttype = 'Onsite'";
+
+				                                    		$runquery = mysqli_query($connection, $query);
+
+				                                    		while ($row = mysqli_fetch_assoc($runquery)){
+
+				                                    			$name = $row['nmr_name'];
+				                                    			$event = $row['re_event_name'];
+				                                    			$transno = $row['nmr_transcode'];
+				                                    			$amount = $row['re_regfee_nonmem'];
+				                                    			$date = $row['nmr_datereg'];
+				                                    			$id = $row['nmr_id'];	
 
 				                                    			echo "<tr>
 				                                    					<td>".$name."</td>
@@ -523,14 +763,14 @@
 																                                <div class='form-group'>
 																                                    <label class='col-md-3 control-label'>Received By</label>
 																                                    <div class='col-md-9'>
-																                                        <input type='text' value='' id='txt_rbnonmembank' class='form-control' placeholder='Bank Name'/>
+																                                        <input type='text' value='' id='txt_rbnonmemsite' class='form-control' placeholder='Received By'/>
 																                                    </div>
 																                                </div>
 																                                <div class='form-group'>
 																                                    <label class='col-md-3 control-label'>Date</label>
 																                                    <div class='col-md-9'>
 																                                    	<div class='input-group'>
-																                                            <input type='date' id='date_rmemdatebank' class='form-control' placeholder='Date of Payment' />
+																                                            <input type='date' id='date_nonmemsite' class='form-control' placeholder='Date of Payment' />
 																                                        </div>
 																                                    </div>
 																                                </div>
@@ -539,7 +779,7 @@
 																					</div>
 																					<div class='modal-footer'>
 																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																						<a href='javascript:;' onclick='btn_uporgpayment(".$id.")' class='btn btn-sm btn-success'>Submit</a>
+																						<a href='javascript:;' onclick='btn_eregnonmemsite(".$id.")' class='btn btn-sm btn-success'>Submit</a>
 																					</div>
 																				</div>
 																			</div>
@@ -556,8 +796,8 @@
 				                    </div>
 				                    <!-- end panel -->
 								</div>
-								<div class="tab-pane fade" id="nav-pills-tab-22">
-								    <h3 class="m-t-10">On Site</h3>
+								<div class="tab-pane fade" id="nav-pills-tab-2222">
+								    <h3 class="m-t-10">Paid</h3>
 									<!-- begin panel -->
 				                    <div class="panel panel-inverse">
 				                        <div class="panel-body">
@@ -569,204 +809,39 @@
 				                                            <th>Event</th>
 				                                            <th>Transaction Code</th>
 				                                            <th>Amount</th>
+				                                            <th>Received By</th>
 				                                            <th>Date</th>
-				                                            <th>Action</th>
 				                                        </tr>
 				                                    </thead>
 				                                    <tbody>
 
 				                                    	<?php
 
-				                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  INNER JOIN ems_r_individual_info AS I ON M.tim_individ = I.rii_individ WHERE M.tim_status = 'Pending'";
+				                                    		$query = "SELECT * FROM ems_t_eventreg_nonmem AS R
+					                                    		INNER JOIN ems_r_event AS E
+					                                    		ON E.re_event_id = R.nmr_event_id
+					                                    		INNER JOIN ems_t_payment_eventregnonmem_onsite AS P
+					                                    		ON P.tpno_regid = R.nmr_id
+					                                    			WHERE R.nmr_status = 'Paid'
+					                                    			AND R.nmr_paymenttype = 'Onsite'";
 
 				                                    		$runquery = mysqli_query($connection, $query);
 
 				                                    		while ($row = mysqli_fetch_assoc($runquery)){
 
-				                                    			$name = $row['rii_name'];
-				                                    			$transno = $row['tim_transcode'];
-				                                    			$amount = $row['tim_amount'];
-				                                    			$date = $row['tim_date'];
-				                                    			$id = $row['tim_indivmemid'];	
+				                                    			$name = $row['nmr_name'];
+				                                    			$event = $row['re_event_name'];
+				                                    			$transno = $row['nmr_transcode'];
+				                                    			$amount = $row['re_regfee_nonmem'];
+				                                    			$receivedby = $row['tpno_receivedby'];
+				                                    			$date = $row['tpno_date'];
 
 				                                    			echo "<tr>
 				                                    					<td>".$name."</td>
+				                                    					<td>".$event."</td>
 				                                    					<td>".$transno."</td>
 				                                    					<td>".$amount."</td>
-				                                    					<td>".$date."</td>
-				                                    					<td>
-							                                            	<a href='ui_modal_notification.html#modal-edit".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-check'></i></a>
-							                                            	<a href='javascript:;' onclick='btn_areventype".$id."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
-							                                            </td>
-				                                    				  </tr>
-
-				                                    				  	<div class='col-md-12'>
-					                                  					<div class='modal fade' id='modal-edit".$id."'>
-																			<div class='modal-dialog'>
-																				<div class='modal-content'>
-																					<div class='modal-header'>
-																						<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-																						<h4 class='modal-title'>Payment</h4>
-																					</div>
-																					<div class='modal-body'>
-																						<div class='panel-body'>
-																                            <form class='form-horizontal'>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Name</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$name."' id='txt_name_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Transaction No.</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$transno."' id='txt_trans_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Amount</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='".$amount."' id='txt_amount_up".$id."' class='form-control' placeholder='Name' disabled='disabled'/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Received By</label>
-																                                    <div class='col-md-9'>
-																                                        <input type='text' value='' id='txt_indivbranch' class='form-control' placeholder='Name/>
-																                                    </div>
-																                                </div>
-																                                <div class='form-group'>
-																                                    <label class='col-md-3 control-label'>Date</label>
-																                                    <div class='col-md-9'>
-																                                    	<div class='input-group'>
-																                                            <input type='date' id='indivdate' class='form-control' placeholder='Date of Payment' />
-																                                        </div>
-																                                    </div>
-																                                </div>
-																                            </form>
-																                        </div>
-																					</div>
-																					<div class='modal-footer'>
-																						<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																						<a href='javascript:;' onclick='btn_upindivpayment(".$id.")' class='btn btn-sm btn-success'>Submit</a>
-																					</div>
-																				</div>
-																			</div>
-																		</div> 	
-																		</div>	
-					                                    			 ";
-				                                    		}
-
-				                                    	?>
-				                                    </tbody>
-				                                </table>
-											</div>
-				                        </div>
-				                    </div>
-				                    <!-- end panel -->
-								</div>
-
-								<div class="tab-pane fade" id="nav-pills-tab-33">
-								    <h3 class="m-t-10">Paid (On Bank)</h3>
-									<!-- begin panel -->
-				                    <div class="panel panel-inverse">
-				                        <div class="panel-body">
-				                            <div class="table-responsive">
-				                                <table id="data-table" class="table table-striped table-bordered">
-				                                    <thead>
-				                                        <tr>
-				                                            <th>Name</th>
-				                                            <th>Transaction Code</th>
-				                                            <th>Amount</th>
-				                                            <th>Control No.</th>
-				                                            <th>Bank</th>
-				                                            <th>Branch</th>
-				                                            <th>Date of Payment</th>
-				                                        </tr>
-				                                    </thead>
-				                                    <tbody>
-
-				                                    	<?php
-
-				                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  INNER JOIN ems_r_individual_info AS I ON M.tim_individ = I.rii_individ INNER JOIN ems_t_payment_indivmem AS P ON M.tim_indivmemid = P.tpi_indivmemid WHERE M.tim_status = 'Paid' OR M.tim_status = 'Renewal'";
-
-				                                    		$runquery = mysqli_query($connection, $query);
-
-				                                    		while ($row = mysqli_fetch_assoc($runquery)){
-
-				                                    			$name = $row['rii_name'];
-				                                    			$transno = $row['tim_transcode'];
-				                                    			$amount = $row['tim_amount'];
-				                                    			$controlno = $row['tpb_controlno'];
-				                                    			$bank = $row['tpb_bank'];
-				                                    			$branch = $row['tpb_branch'];
-				                                    			$date = $row['tpb_date'];
-				                                    			$id = $row['tim_indivmemid'];	
-
-				                                    			echo "<tr>
-				                                    					<td>".$name."</td>
-				                                    					<td>".$transno."</td>
-				                                    					<td>".$amount."</td>
-				                                    					<td>".$controlno."</td>
-				                                    					<td>".$bank."</td>
-				                                    					<td>".$branch."</td>
-				                                    					<td>".$date."</td>
-				                                    				  </tr>";
-				                                    		}
-
-				                                    	?>
-				                                    </tbody>
-				                                </table>
-											</div>
-				                        </div>
-				                    </div>
-				                    <!-- end panel -->
-								</div>
-
-								<div class="tab-pane fade" id="nav-pills-tab-44">
-								    <h3 class="m-t-10">Paid (On Site)</h3>
-									<!-- begin panel -->
-				                    <div class="panel panel-inverse">
-				                        <div class="panel-body">
-				                            <div class="table-responsive">
-				                                <table id="data-table" class="table table-striped table-bordered">
-				                                    <thead>
-				                                        <tr>
-				                                            <th>Name</th>
-				                                            <th>Transaction Code</th>
-				                                            <th>Amount</th>
-				                                            <th>Control No.</th>
-				                                            <th>Bank</th>
-				                                            <th>Branch</th>
-				                                            <th>Date of Payment</th>
-				                                        </tr>
-				                                    </thead>
-				                                    <tbody>
-
-				                                    	<?php
-
-				                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  INNER JOIN ems_r_individual_info AS I ON M.tim_individ = I.rii_individ INNER JOIN ems_t_payment_indivmem AS P ON M.tim_indivmemid = P.tpi_indivmemid WHERE M.tim_status = 'Paid' OR M.tim_status = 'Renewal'";
-
-				                                    		$runquery = mysqli_query($connection, $query);
-
-				                                    		while ($row = mysqli_fetch_assoc($runquery)){
-
-				                                    			$name = $row['rii_name'];
-				                                    			$transno = $row['tim_transcode'];
-				                                    			$amount = $row['tim_amount'];
-				                                    			$controlno = $row['tpb_controlno'];
-				                                    			$bank = $row['tpb_bank'];
-				                                    			$branch = $row['tpb_branch'];
-				                                    			$date = $row['tpb_date'];
-				                                    			$id = $row['tim_indivmemid'];	
-
-				                                    			echo "<tr>
-				                                    					<td>".$name."</td>
-				                                    					<td>".$transno."</td>
-				                                    					<td>".$amount."</td>
-				                                    					<td>".$controlno."</td>
-				                                    					<td>".$bank."</td>
-				                                    					<td>".$branch."</td>
+				                                    					<td>".$receivedby."</td>
 				                                    					<td>".$date."</td>
 				                                    				  </tr>";
 				                                    		}
@@ -781,8 +856,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- Membership Org -->
-
+						<!-- Non-member (On SIte) -->
 					</div>
 				</div>
 			    <!-- end col-6 -->
@@ -822,19 +896,19 @@
 
     <script type="text/javascript">
 
-    	function btn_upindivpayment(myId){
+    	function btn_eregmembank(myId){
     		// alert(myId)
 
-    		let bank = $('#txt_indivbank').val()
-    		let branch = $('#txt_indivbranch').val()
-    		let controlno = $('#txt_indivcontrolno').val()
-    		let date = $('#indivdate').val()
+    		let bank = $('#txt_membank').val()
+    		let branch = $('#txt_membranch').val()
+    		let controlno = $('#txt_memcontrolno').val()
+    		let date = $('#date_membank').val()
 
     		// alert(bank+" | "+branch)
  
     		$.ajax({
     			type: 'POST',
-    			url:'../functionalities/update_indivpaymentbank.php',
+    			url:'../functionalities/payment_eventreg_member_bank.php',
     			async: false,
     			data:{
     					_bank:bank,
@@ -853,23 +927,78 @@
     		})
     	}
 
-    	function btn_uporgpayment(myId){
+    	function btn_eregmemsite(myId){
     		// alert(myId)
 
-    		let bank = $('#txt_orgbank').val()
-    		let branch = $('#txt_orgbranch').val()
-    		let controlno = $('#txt_orgcontrolno').val()
-    		let date = $('#orgdate').val()
+    		let receivedby = $('#txt_rbmemsite').val()
+    		let date = $('#date_memsite').val()
 
-    		// alert(bank+" | "+branch+" | "+controlno+" | "+date)
+    		// alert(bank+" | "+branch)
  
     		$.ajax({
-    			type:'POST',
-    			url:'../functionalities/update_orgpaymentbank.php',
+    			type: 'POST',
+    			url:'../functionalities/payment_eventreg_member_onsite.php',
+    			async: false,
+    			data:{
+    					_receivedby:receivedby,
+    					_date:date,
+    					_myId:myId
+    			},
+    			success: function(data){
+    				// alert(data)
+    				setTimeout(location.reload.bind(location), 1000)
+    			},
+    			error: function(response){
+    				alert('Oops, something went wrong')
+    			}
+    		})
+    	}
+
+    	function btn_eregnonmembank(myId){
+    		// alert(myId)
+
+    		let bank = $('#txt_nonmembank').val()
+    		let branch = $('#txt_nonmembranch').val()
+    		let controlno = $('#txt_nonmemconno').val()
+    		let date = $('#date_nonmembank').val()
+
+    		// alert(bank+" | "+branch)
+ 
+    		$.ajax({
+    			type: 'POST',
+    			url:'../functionalities/payment_eventreg_nonmember_bank.php',
+    			async: false,
     			data:{
     					_bank:bank,
     					_branch:branch,
     					_controlno:controlno,
+    					_date:date,
+    					_myId:myId
+    			},
+    			success: function(data){
+    				// alert(data)
+    				setTimeout(location.reload.bind(location), 1000)
+    			},
+    			error: function(response){
+    				alert('Oops, something went wrong')
+    			}
+    		})
+    	}
+    	
+    	function btn_eregnonmemsite(myId){
+    		// alert(myId)
+
+    		let receivedby = $('#txt_rbnonmemsite').val()
+    		let date = $('#date_nonmemsite').val()
+
+    		// alert(bank+" | "+branch)
+ 
+    		$.ajax({
+    			type: 'POST',
+    			url:'../functionalities/payment_eventreg_nonmember_onsite.php',
+    			async: false,
+    			data:{
+    					_receivedby:receivedby,
     					_date:date,
     					_myId:myId
     			},

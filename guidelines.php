@@ -37,6 +37,25 @@
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
+	<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<!-- <div class="navbar-header"> -->
+					<a href="homepage.php" class="navbar-brand" style="margin-bottom: 3px">
+						<i class="fa fa-arrow-left" style="margin-right: 5px"></i> 
+						<span> Back to Homepage </span>
+                     
+                    </a>
+				<!-- </div> -->
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
 
 	
 	

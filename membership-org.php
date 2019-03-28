@@ -47,7 +47,12 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="homepage.php" class="navbar-brand">NYVC</a>
+					<a href="homepage.php" class="navbar-brand" style="margin-bottom: 3px">
+                        <div class="row" >
+                             <img src="resources/images/nvyc.png" style="width: 20%">
+                             NYVCEMS
+                        </div>
+                    </a>
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>

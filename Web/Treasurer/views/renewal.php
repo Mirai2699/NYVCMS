@@ -182,7 +182,18 @@
 
 					                                    	<?php
 
-					                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  INNER JOIN ems_r_individual_info AS I ON M.tim_individ = I.rii_individ INNER JOIN ems_t_renewal_indiv AS R ON R.tri_indivmemid = M.tim_indivmemid INNER JOIN ems_t_payment_renewal_indiv AS P ON P.tpri_indivrenid = R.tri_indivrenid WHERE M.tim_status = 'Paid' OR M.tim_status = 'Renewal' AND R.tri_status = 'Paid' AND M.tim_activeflag = 1 AND R.tri_activeflag = 1";
+					                                    		$query = "SELECT * FROM ems_t_individual_membership AS M  
+					                                    		INNER JOIN ems_r_individual_info AS I 
+					                                    		ON M.tim_individ = I.rii_individ 
+					                                    		INNER JOIN ems_t_renewal_indiv AS R 
+					                                    		ON R.tri_indivmemid = M.tim_indivmemid 
+					                                    		INNER JOIN ems_t_payment_renewal_indiv AS P 
+					                                    		ON P.tpri_indivrenid = R.tri_indivrenid 
+					                                    		WHERE M.tim_status = 'Paid' 
+					                                    		OR M.tim_status = 'Renewal' 
+					                                    		AND R.tri_status = 'Paid' 
+					                                    		AND M.tim_activeflag = 1 
+					                                    		AND R.tri_activeflag = 1";
 
 					                                    		$runquery = mysqli_query($connection, $query);
 

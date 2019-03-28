@@ -171,7 +171,8 @@
                                     					<td style='width:135px'>
                                                         <center>
 			                                            	<a href='ui_modal_notification.html#modal-edit".$dataeventid."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
-                                                            <a href='event_to_activity.php?viewEvent=".$dataeventid."'  class='btn btn-primary'><i class='fa fa-eye'></i></a>
+                                                             <a href='event_to_sponsor.php?viewEvent=".$dataeventid."'  class='btn btn-primary'><i class='fa fa-group'></i></a>
+                                                            <a href='event_to_activity.php?viewEvent=".$dataeventid."'  class='btn btn-primary'><i class='fa fa-file-text'></i></a>
                                                             </center>
 			                                            </td>
                                     				  </tr>

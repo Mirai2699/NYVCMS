@@ -1,4 +1,4 @@
-﻿
+
     <title>Dashboard | UPDS</title>
 <?php
     
@@ -241,6 +241,8 @@
                                                                                 {   
                                                                                     $InvQty = $row2["rate"];
                                                                                     $total = $total + 'column name kung nasaan yung amount'
+                                                                                    $total1 = $total1 + 'column ng 2nd table'
+                                                                                    $total = $total + $total1;
                                                                                     echo ($InvQty);
                                                                                 }
                                                                            ?>,

@@ -43,18 +43,14 @@
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
 	
+	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed ">	
 		<!-- end #sidebar -->
 		
 		<!-- begin #content -->
 		<div id="content" class="content">
-			<!-- begin breadcrumb -->
-			<ol class="breadcrumb pull-right">
-				<li><a href="arss_index.html">Home</a></li>
-				<li><a href="career.html">Registration</a></li>
-			</ol>
-			<!-- end breadcrumb -->
+			
 			<!-- begin page-header -->
 			<h1 class="page-header">Event Registration</h1>
 			<!-- end page-header -->
@@ -64,10 +60,10 @@
 									<label class="control-label col-md-4 col-sm-4" for="message">Register as :</label>
 									<div class="col-md-6 col-sm-6">
                                         <select class="form-control regType" id="reg" name="nmr_advoc" >
-		                                           				<option value="Health"></option>
-	                                          				<option value="Member">Member</option>
-	                                          				<option value="Non member">Non member</option>
-	                                          						   </select>
+                                   			<option value="Health"></option>
+                              				<option value="Member">Member</option>
+                              				<option value="Non member">Non member</option>
+                              			</select>
 									</div>
 								</div>
                             </form>
@@ -119,8 +115,8 @@
 									<div class="col-md-6 col-sm-6">
                                         <select class="form-control" name="pType" data-parsley-required="true"placeholder="Gender">
 		                                           				<option></option>
-		                                           				<option>Onsite</option>	
-		                                           				<option>Bank</option>	
+		                                           				<option value="Onsite">On-site</option>	
+		                                           				<option value="Bank">Bank</option>	
                                         </select>
 									</div>
 								</div>
@@ -174,45 +170,70 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">First Name * :</label>
+									<label class="control-label col-md-4 col-sm-4" for="fullname">Name * :</label>
 									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="nmr_fname" placeholder="Required" data-parsley-required="true" />
-									</div>
-								</div>
-                                	<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">Middle Name * :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="nmr_mname" placeholder="Required" data-parsley-required="true" />
-									</div>
-								</div>
-                                	<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">Last Name * :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="nmr_lname" placeholder="Required" data-parsley-required="true" />
-									</div>
-								</div>
-                                	<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">Extension Name * :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="nmr_ename" placeholder="JR, II, III, IV" data-parsley-required="true" />
+										<input class="form-control" type="text" id="fullname" name="nmr_name" placeholder="Required" data-parsley-required="true" />
 									</div>
 								</div>
                                 	<div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Age * :</label>
 									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="digits" name="nmr_age" data-parsley-type="digits" data-parsley-required="true"placeholder="Age" />
+										<input class="form-control" type="text" id="digits" name="nmr_age" data-parsley-type="digits" data-parsley-required="true" placeholder="Age" />
 									</div>
 								</div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Complete Permanent Home Address :</label>
 									<div class="col-md-6 col-sm-6">
 										<textarea class="form-control" id="message" name="nmr_address" rows="4" data-parsley-range="[5,200]"></textarea>
 									</div>
+								</div> -->
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="fullname">Barangay * :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="fullname" name="nmr_name" placeholder="Required" data-parsley-required="true" />
+									</div>
 								</div>
-                                	<div class="form-group">
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="fullname">City * :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="fullname" name="nmr_name" placeholder="Required" data-parsley-required="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="fullname">Municipality * :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="fullname" name="nmr_name" placeholder="Required" data-parsley-required="true" />
+									</div>
+								</div>
+									<div class="form-group">
+                      				  <label class="control-label col-md-4 col-sm-4">Region</label>
+                      				  <div class="col-md-6 col-sm-6">
+                      				 		<select class="form-control" id="dd_region">
+                                   				<option value="Ilocos Region">Ilocos Region</option>
+                                  				<option value="Cagayan Valley">Cagayan Valley</option>
+                                  				<option value="Central Luzon">Central Luzon</option>
+                                  				<option value="CALABARZON">CALABARZON</option>
+                                  				<option value="MIMAROPA">MIMAROPA</option>
+                                  				<option value="Bicol Region">Bicol Region</option>
+                                  				<option value="CAR">CAR</option>
+                                  				<option value="NCR">NCR</option>
+                                  				<option value="Western Visayas">Western Visayas</option>
+                                  				<option value="Central Visayas">Central Visayas</option>
+                                  				<option value="Eastern Visayas">Eastern Visayas</option>
+                                  				<option value="Zamboanga Peninsula">Zamboanga Peninsula</option>
+                                  				<option value="Northern Mindanao">Northern Mindanao</option>
+                                  				<option value="Davao Region">Davao Region</option>
+                                  				<option value="SOCCSKSARGEN">SOCCSKSARGEN</option>
+                                  				<option value="Caraga Region">Caraga Region</option>
+                                  				<option value="SOCCSKSARGEN">SOCCSKSARGEN</option>
+                                  				<option value="ARMM">ARMM</option>
+                         				   </select>
+                         				</div>
+                      				</div>
+                                <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Birthdate :</label>
 									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="data-phone" data-parsley-type="number" placeholder="yyyy-mm-dd" name="nmr_birthdate" />
+										<input class="form-control" type="date" id="data-phone" data-parsley-type="number" placeholder="" name="nmr_birthdate" />
 									</div>
 								</div>
                                 	<div class="form-group">
@@ -241,7 +262,7 @@
 									<label class="control-label col-md-4 col-sm-4" for="message">Advocacy * :</label>
 									<div class="col-md-6 col-sm-6">
                                         <select class="form-control" name="nmr_advoc" data-parsley-required="true"placeholder="Gender">
-		                                           				<option value="Health">Health</option>
+		                                           			<option value="Health">Health</option>
 	                                          				<option value="Education">Education</option>
 	                                          				<option value="Economic Empowerment">Economic Empowerment</option>
 	                                          				<option value="Social Inclusion and Equity">Social Inclusion and Equity</option>
@@ -276,8 +297,8 @@
 									<div class="col-md-6 col-sm-6">
                                         <select class="form-control" name="nmr_payment" data-parsley-required="true"placeholder="Gender">
 		                                           				<option></option>
-		                                           				<option>Onsite</option>	
-		                                           				<option>Bank</option>	
+		                                           				<option value="Onsite">On-site</option>	
+		                                           				<option value="Bank">Bank</option>	
                                         </select>
 									</div>
 								</div>

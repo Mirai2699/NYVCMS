@@ -11,7 +11,14 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="index.html" class="navbar-brand"></span> NYVCEMS</a>
+
+                    <a href="dashboard.php" class="navbar-brand" style="margin-bottom: 3px">
+                        <div class="row" >
+                             <img src="../../../resources/images/nvyc.png" style="width: 24%">
+                             NYVCEMS
+                        </div>
+                    </a>
+					
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -83,7 +90,7 @@
 					</li> -->
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="assets/img/user-13.jpg" alt="" /> 
+							<img src="../../../resources/assets/img/admin.jpg" alt="" /> 
 							<span class="hidden-xs">Admin</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">

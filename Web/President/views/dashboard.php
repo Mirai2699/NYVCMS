@@ -121,16 +121,16 @@
 			            },
 			            xAxis: {
 			                categories: [<?php
-                                                                        $curryear = date("Y");
+                                $curryear = date("Y");
 
-                                                                             $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month, monthname(re_event_enddate) AS Name from ems_r_event WHERE year(re_event_enddate) = '$curryear'");
-                                                                            while($row2 = mysqli_fetch_assoc($view_query2))
-                                                                                {   
-                                                                                    $eventMonth = $row2["Month"];
-                                                                                    $m_name = $row2["Name"];
-                                                                                    echo '\''.$m_name.'\',';
-                                                                                }
-                                                                     ?>]
+                                     $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month, monthname(re_event_enddate) AS Name from ems_r_event WHERE year(re_event_enddate) = '$curryear'");
+                                    while($row2 = mysqli_fetch_assoc($view_query2))
+                                        {   
+                                            $eventMonth = $row2["Month"];
+                                            $m_name = $row2["Name"];
+                                            echo '\''.$m_name.'\',';
+                                        }
+                             ?>]
 			            },
 			            yAxis: {
 			                title: {

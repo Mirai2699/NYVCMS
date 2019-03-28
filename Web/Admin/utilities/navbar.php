@@ -5,11 +5,11 @@
 				<!-- begin sidebar user -->
 				<ul class="nav">
 					<li class="nav-profile">
-						<!-- <div class="image">
-							<a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
-						</div> -->
+						<div class="image">
+							<a href="javascript:;"><img src="../../../resources/assets/img/admin.jpg" alt="" /></a>
+						</div>
 						<div class="info">
-							Sofhialyn Ewayan
+							Villy Ormido
 							<small>Admin</small>
 						</div>
 					</li>
@@ -18,14 +18,20 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
 					<li class="nav-header">Navigation</li>
-					<li><a href="dashboard.php"><span>Dashboard</span></a></li>
+					<li><a href="dashboard.php">
+							<i class="fa fa-dashboard"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
 					<li class="has-sub ">
 						<a href="javascript:;">
 						    <b class="caret pull-right"></b>
-						    <span>System Configuration</span> 
+						    <i class="fa fa-gears"></i>
+						    <span>System Configuration</span>
 						</a>
 						<ul class="sub-menu">
 							<li><a href="event-type.php">Event Type</a></li>
+							<li><a href="sponsor-type.php">Sponsor Type</a></li>
 							<li><a href="venue.php">Venue</a></li>
 							<li><a href="sustainable-development-goal.php">Sustainable Development Goals</a></li>
 							<li><a href="district.php">District</a></li>

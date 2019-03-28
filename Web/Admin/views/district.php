@@ -73,10 +73,8 @@
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a> -->
                             </div>
                             <h4 class="panel-title">Districts</h4>
                         </div>
@@ -86,7 +84,6 @@
                                     <thead>
                                         <tr>
                                             <th>District</th>
-                                            <th>Description</th>
                                             <th>District Head</th>
                                             <th>Action</th>
                                         </tr>
@@ -102,7 +99,6 @@
                                     		while ($row = mysqli_fetch_assoc($runquery)){
 
                                     			$data_dis = $row['rd_dis_name'];
-                                    			$data_description = $row['rd_dis_description'];
                                     			$data_dishead = $row['rd_dis_head'];
                                     			$datadisid = $row['rd_dis_id'];
 
@@ -110,7 +106,7 @@
                                     					<td>".$data_dis."</td>
                                     					<td>".$data_description."</td>
                                     					<td>".$data_dishead."</td>
-                                    					<td>
+                                    					<td style='width:135px'>
 			                                            	<a href='ui_modal_notification.html#modal-edit".$datadisid."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
 			                                            	<a href='javascript:;' onclick='btn_areventype".$datadisid."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
 			                                            </td>
@@ -131,12 +127,6 @@
 												                                    <label class='col-md-3 control-label'>District Name</label>
 												                                    <div class='col-md-9'>
 												                                        <input type='text' value='".$data_dis."' id='txt_dis_name_up".$datadisid."' class='form-control' placeholder='Name'/>
-												                                    </div>
-												                                </div>
-												                                <div class='form-group'>
-												                                    <label class='col-md-3 control-label'>Description</label>
-												                                    <div class='col-md-9'>
-												                                        <textarea class='form-control' id='txt_dis_description_up".$datadisid."' placeholder='Description' rows='2'>".$data_description."</textarea>
 												                                    </div>
 												                                </div>
 												                                <div class='form-group'>
@@ -215,7 +205,6 @@
     			type: 'POST',
     			data:{
     					_dis_name:dis_name,
-    					_dis_description:dis_description,
     					_dishead:dishead
     				},
     			url: '../functionalities/add_district.php',
@@ -248,7 +237,6 @@
     			async: false,
     			data:{
     					_new_dis:new_dis,
-    					_new_disdescription:new_disdescription,
     					_new_dishead:new_dishead,
     					_myId:myId
     			},

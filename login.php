@@ -131,10 +131,12 @@
         <div class="login login-v2" data-pageload-addclass="animated flipInX">
             <!-- begin brand -->
             <div class="login-header">
-            	<div class="brand">
-                    <img src="resources/images/nvyc.png" width="45px" height="45px"> Log In
-                    <small>NYVCEMS</small>
-                </div>
+            	<a href="homepage.php" class="brand">
+	            	<div class="brand">
+	                    <img src="resources/images/nvyc.png" width="45px" height="45px"> Log In
+	                    <small>NYVCEMS</small>
+	                </div>
+            	</a>
                 <div class="icon">
                     <i class="fa fa-sign-in"></i>
                 </div>

@@ -90,7 +90,7 @@
 					</li> -->
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="../../../resources/assets/img/user-11.jpg" alt="" /> 
+							<img src="../../../resources/assets/img/user-13.jpg" alt="" /> 
 							<span class="hidden-xs">President</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">

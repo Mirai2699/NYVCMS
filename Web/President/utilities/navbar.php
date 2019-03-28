@@ -6,7 +6,7 @@
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"><img src="../../../resources/assets/img/user-11.jpg" alt="" /></a>
+							<a href="javascript:;"><img src="../../../resources/assets/img/user-13.jpg" alt="" /></a>
 						</div>
 						<div class="info">
 							Juan Dela Cruz

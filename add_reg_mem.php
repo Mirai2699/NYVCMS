@@ -25,14 +25,15 @@
 
         $query = "INSERT INTO ems_t_eventreg_mem  (term_eventid,
 										     term_indivmemid,
-										     term_paymenttype, term_date 
+										     term_paymenttype, term_date, term_transcode
 										     ) 
 
 				   					  VALUES(
 				   					  		 '$a',
 				   					  		 '$id',
 				   					  		 '$c',
-				   					  		 CURRENT_DATE
+				   					  		 CURRENT_DATE,
+				   					  		 '$trans'
 				   					  		 )";
 
 		mysqli_query($db,$query);

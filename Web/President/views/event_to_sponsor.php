@@ -18,11 +18,11 @@ if (isset($_GET['viewEvent']))
             <!-- begin breadcrumb -->
             <ol class="breadcrumb pull-right">
                 <li><a href="javascript:;">Home</a></li>
-                <li><a href="javascript:;">Event Details </a></li>
+                <li><a href="javascript:;">Event Sponsors </a></li>
             </ol>
             <!-- end breadcrumb -->
             <!-- begin page-header -->
-            <h1 class="page-header">Event Details</h1>
+            <h1 class="page-header">Event Sponsor</h1>
             <!-- end page-header -->
 
 			<!-- begin row -->
@@ -38,7 +38,7 @@ if (isset($_GET['viewEvent']))
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                             </div>
-                            <h4 class="panel-title">Details</h4>
+                            <h4 class="panel-title">Sponsor</h4>
                         </div>
                         <div class="panel-body">
                             
@@ -64,17 +64,17 @@ if (isset($_GET['viewEvent']))
                         <?php
                             }
                         ?>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">                                                             
                                     </div>
                                 </div>
                             </div>
-                            
+                            <br>
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td>                          
-                                        <form action="addActivity.php" method="POST">
+                                        <form action="addSponsor.php" method="POST">
 
                                             <div class="form-content">
                                                 <div class="row">
@@ -98,22 +98,37 @@ if (isset($_GET['viewEvent']))
                                                 <div class="form-group">
                                                     <input type="hidden" name="currentdate" value="">
                                                 </div>
-                                                <div class="row group">                                   <div class="col-md-4">
+                                                <div class="row group">                                   
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label>Activity Name</label>
-                                                            <input style="color: black; padding-right: 2px;" type="text" name="name[]" class="form-control" required="" minlength="3" min="1" max="100" />
+                                                            <label>Sponsor Name</label>
+					                                        <select class="form-control" name="sponsor[]">
+					                                        	<option></option>
+                                                                   <?php
+                                                                        $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_sponsor`");
+                                                                        while($row = mysqli_fetch_assoc($view_query))
+                                                                    {   
+                                                                        $e_name = $row["rs_sponsor_name"];
+                                                                        $e_no = $row["rs_sponsor_id"]; 
+                                  
+                                                                    ?>    
+					                                            <option value="<?php echo $e_no; ?>"><?php echo $e_name; ?></option>
+                                                                <?php
+                                                                     }
+                                                                ?>  
+					                                        </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label>Description</label>
-                                                            <input style="color: black; padding-right: 2px;" type="text" name="desc[]" class="form-control" required="" minlength="3" min="1" max="100" />
+                                                            <label>Amount Sponsored</label>
+                                                            <input style="color: black; padding-right: 2px;" type="digit" name="amount[]" class="form-control" required="" minlength="3" min="1" max="100" placeholder="000.00" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label>Start time</label>
-                                                            <input style="color: black; padding-right: 2px;" type="text" name="time[]" class="form-control" required="" minlength="3" min="1" placeholder="00:00" max="100" />
+                                                            <label>Date Received</label>
+                                                            <input style="color: black; padding-right: 2px;" type="text" name="date[]" class="form-control" required="" minlength="3" min="1" max="100" placeholder="YYYY-MM-DD" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -139,10 +154,10 @@ if (isset($_GET['viewEvent']))
                                                                 
                                                             </div>
                                                             <br>
-                                                          <h1>Do you wanted to add the activities?</h1>
+                                                          <h1>Do you wanted to add the sponsor/s?</h1>
                                                             <div class="panel" style="height: 50%; width: 100%">
                                                                 <br>
-                                                                <button type="submit" class="btn btn-success btn-lg" name="addAct" value="<?php echo $ids; ?>">   Yes   </button> &nbsp&nbsp&nbsp&nbsp
+                                                                <button type="submit" class="btn btn-success btn-lg" name="addSpons" value="<?php echo $ids; ?>">   Yes   </button> &nbsp&nbsp&nbsp&nbsp
                                                                 <button data-dismiss="modal" class="btn btn-error btn-lg">No</button>
                                                             </div>
                                                             <br>
@@ -153,6 +168,68 @@ if (isset($_GET['viewEvent']))
                                     </td> 
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Event Sponsor/s</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sponsor Name</th>
+                                            <th>Contact</th>
+                                            <th>Event</th>
+                                            <th>Amount Sponsored</th>
+                                            <th>Date Received</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                    		$query = "SELECT * FROM (`ems_r_sponsor` as sp RIGHT JOIN `ems_r_sponsorship` as pp on pp.rss_sponsor_id = sp.rs_sponsor_id) left join ems_r_event as ev on pp.rss_event_id = ev.re_event_id where ev.re_event_id =".$ids."";
+
+                                    		$runquery = mysqli_query($connection, $query);
+
+                                    		while ($row = mysqli_fetch_assoc($runquery)){
+
+                                    			
+                                            $sponsor = $row["rs_sponsor_name"];
+                                            $contact = $row["rs_sponsor_contact_no"]; 
+                                            $event = $row["re_event_name"]; 
+                                            $amount = $row["rss_amount"]; 
+                                            $date = $row["rss_received_date"]; 
+
+                                    			echo "<tr>
+                                    					<td>".$sponsor."</td>
+                                    					<td>".$contact."</td>
+                                    					<td>".$event."</td>
+                                    					<td>".$amount."</td>
+                                    					<td>".$date."</td>
+                                    					<td style='width:135px'>
+                                                        <center>
+                                                             <a href='event_to_sponsor.php?viewEvent='  class='btn btn-primary'><i class='fa fa-archive'></i></a>
+                                                            </center>
+			                                            </td>
+                                    				  </tr>	
+	                                    			 ";
+                                    		}
+
+                                    	?>
+                                    </tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <!-- end panel -->

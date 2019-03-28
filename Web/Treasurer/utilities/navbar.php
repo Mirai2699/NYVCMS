@@ -5,9 +5,9 @@
 				<!-- begin sidebar user -->
 				<ul class="nav">
 					<li class="nav-profile">
-						<!-- <div class="image">
-							<a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
-						</div> -->
+						<div class="image">
+							<a href="javascript:;"><img src="../../../resources/assets/img/treasurer.jpg" alt="" /></a>
+						</div>
 						<div class="info">
 							Sherie Mae Remo	
 							<small>Treasurer</small>
@@ -18,9 +18,14 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
 					<li class="nav-header">Navigation</li>
-					<li><a href="dashboard.php"><span>Dashboard</span></a></li>	
+					<li><a href="dashboard.php">
+							<i class="fa fa-dashboard"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>	
 					<li class="has-sub">
 						<a href="javascript:;">
+							<i class="fa fa-money"></i>
 						    <b class="caret pull-right"></b>
 						    <span>Collection</span> 
 						</a>
@@ -39,9 +44,14 @@
 							<li><a href="sponsorship.php">Sponsorship</a></li>	
 						</ul>
 					</li>
-					<li><a href="expenditure.php">Expenditures</a></li>
+					<li>
+						<a href="expenditure.php">Expenditures
+							<i class="fa fa-tags"></i>
+						</a>
+					</li>
 					<li class="has-sub">
 						<a href="javascript:;">
+							<i class="fa fa-copy"></i>
 				            <b class="caret pull-right"></b>
 				            Reports
 				        </a>

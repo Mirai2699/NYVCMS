@@ -18,11 +18,11 @@ if (isset($_GET['viewEvent']))
             <!-- begin breadcrumb -->
             <ol class="breadcrumb pull-right">
                 <li><a href="javascript:;">Home</a></li>
-                <li><a href="javascript:;">Event Details </a></li>
+                <li><a href="javascript:;">Event Activities </a></li>
             </ol>
             <!-- end breadcrumb -->
             <!-- begin page-header -->
-            <h1 class="page-header">Event Details</h1>
+            <h1 class="page-header">Event Activities</h1>
             <!-- end page-header -->
 
 			<!-- begin row -->
@@ -38,7 +38,7 @@ if (isset($_GET['viewEvent']))
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                             </div>
-                            <h4 class="panel-title">Details</h4>
+                            <h4 class="panel-title">Activities</h4>
                         </div>
                         <div class="panel-body">
                             
@@ -70,7 +70,7 @@ if (isset($_GET['viewEvent']))
                                     </div>
                                 </div>
                             </div>
-                            
+                            <br>
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td>                          
@@ -159,6 +159,65 @@ if (isset($_GET['viewEvent']))
                                     </td> 
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Event Sponsor/s</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Activity Name</th>
+                                            <th>Description</th>
+                                            <th>Person in charge</th>
+                                            <th>Start time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                    		$query = "SELECT * FROM `ems_r_activity` as ac left join `ems_r_event` as ev on ac.ra_event_id = ev.re_event_id where ac.ra_event_id =".$ids."";
+
+                                    		$runquery = mysqli_query($connection, $query);
+
+                                    		while ($row = mysqli_fetch_assoc($runquery)){
+
+                                    			
+                                            $name = $row["ra_activity_name"];
+                                            $desc = $row["ra_activity_description"]; 
+                                            $pic = $row["ra_activity_pic"]; 
+                                            $time = $row["ra_activity_starttime"]; 
+
+                                    			echo "<tr>
+                                    					<td>".$name."</td>
+                                    					<td>".$desc."</td>
+                                    					<td>".$pic."</td>
+                                    					<td>".$time."</td>
+                                    					<td style='width:135px'>
+                                                        <center>
+                                                             <a href='event_to_sponsor.php?viewEvent='  class='btn btn-primary'><i class='fa fa-edit'></i></a>
+                                                            </center>
+			                                            </td>
+                                    				  </tr>	
+	                                    			 ";
+                                    		}
+
+                                    	?>
+                                    </tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <!-- end panel -->
