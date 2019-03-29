@@ -47,12 +47,6 @@
 					                                    </div>
 					                                </div>
 					                                <div class="form-group">
-					                                    <label class="col-md-3 control-label">Description</label>
-					                                    <div class="col-md-9">
-					                                        <textarea class="form-control" id="txt_dis_description" placeholder="Description" rows="2"></textarea>
-					                                    </div>
-					                                </div>
-					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">District Head</label>
 					                                    <div class="col-md-9">
 					                                        <input type="text" id="txt_dishead_name" class="form-control" placeholder="Name"/>
@@ -69,13 +63,10 @@
 								</div>
 							</div>
 							<!-- #modal-without-animation -->
+
 			        <!-- begin panel -->
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a> -->
-                            </div>
                             <h4 class="panel-title">Districts</h4>
                         </div>
                         <div class="panel-body">
@@ -104,48 +95,12 @@
 
                                     			echo "<tr>
                                     					<td>".$data_dis."</td>
-                                    					<td>".$data_description."</td>
                                     					<td>".$data_dishead."</td>
-                                    					<td style='width:135px'>
+                                    					<td style='width:80px'>
 			                                            	<a href='ui_modal_notification.html#modal-edit".$datadisid."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
 			                                            	<a href='javascript:;' onclick='btn_areventype".$datadisid."' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
 			                                            </td>
-                                    				  </tr>
-
-
-	                                  					<div class='modal fade' id='modal-edit".$datadisid."'>
-															<div class='modal-dialog'>
-																<div class='modal-content'>
-																	<div class='modal-header'>
-																		<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-																		<h4 class='modal-title'>Update District</h4>
-																	</div>
-																	<div class='modal-body'>
-																		<div class='panel-body'>
-												                            <form class='form-horizontal'>
-												                                <div class='form-group'>
-												                                    <label class='col-md-3 control-label'>District Name</label>
-												                                    <div class='col-md-9'>
-												                                        <input type='text' value='".$data_dis."' id='txt_dis_name_up".$datadisid."' class='form-control' placeholder='Name'/>
-												                                    </div>
-												                                </div>
-												                                <div class='form-group'>
-												                                    <label class='col-md-3 control-label'>District Head</label>
-												                                    <div class='col-md-9'>
-												                                        <input type='text' value='".$data_dishead."' id='txt_dishead_name_up".$datadisid."' class='form-control' placeholder='Name'/>
-												                                    </div>
-												                                </div>
-												                            </form>
-												                        </div>
-																	</div>
-																	<div class='modal-footer'>
-																		<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																		<a href='javascript:;' onclick='btn_updis(".$datadisid.")' class='btn btn-sm btn-success'>Submit</a>
-																	</div>
-																</div>
-															</div>
-														</div> 		
-	                                    			 ";
+                                    				  </tr>";
                                     		}
 
                                     	?>
@@ -155,6 +110,57 @@
                         </div>
                     </div>
                     <!-- end panel -->
+
+                    <!-- begin panel -->
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Regions</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Region</th>
+                                            <th>District</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+
+                                            $query = "SELECT * FROM ems_r_region AS R
+                                            INNER JOIN ems_r_district AS D
+                                            ON D.rd_dis_id = R.rr_disid
+                                            WHERE R.rr_activeflag = 1
+                                            AND D.rd_dis_status = 1";
+
+                                            $runquery = mysqli_query($connection, $query);
+
+                                            while ($row = mysqli_fetch_assoc($runquery)){
+
+                                                $name = $row['rr_name'];
+                                                $district = $row['rd_dis_name'];
+                                                $id = $row['rr_id'];
+
+                                                echo "<tr>
+                                                        <td style='width:300px'>".$name."</td>
+                                                        <td>".$district."</td>
+                                                        <td style='width:75px'>
+                                                            <a href='ui_modal_notification.html#modal-edit1".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
+                                                        </td>
+                                                      </tr>";
+                                            }
+
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end panel -->
+
                 </div>
                 <!-- end col-12 -->				
 			</div>
@@ -170,7 +176,122 @@
 	</div>
 	<!-- end page container -->
 
+    <!-- district modal -->
+	<?php
 
+		$query = "SELECT * FROM ems_r_district WHERE rd_dis_status = 1";
+
+		$runquery = mysqli_query($connection, $query);
+
+		while ($row = mysqli_fetch_assoc($runquery)){
+
+			$data_dis = $row['rd_dis_name'];
+			$data_dishead = $row['rd_dis_head'];
+			$datadisid = $row['rd_dis_id'];
+	?>
+
+	<div class='modal fade' id="modal-edit<?php echo $datadisid ?>">
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+					<h4 class='modal-title'>Update District</h4>
+				</div>
+				<div class='modal-body'>
+					<div class='panel-body'>
+                        <form class='form-horizontal'>
+                            <div class='form-group'>
+                                <label class='col-md-3 control-label'>District Name</label>
+                                <div class='col-md-9'>
+                                    <input type='text' value="<?php echo $data_dis ?>" id="txt_dis_name_up<?php echo $datadisid ?>" class='form-control' placeholder='District'/>
+                                </div>
+                            </div>
+                            <div class='form-group'>
+                                <label class='col-md-3 control-label'>District Head</label>
+                                <div class='col-md-9'>
+                                    <input type='text' value="<?php echo $data_dishead ?>" id="txt_dishead_name_up<?php echo $datadisid ?>" class='form-control' placeholder='District Head'/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+				<div class='modal-footer'>
+					<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
+					<a href='' onclick="btn_updis(<?php echo $datadisid ?>)" class='btn btn-sm btn-success'>Submit</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <?php } ?>
+    <!-- district modal -->
+
+<!-- region modal -->
+    <?php
+
+
+        $query = "SELECT * FROM ems_r_region AS R
+        INNER JOIN ems_r_district AS D
+        ON D.rd_dis_id = R.rr_disid
+        WHERE R.rr_activeflag = 1
+        AND D.rd_dis_status = 1";
+
+        $runquery = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_assoc($runquery)){
+
+            $name = $row['rr_name'];
+            $district = $row['rd_dis_name'];
+            $id = $row['rr_id'];
+    ?>
+
+    <div class='modal fade' id="modal-edit1<?php echo $id?>">
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+                    <h4 class='modal-title'>Update District</h4>
+                </div>
+                <div class='modal-body'>
+                    <div class='panel-body'>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Region</label>
+                                <div class="col-md-9">
+                                    <input type="text" value="<?php echo $name ?>" id="txt_region_up<?php echo $id?>" class="form-control" placeholder="Name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">District</label>
+                                <div class="col-md-9">
+                                    <select name="dd_etype" id="dd_district"  class="form-control" style="color: black;" required="">
+                                        <option selected disabled value=""></option>
+                                            <?php  
+                                                $sql= "SELECT DISTINCT * FROM ems_r_district WHERE rd_dis_status = 1";
+                                                 $results = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                                     while($row = mysqli_fetch_assoc($results))
+                                                        {  
+                                                            $disname = $row['rd_dis_name'];
+                                                            $disid = $row['rd_dis_id'];
+                                                        ?>
+                                       <option id="<?php echo $disid ?>" value="<?php echo $disid ?>"><?php echo "$disname"; ?></option>
+                                            <?php
+                                                        }
+                                            ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
+                    <a href='javascript:;' onclick='btn_upregion(<?php echo $id ?>)' class='btn btn-sm btn-success'>Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+    <!-- region modal -->
 	
 	<script>
 		$(document).ready(function() {
@@ -225,11 +346,10 @@
     	function btn_updis(myId){
     		// alert(myId)
 
-    		let new_dis = $('#txt_dis_name_up'+myId).val()
-    		let new_disdescription = $('#txt_dis_description_up'+myId).val();
+    		let new_dis = $('#txt_dis_name_up' +myId).val()
     		let new_dishead = $('#txt_dishead_name_up' +myId).val();
 
-    		// alert(new_sdg+" | "+new_sdgdescription)
+    		// alert(new_dis+" | "+new_dishead)
 
     		$.ajax({
     			type: 'POST',
@@ -249,6 +369,33 @@
     			}
     		})
     	}
+
+        function btn_upregion(myId){
+            // alert(myId)
+
+            let region = $('#txt_region_up' +myId).val();
+            let district = $('#dd_district' +myId).val();
+
+            alert(region+" | "+district)
+
+            // $.ajax({
+            //     type: 'POST',
+            //     url:'../functionalities/update_region.php',
+            //     async: false,
+            //     data:{
+            //             _region:region,
+            //             _district:district,
+            //             _myId:myId
+            //     },
+            //     success: function(data){
+            //         alert(data)
+            //         // setTimeout(location.reload.bind(location), 1000)
+            //     },
+            //     error: function(response){
+            //         alert('something went wrong')
+            //     }
+            // })
+        }
 
     </script>
 </body>
