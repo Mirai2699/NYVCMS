@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2019 at 05:11 AM
+-- Generation Time: Mar 29, 2019 at 04:55 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -230,6 +230,42 @@ INSERT INTO `ems_r_org_info` (`roi_orgid`, `roi_orgname`, `roi_date_established`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ems_r_region`
+--
+
+CREATE TABLE `ems_r_region` (
+  `rr_id` int(11) NOT NULL,
+  `rr_name` varchar(50) NOT NULL,
+  `rr_disid` int(11) NOT NULL,
+  `rr_activeflag` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_r_region`
+--
+
+INSERT INTO `ems_r_region` (`rr_id`, `rr_name`, `rr_disid`, `rr_activeflag`) VALUES
+(1, 'Ilocos Region', 1, 1),
+(2, 'Cagayan Valley', 1, 1),
+(3, 'CAR', 1, 1),
+(4, 'Central Luzon', 2, 1),
+(5, 'NCR', 2, 1),
+(6, 'CALABARZON', 3, 1),
+(7, 'MIMAROPA', 3, 1),
+(8, 'Bicol Region', 3, 1),
+(9, 'Eastern Visayas', 4, 1),
+(10, 'Western Visayas', 4, 1),
+(11, 'Central Visayas', 4, 1),
+(12, 'Zamboanga Peninsula', 5, 1),
+(13, 'Northern Mindanao', 5, 1),
+(14, 'CARAGA', 5, 1),
+(15, 'Davao Region', 6, 1),
+(16, 'SOCCSKSARGEN', 6, 1),
+(17, 'ARMM', 6, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ems_r_sdg`
 --
 
@@ -437,8 +473,8 @@ CREATE TABLE `ems_t_eventreg_mem` (
 --
 
 INSERT INTO `ems_t_eventreg_mem` (`term_regid`, `term_eventid`, `term_indivmemid`, `term_date`, `term_transcode`, `term_paymenttype`, `term_status`, `term_activeflag`) VALUES
-(1, 8, 1, '0000-00-00', '', 'Onsite', 'Pending', 1),
-(2, 8, 1, '2019-03-23', '', 'Bank', 'Pending', 1);
+(1, 8, 1, '0000-00-00', '', 'Onsite', 'Paid', 1),
+(2, 8, 1, '2019-03-23', '', 'Bank', 'Paid', 1);
 
 -- --------------------------------------------------------
 
@@ -449,7 +485,7 @@ INSERT INTO `ems_t_eventreg_mem` (`term_regid`, `term_eventid`, `term_indivmemid
 CREATE TABLE `ems_t_eventreg_nonmem` (
   `nmr_id` int(11) NOT NULL,
   `nmr_transcode` varchar(10) NOT NULL,
-  `nmr_datereg` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `nmr_datereg` date NOT NULL,
   `nmr_name` varchar(50) NOT NULL,
   `nmr_age` int(11) NOT NULL,
   `nmr_address` varchar(100) NOT NULL,
@@ -461,16 +497,18 @@ CREATE TABLE `ems_t_eventreg_nonmem` (
   `nmr_org` varchar(100) NOT NULL,
   `nmr_represent` varchar(100) NOT NULL,
   `nmr_status` varchar(100) NOT NULL DEFAULT 'Pending',
-  `nmr_event_id` int(11) DEFAULT NULL
+  `nmr_event_id` int(11) DEFAULT NULL,
+  `nmr_paymenttype` varchar(10) NOT NULL,
+  `nmr_disid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ems_t_eventreg_nonmem`
 --
 
-INSERT INTO `ems_t_eventreg_nonmem` (`nmr_id`, `nmr_transcode`, `nmr_datereg`, `nmr_name`, `nmr_age`, `nmr_address`, `nmr_birthdate`, `nmr_gender`, `nmr_phone`, `nmr_email`, `nmr_advoc`, `nmr_org`, `nmr_represent`, `nmr_status`, `nmr_event_id`) VALUES
-(2, 'RfEBLjm0VC', '0000-00-00 00:00:00', 'Jean Ann Ramos', 20, '67', '2012-01-20', 'Male', '09162395162', 'jeanchangowo@gmail.com', 'Economic Empowerment', 'Polytechnic University of The Philippines - Quezon City Branch', 'Community-based Organization', 'Pending', 7),
-(3, 'RmfxPrIVbq', '0000-00-00 00:00:00', 'Sofhialyn Ewayan', 19, 'Quezon City', '1999-02-10', 'Female', '09374826473', 'sofhialyn@gmail.com', 'Education', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Pending', 7);
+INSERT INTO `ems_t_eventreg_nonmem` (`nmr_id`, `nmr_transcode`, `nmr_datereg`, `nmr_name`, `nmr_age`, `nmr_address`, `nmr_birthdate`, `nmr_gender`, `nmr_phone`, `nmr_email`, `nmr_advoc`, `nmr_org`, `nmr_represent`, `nmr_status`, `nmr_event_id`, `nmr_paymenttype`, `nmr_disid`) VALUES
+(2, 'RfEBLjm0VC', '0000-00-00', 'Jean Ann Ramos', 20, '67', '2012-01-20', 'Male', '09162395162', 'jeanchangowo@gmail.com', 'Economic Empowerment', 'Polytechnic University of The Philippines - Quezon City Branch', 'Community-based Organization', 'Paid', 7, 'Onsite', 0),
+(3, 'RmfxPrIVbq', '2019-03-28', 'Sofhialyn Ewayan', 19, 'Quezon City', '1999-03-28', 'Female', '09374826473', 'sofhialyn@gmail.com', 'Education', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 7, 'Bank', 0);
 
 -- --------------------------------------------------------
 
@@ -566,6 +604,13 @@ CREATE TABLE `ems_t_payment_eventregmem_bank` (
   `tpeb_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ems_t_payment_eventregmem_bank`
+--
+
+INSERT INTO `ems_t_payment_eventregmem_bank` (`tpeb_paymentid`, `tpeb_regid`, `tpeb_date`, `tpeb_bank`, `tpeb_branch`, `tpeb_controlno`, `tpeb_activeflag`) VALUES
+(1, 2, '2019-03-28', 'East West Bank', 'Tungkong Mangga', '23752935', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -579,6 +624,13 @@ CREATE TABLE `ems_t_payment_eventregmem_onsite` (
   `tpeo_receivedby` varchar(50) NOT NULL,
   `tpeo_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_t_payment_eventregmem_onsite`
+--
+
+INSERT INTO `ems_t_payment_eventregmem_onsite` (`tpeo_paymentid`, `tpeo_regid`, `tpeo_date`, `tpeo_receivedby`, `tpeo_activeflag`) VALUES
+(1, 1, '2019-03-28', 'Villy Ormido', 1);
 
 -- --------------------------------------------------------
 
@@ -596,6 +648,13 @@ CREATE TABLE `ems_t_payment_eventregnonmem_bank` (
   `tpnb_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ems_t_payment_eventregnonmem_bank`
+--
+
+INSERT INTO `ems_t_payment_eventregnonmem_bank` (`tpnb_paymentid`, `tpnb_regid`, `tpnb_date`, `tpnb_bank`, `tpnb_branch`, `tpnb_controlno`, `tpnb_activeflag`) VALUES
+(1, 3, '2019-03-28', 'Chinabank', 'Fairview', '827364525', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -609,6 +668,13 @@ CREATE TABLE `ems_t_payment_eventregnonmem_onsite` (
   `tpno_receivedby` varchar(50) NOT NULL,
   `tpno_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_t_payment_eventregnonmem_onsite`
+--
+
+INSERT INTO `ems_t_payment_eventregnonmem_onsite` (`tpno_paymentid`, `tpno_regid`, `tpno_date`, `tpno_receivedby`, `tpno_activeflag`) VALUES
+(1, 2, '2019-03-28', 'Villy Ormido', 1);
 
 -- --------------------------------------------------------
 
@@ -804,6 +870,13 @@ ALTER TABLE `ems_r_logistics`
 --
 ALTER TABLE `ems_r_org_info`
   ADD PRIMARY KEY (`roi_orgid`);
+
+--
+-- Indexes for table `ems_r_region`
+--
+ALTER TABLE `ems_r_region`
+  ADD PRIMARY KEY (`rr_id`),
+  ADD KEY `FK_REGION_DISTRICT` (`rr_disid`);
 
 --
 -- Indexes for table `ems_r_sdg`
@@ -1005,6 +1078,12 @@ ALTER TABLE `ems_r_org_info`
   MODIFY `roi_orgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `ems_r_region`
+--
+ALTER TABLE `ems_r_region`
+  MODIFY `rr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `ems_r_sdg`
 --
 ALTER TABLE `ems_r_sdg`
@@ -1086,25 +1165,25 @@ ALTER TABLE `ems_t_org_membership`
 -- AUTO_INCREMENT for table `ems_t_payment_eventregmem_bank`
 --
 ALTER TABLE `ems_t_payment_eventregmem_bank`
-  MODIFY `tpeb_paymentid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tpeb_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregmem_onsite`
 --
 ALTER TABLE `ems_t_payment_eventregmem_onsite`
-  MODIFY `tpeo_paymentid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tpeo_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregnonmem_bank`
 --
 ALTER TABLE `ems_t_payment_eventregnonmem_bank`
-  MODIFY `tpnb_paymentid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tpnb_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregnonmem_onsite`
 --
 ALTER TABLE `ems_t_payment_eventregnonmem_onsite`
-  MODIFY `tpno_paymentid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tpno_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_indivmem`
@@ -1164,6 +1243,12 @@ ALTER TABLE `ems_r_event`
 ALTER TABLE `ems_r_logistics`
   ADD CONSTRAINT `FK_LOGISTICS_EVENT` FOREIGN KEY (`rl_event_id`) REFERENCES `ems_r_event` (`re_event_id`),
   ADD CONSTRAINT `FK_LOGISTICS_SPONSOR` FOREIGN KEY (`rl_sponsor_id`) REFERENCES `ems_r_sponsor` (`rs_sponsor_id`);
+
+--
+-- Constraints for table `ems_r_region`
+--
+ALTER TABLE `ems_r_region`
+  ADD CONSTRAINT `FK_REGION_DISTRICT` FOREIGN KEY (`rr_disid`) REFERENCES `ems_r_district` (`rd_dis_id`);
 
 --
 -- Constraints for table `ems_r_sponsor`
