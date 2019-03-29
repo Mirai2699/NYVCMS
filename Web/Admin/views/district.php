@@ -242,6 +242,7 @@
             $name = $row['rr_name'];
             $district = $row['rd_dis_name'];
             $id = $row['rr_id'];
+            $disid = $row['rd_dis_id'];
     ?>
 
     <div class='modal fade' id="modal-edit1<?php echo $id?>">
@@ -264,16 +265,15 @@
                                 <label class="col-md-3 control-label">District</label>
                                 <div class="col-md-9">
                                     <select name="dd_etype" id="dd_district"  class="form-control" style="color: black;" required="">
-                                        <option selected disabled value=""></option>
                                             <?php  
                                                 $sql= "SELECT DISTINCT * FROM ems_r_district WHERE rd_dis_status = 1";
                                                  $results = mysqli_query($connection, $sql) or die("Bad Query: $sql");
                                                      while($row = mysqli_fetch_assoc($results))
                                                         {  
                                                             $disname = $row['rd_dis_name'];
-                                                            $disid = $row['rd_dis_id'];
+                                                            $disid1 = $row['rd_dis_id'];
                                                         ?>
-                                       <option id="<?php echo $disid ?>" value="<?php echo $disid ?>"><?php echo "$disname"; ?></option>
+                                       <option value="<?php echo $disid1 ?>"><?php echo "$disname"; ?></option>
                                             <?php
                                                         }
                                             ?>

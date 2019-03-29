@@ -112,13 +112,6 @@
 													</div>
                                                 </div>
 
-                                                <!-- <div class="col-md-4">
-													<div class="form-group">
-														<label>Date of Establishment:</label>
-														 <input type="text" data-parsley-group="wizard-step-1" class="form-control" id="date_established" placeholder="MM/DD/YYYY">
-													</div>
-                                            	</div> -->
-
                                           		<div class="col-md-4">
 													<div class="form-group">
 														<label>Current Number of Members:</label>
@@ -136,7 +129,7 @@
                                                 <div class="col-md-4">
 													<div class="form-group">
 														<label>Official Org Email Address:</label>
-														<input type="text" data-parsley-type="email" data-parsley-group="wizard-step-1" id="txt_email" placeholder="" class="form-control" data-parsley-required="true" />
+														<input type="text" data-parsley-type="email" data-parsley-group="wizard-step-1" id="txt_email" placeholder="" class="form-control" data-parsley-required="true" data-parsley-type="email" />
 													</div>
                                                 </div>
                                             	 <!-- begin col-4 -->

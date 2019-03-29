@@ -15,8 +15,6 @@
 	<link href="resources/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
 	<link href="resources/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="resources/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="resources/assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-	<link href="resources/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
 	<link href="resources/assets/css/animate.min.css" rel="stylesheet" />
 	<link href="resources/assets/css/style.min.css" rel="stylesheet" />
 	<link href="resources/assets/css/style-responsive.min.css" rel="stylesheet" />
@@ -119,7 +117,7 @@
 	                                                <div class="col-md-1">
 														<div class="form-group">
 															<label>Age:</label>
-															<input type="text" data-parsley-group="wizard-step-1" id="txt_age" placeholder="" class="form-control" required />
+															<input type="text" data-parsley-group="wizard-step-1" id="txt_age" placeholder="" class="form-control" data-parsley-type="digits" required />
 														</div>
 	                                                </div>
 
@@ -137,14 +135,14 @@
 			                              			<div class="col-md-2">
 														<div class="form-group">
 															<label>Contact Number:</label>
-															<input type="text" data-parsley-group="wizard-step-1" id="txt_conno" placeholder="09123456789" class="form-control" required />
+															<input type="text" data-parsley-group="wizard-step-1" id="txt_conno" placeholder="09123456789" class="form-control" data-parsley-type="number" required />
 														</div>
 	                                                </div>
 
 	                                                <div class="col-md-3">
 														<div class="form-group">
 															<label>Email Address:</label>
-															<input type="text" data-parsley-group="wizard-step-1" id="txt_email" placeholder="emailaddress@gmail.com" class="form-control" required />
+															<input type="text" data-parsley-group="wizard-step-1" id="txt_email" placeholder="emailaddress@gmail.com" class="form-control" data-parsley-type="email" required />
 														</div>
 	                                                </div>
 	                                                <div class="col-md-4">
@@ -157,7 +155,7 @@
 	                                                <div class="col-md-4">
 														<div class="form-group">
 															<label>Contact Number(Emergency):</label>
-															<input type="text" data-parsley-group="wizard-step-1" id="txt_conperno" placeholder="09123456789" class="form-control" required />
+															<input type="text" data-parsley-group="wizard-step-1" id="txt_conperno" placeholder="09123456789" class="form-control" data-parsley-type="number" required />
 														</div>
 	                                                </div>
 	                                                <div class="col-md-4">
@@ -212,6 +210,7 @@
 										</fieldset>
 									</div>
 									<!-- end wizard step-1 -->
+
 									<!-- begin wizard step-2 -->
 									<div class="wizard-step-2">
 										<fieldset>
@@ -225,7 +224,7 @@
 													</div>
 													<div class="form-group">
 														<label>Year Graduated (if undergraduate, use N/A):</label>
-														<input type="text" data-parsley-group="wizard-step-2" id="txt_yeargrad" placeholder="" value="N/A" class="form-control" required />
+														<input type="text" data-parsley-group="wizard-step-2" id="txt_yeargrad" placeholder="" value="N/A" class="form-control" data-parsley-type="digits" required />
 													</div>
                                                 </div>
                                                 <!-- end col-6 -->
@@ -277,7 +276,7 @@
 									</div>
 									<!-- end wizard step-3 -->
 									<!-- begin wizard step-4 -->
-									<div class="wizard-step-3">
+									<div class="wizard-step-4">
 										<fieldset>
 											<legend class="pull-left width-full">Advocacy:</small></legend>
                                             <!-- begin row -->
