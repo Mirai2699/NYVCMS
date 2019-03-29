@@ -53,6 +53,12 @@
 						<span> Back to Homepage </span>
                      
                     </a>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
 				<!-- </div> -->
 				<!-- end mobile sidebar expand / collapse button -->
 				

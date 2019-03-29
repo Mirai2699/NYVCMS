@@ -10,4 +10,5 @@
 	<![endif]-->
 	<script src="../../../resources/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="../../../resources/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<script src="../../../resources/assets/jquery.multifield.min.js"></script>
 	<!-- ================== END BASE JS ================== -->

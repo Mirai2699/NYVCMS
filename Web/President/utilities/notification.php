@@ -14,7 +14,7 @@
 
 					<a href="dashboard.php" class="navbar-brand" style="margin-bottom: 3px">
                         <div class="row" >
-                             <img src="../../../resources/images/nvyc.png" style="width: 24%">
+                             <img src="../../../resources/images/nvyc.png" style="width: 20%">
                              NYVCEMS
                         </div>
                     </a>

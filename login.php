@@ -133,7 +133,7 @@
             <div class="login-header">
             	<a href="homepage.php" class="brand">
 	            	<div class="brand">
-	                    <img src="resources/images/nvyc.png" width="45px" height="45px"> Log In
+	                    <img src="resources/images/nvyc.png" width="35px" height="35px"> Log In
 	                    <small>NYVCEMS</small>
 	                </div>
             	</a>

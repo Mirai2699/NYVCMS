@@ -37,6 +37,7 @@ session_start();
 	<link href="../../../resources/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
 	<link href="../../../resources/assets/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet" />
 	<link href="../../../resources/assets/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet" />
+	<link href="../../../resources/assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
 	<link href="../../../resources/images/nvyc.png" rel="icon" />
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 

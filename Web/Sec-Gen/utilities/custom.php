@@ -7,4 +7,5 @@
 	<script src="../../../resources/assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
 	<script src="../../../resources/assets/js/form-plugins.demo.min.js"></script>
 	<script src="../../../resources/assets/js/apps.min.js"></script>
+	<script src="../../../resources/assets/plugins/parsley/dist/parsley.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
