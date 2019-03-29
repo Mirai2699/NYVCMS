@@ -70,7 +70,7 @@
 																<td>".$conno."</td>
 																<td>".$email."</td>
 											                    <td>
-											                        <a onclick='btn_inactive(".$id.")' class='btn btn-danger btn_sm'><i class='fa fa-times'></i>
+											                        <a onclick='btn_inactive(".$id.")' class='btn btn-danger btn_sm'>Inactive
 											                        </a>
 											                    </td>
 															</tr>";
@@ -120,7 +120,7 @@
 												<td>".$conno."</td>
 												<td>".$email."</td>
 							                    <td>
-							                        <a href='ui_modal_notification.html#modal-edit".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-check'></i></a>
+							                        <a href='ui_modal_notification.html#modal-edit".$id."' class='btn  btn-success' data-toggle='modal'>Renew</a>
 							                    </td>
 											  </tr>
 
