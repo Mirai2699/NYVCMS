@@ -224,7 +224,7 @@
 													</div>
 													<div class="form-group">
 														<label>Year Graduated (if undergraduate, use N/A):</label>
-														<input type="text" data-parsley-group="wizard-step-2" id="txt_yeargrad" placeholder="" value="N/A" class="form-control" data-parsley-type="digits" required />
+														<input type="text" data-parsley-group="wizard-step-2" id="txt_yeargrad" placeholder="" value="N/A" class="form-control" required />
 													</div>
                                                 </div>
                                                 <!-- end col-6 -->

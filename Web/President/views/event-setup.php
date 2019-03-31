@@ -72,10 +72,10 @@
 					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">Date</label>
 					                                    <div class="col-md-9">
-					                                        <div class="input-group input-daterange">
-					                                            <input type="text" id="date_event_start" class="form-control" name="start" placeholder="Date Start" />
+					                                        <div class="input-group">
+					                                            <input type="date" id="date_event_start" class="form-control" name="start" placeholder="Date Start" />
 					                                            <span class="input-group-addon">to</span>
-					                                            <input type="text" id="date_event_end" class="form-control" name="end" placeholder="Date End" />
+					                                            <input type="date" id="date_event_end" class="form-control" name="end" placeholder="Date End" />
 					                                        </div>
 					                                    </div>
 					                                </div>
@@ -149,7 +149,7 @@
                                     <tbody>
                                         <?php
 
-                                    		$query = "SELECT * FROM ems_r_event INNER JOIN ems_r_event_type ON ems_r_event.re_etype_id = ems_r_event_type.ret_etype_id  WHERE re_event_status = 1";
+                                    		$query = "SELECT * FROM ems_r_event INNER JOIN ems_r_event_type ON ems_r_event.re_etype_id = ems_r_event_type.ret_etype_id  WHERE re_event_stat = 'Pending'";
 
                                     		$runquery = mysqli_query($connection, $query);
 

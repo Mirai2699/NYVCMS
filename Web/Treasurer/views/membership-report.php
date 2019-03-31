@@ -12,6 +12,7 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
+				<li><a href="javascript:;">Home</a></li>
 				<li><a href="javascript:;">Reports</a></li>
 				<li class="active"><a href="event-report.php">List of Expenses</a></li>
 			</ol>
@@ -43,7 +44,8 @@
 	                            <table id="data-table" class="table table-striped table-bordered">
 	                                <thead>
 	                                <tr>
-	                                	<th>Expense</th>
+	                                	<th>Item Name</th>
+	                                	<th>Quantity</th>
 	                                    <th>Event</th>
 	                                    <th>Sponsor</th>
 	                                    <th>Date Received</th>
@@ -53,26 +55,27 @@
 
 	                            	<?php
 
-	                            		$query = "SELECT DISTINCT * FROM ems_t_expenditures WHERE te_status = 1";
+	                            		$query = "SELECT * FROM ems_r_logistics AS L INNER JOIN ems_r_sponsor AS S ON L.rl_sponsor_id = S.rs_sponsor_id INNER JOIN ems_r_event AS E ON E.re_event_id = L.rl_event_id WHERE rl_status = 1";
 
 	                            		$runquery = mysqli_query($connection, $query);
 
 	                            		while ($row = mysqli_fetch_assoc($runquery)){
 
-	                            		  $data_expense = $row['te_expense'];
-                                          $data_amount = $row['te_amount'];
-                                          $data_purpose = $row['te_purpose'];
-                                          $data_date = $row['te_date'];
-                                          $dataexeid = $row['te_expenditure_id'];
+	                            			$item = $row['rl_item_name'];
+	                            			$quantity = $row['rl_quantity'];
+	                            			$event = $row['re_event_name'];
+	                            			$sponsor = $row['rs_sponsor_name'];
+	                            			$date_received = $row['rl_date_received'];
+	                            			$rlid = $row['rl_id'];
 
-                                          echo "<tr>
-                                                <td>".$data_expense."</td>
-                                                <td>".$data_amount."</td>
-                                                <td>".$data_purpose."</td>
-                                                <td>".$data_date."</td>
-                                              </tr>
-                                             ";
-                                        }
+	                            			echo "<tr>
+	                            					<td>".$item."</td>
+	                            					<td>".$quantity."</td>
+	                            					<td>".$event."</td>
+	                            					<td>".$sponsor."</td>
+	                            					<td>".$date_received."</td>
+	                            				  </tr>";
+	                                		}
 
 	                                	?>
 	                                </tbody>
@@ -94,7 +97,7 @@
 		<!-- end scroll to top btn -->
 
 		<?php 
-			include('expense-report-printable.php');
+			include('membership-report-printable.php');
 		?>
 	</div>
 	<!-- end page container -->
@@ -111,7 +114,7 @@
 	<script type="text/javascript">
 	  function print()
 	  {
-	    $('#expense').printThis({
+	    $('#membership').printThis({
 	       debug: false,               // show the iframe for debugging
 	       importCSS: true,            // import page CSS
 	       importStyle:true,           // import style tags

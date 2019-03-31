@@ -131,7 +131,7 @@
                                     					<td>".$data_type."</td>
                                     					<td>".$data_conno."</td>
                                     					<td>".$data_address."</td>
-                                    					<td style='width:135px'>
+                                    					<td style='width:85px'>
 			                                            	<a href='ui_modal_notification.html#modal-edit".$datasponsorid."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
 			                                            	<a href='javascript:;' onclick='btn_areventype(".$datasponsorid.")' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
 			                                            </td>
@@ -230,8 +230,8 @@
     			url: '../functionalities/add_sponsor.php',
     			async: false,
     			success: function(data){
-    				// alert(data);
-    				// setTimeout(location.reload.bind(location), 1000);
+    				alert("Successfully Added!");
+    				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){
     				alert('something went wrong')

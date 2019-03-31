@@ -16,7 +16,6 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
-				<li><a href="javascript:;">Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 			<!-- end breadcrumb -->
@@ -34,13 +33,10 @@
 							<h4>TOTAL NUMBER OF MEMBERS</h4>
 							<p>
 								<?php
-									$query1 = mysqli_query($connection, "Select count(*) indv from ems_t_individual_membership");
-									$query2 = mysqli_query($connection, "select count(*) org from ems_t_org_membership");
+									$query1 = mysqli_query($connection, "Select count(*) indv from ems_t_individual_membership WHERE tim_status = 'Paid' AND tim_activeflag = 1");
 									$count = 0;
 									if ($query1)
 										$count += mysqli_fetch_assoc($query1)["indv"];
-									if ($query2)
-										$count += mysqli_fetch_assoc($query2)["org"];
 									echo $count;
 								?>
 									
@@ -49,44 +45,8 @@
 					</div>
 				</div>
 				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-md-3 col-sm-6">
-					<div class="widget widget-stats bg-blue">
-						<div class="stats-icon"><i class="fa fa-calendar"></i></div>
-						<div class="stats-info">
-							<h4>TOTAL NUMBER OF EVENTS</h4>
-							<p>
-								<?php
-									$query1 = mysqli_query($connection, "Select count(*) event from ems_r_event");
-									$count = 0;
-									if ($query1)
-										$count += mysqli_fetch_assoc($query1)["event"];
-									echo $count;
-								?>
-							</p>	
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-md-3 col-sm-6">
-					<div class="widget widget-stats bg-purple">
-						<div class="stats-icon"><i class="fa fa-star-o"></i></div>
-						<div class="stats-info">
-							<h4>TOTAL NUMBER OF SPONSORS</h4>
-							<p>
-								<?php
-									$query1 = mysqli_query($connection, "Select count(*) s from ems_r_sponsor");
-									$count = 0;
-									if ($query1)
-										$count += mysqli_fetch_assoc($query1)["s"];
-									echo $count;
-								?>
-							</p>	
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
+				
+				
 				<!-- begin col-3 -->
 				<div class="col-md-3 col-sm-6">
 					<div class="widget widget-stats bg-red">
@@ -108,107 +68,24 @@
 				<!-- end col-3 -->
 			</div>
 			<!-- end row -->
-			<!-- begin row -->
-			<div class="col-md-12" style="margin-bottom: 10px">
-			    <div id="daterep" style="width: 100%; height: 500px;border:1px solid black;"></div>
-			    <script type="text/javascript">
-			        Highcharts.chart('daterep', {
-			            chart: {
-			                type: 'line'
-			            },
-			            title: {
-			                text: 'Monthly Collective Number of Attendees in All Events in the Year <?php echo date('Y');?>'
-			            },
-			            xAxis: {
-			                categories: [<?php
-                                                                        $curryear = date("Y");
-
-                                                                             $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month, monthname(re_event_enddate) AS Name from ems_r_event WHERE year(re_event_enddate) = '$curryear'");
-                                                                            while($row2 = mysqli_fetch_assoc($view_query2))
-                                                                                {   
-                                                                                    $eventMonth = $row2["Month"];
-                                                                                    $m_name = $row2["Name"];
-                                                                                    echo '\''.$m_name.'\',';
-                                                                                }
-                                                                     ?>]
-			            },
-			            yAxis: {
-			                title: {
-			                    text: 'Total Number of Attendees'
-			                }
-			            },
-
-			            plotOptions: {
-			                line: {
-			                    dataLabels: {
-			                        enabled: true
-			                    },
-			                    enableMouseTracking: true
-			                }
-			            },
-			            series: [{
-			                name: 'Number of attendees',
-			                data: [
-			                      <?php
-			                        $curryear = date("Y");
-			                        $baseyear = ($curryear - 1);
-
-			                        $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month_End, monthname(re_event_enddate) AS Month_Name from ems_r_event WHERE year(re_event_enddate) = ".$curryear." ORDER BY month(re_event_enddate) ASC");
-			                            while($row2 = mysqli_fetch_assoc($view_query2))
-			                                {   
-			                                    $eventMonth = $row2["Month_End"];
-			                                    $eventMonthName = $row2["Month_Name"];
-			                      ?>
-			                    {
-			                            name: '<?php
-			                                      echo $eventMonthName; 
-			                                   ?>',
-			                            y: <?php 
-			                                  $view_query3 = mysqli_query($connection,"SELECT COUNT(ta_attendance_id) AS attendees
-			                                  											FROM `ems_t_attendance` AS ATT 
-			                                  											INNER JOIN `ems_r_event` AS EVE 
-			                                  											ON ATT.ta_event_id = EVE.re_event_id
-			                                  											WHERE month(ta_date_attended) = ".$eventMonth." AND year(ta_date_attended) = ".$curryear." ");
-			                                  $total = 0;
-			                                  while($row3 = mysqli_fetch_assoc($view_query3))
-			                                      {
-			                                        
-			                                        $eventMonthQty = $row3["attendees"];
-			                                        $total = $total + $eventMonthQty;
-			                                        echo($total);
-			                                      }
-			                               ?>
-			                    },
-			                      <?php
-			                      }
-			                      ?>
-			                      ]
-			            },
-			           
-			          ]
-
-			        });
-			    </script>
-			</div>
-
 
 			<div class="col-md-12" style="margin-top: 15px; margin-bottom: 20px">
-				<div id="collection" style=""></div>
+				<div id="collection" style="width: 100%; height: 500px;border:1px solid black;"></div>
 			    <script type="text/javascript">
 
 			        Highcharts.chart('collection', {
 			            chart: {
-			                type: 'column'
+			                type: 'bar'
 			            },
 			            title: {
-			                text: 'Collection From Different Transactions For the Year <?php echo date("Y")?>'
+			                text: 'Total Number of Members per Disrtict For the Year <?php echo date("Y")?>'
 			            },
 			            xAxis: {
-			                categories: ['Membership (Individual)', 'Membership (Organization)', 'Renewal (Individual)', 'Renewal (Organization)']
+			                categories: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6']
 			            },
 			            yAxis: {
 			                title: {
-			                    text: 'Total Amount in Peso'
+			                    text: 'Total Number of Members'
 			                }
 			            },
 
@@ -226,52 +103,91 @@
 			                }
 			            },
 			            series: [{
-			                name: 'Yearly Collection',
+			                name: 'Total number of Members',
 			                data: [
 			                          <?php
-			                              include("../../../dbconnection.php");  
-			                              $curryear = date('Y');
-			                              $view_queryR1 = mysqli_query($connection,"SELECT IFNULL(SUM(tim_amount),0.00) AS AMOUNT1 FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'");
-			                                                 while($row = mysqli_fetch_assoc($view_queryR1))
-			                                                 {   
-			                                                    
-			                                                    echo($row["AMOUNT1"]);
-			                                                 }
-			                           ?>, 
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS1 
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 1 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS1"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
 			                           <?php
-			                             include("../../../dbconnection.php");  
-
-			                              $curryear = date('Y');
-			                              $view_queryR2 = mysqli_query($connection,"SELECT IFNULL(SUM(tom_amount),0.00) AS AMOUNT2 FROM ems_t_org_membership 
-			                                                 WHERE tom_status = 'Paid' ");
-			                                                 while($row = mysqli_fetch_assoc($view_queryR2))
-			                                                 {   
-			                                                    
-			                                                    echo($row["AMOUNT2"]);
-			                                                 }
-			                           ?>, 
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS2 
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 2 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS2"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
 			                           <?php
-			                              include("../../../dbconnection.php");  
-			                              $curryear = date('Y');
-			                              $view_queryR3 = mysqli_query($connection,"SELECT IFNULL(SUM(tri_amount),0.00) AS AMOUNT3 FROM ems_t_renewal_indiv 
-			                                                 WHERE tri_status = 'Paid' ");
-			                                                 while($row = mysqli_fetch_assoc($view_queryR3))
-			                                                 {   
-			                                                    
-			                                                    echo($row["AMOUNT3"]);
-			                                                 }
-			                           ?>, 
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS3 
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 3 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS3"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
 			                           <?php
-			                              include("../../../dbconnection.php");  
-			                              $curryear = date('Y');
-			                              $view_queryR4 = mysqli_query($connection,"SELECT IFNULL(SUM(tro_amount),0.00) AS AMOUNT4 FROM ems_t_renewal_org 
-			                                                 WHERE tro_status = 'Paid'");
-			                                                 while($row = mysqli_fetch_assoc($view_queryR4))
-			                                                 {   
-			                                                    
-			                                                    echo($row["AMOUNT4"]);
-			                                                 }
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS4 
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 4 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS4"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS5 
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 5 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS5"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS6
+			                              		FROM ems_t_individual_membership 
+			                                                 WHERE tim_status = 'Paid'
+			                                                 AND tim_activeflag = 1
+			                                                 AND tim_disid = 6 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS6"];
+                                                    echo ($dis);
+                                                }
 			                           ?>
 			                       ]
 			            },
@@ -281,7 +197,136 @@
 			    </script>               
 
 			</div>
+			<br><br>
 			<!-- end row -->
+			<div class="col-md-12" style="margin-top: 15px; margin-bottom: 20px">
+				<div id="collection1" style="width: 100%; height: 500px;border:1px solid black;"></div>
+			    <script type="text/javascript">
+
+			        Highcharts.chart('collection1', {
+			            chart: {
+			                type: 'bar'
+			            },
+			            title: {
+			                text: 'Total Number of Organizations per Disrtict For the Year <?php echo date("Y")?>'
+			            },
+			            xAxis: {
+			                categories: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6']
+			            },
+			            yAxis: {
+			                title: {
+			                    text: 'Total Number of Members'
+			                }
+			            },
+
+			            plotOptions: {
+			            	series:
+			            	{
+			            		colorByPoint: false,
+			            	},
+			            	
+			                line: {
+			                    dataLabels: {
+			                        enabled: true
+			                    },
+			                    enableMouseTracking: true
+			                }
+			            },
+			            series: [{
+			                name: 'Total number of Members',
+			                data: [
+			                          <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS1 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 1 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS1"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS2 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 2 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS2"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS3 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 3 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS3"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS4 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 4 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS4"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS5 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 5 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS5"];
+                                                    echo ($dis);
+                                                }
+			                           ?>,
+			                           <?php
+			                              	include("../../../dbconnection.php");  
+			                              	$curryear = date('Y');
+			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tom_orgmemid) AS DIS6 
+			                              		FROM ems_t_org_membership 
+			                                                 WHERE tom_status = 'Paid'
+			                                                 AND tom_activeflag = 1
+			                                                 AND tom_disid = 6 ");
+											while($row = mysqli_fetch_assoc($view_query1))
+                                                {   
+                                                    $dis = $row["DIS6"];
+                                                    echo ($dis);
+                                                }
+			                           ?>
+			                       ]
+			            },
+			           ]
+
+			        });
+			    </script>               
+
+			</div>
 		</div>
 		<!-- end #content -->
 		

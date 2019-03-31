@@ -56,7 +56,18 @@
 				            Reports
 				        </a>
 						<ul class="sub-menu">
-							<li><a href="expense-report.php">List of Expenses</a></li>
+							<!-- <li class="has-sub">
+								<a href="javascript:;">
+						            <b class="caret pull-right"></b>
+						            List of Paid Transactions
+						        </a>
+								<ul class="sub-menu">
+									<li><a href="membership-report.php">List of Paid Membership</a></li>
+									<li><a href="renewal-report.php">List of Paid Renewal</a></li>
+									<li><a href="event-registration-report.php">List of Paid Event Registration</a></li>
+								</ul>
+							</li>
+ -->							<li><a href="expense-report.php">List of Expenses</a></li>
 						</ul>
 					</li>
 				</ul>

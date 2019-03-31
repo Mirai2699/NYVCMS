@@ -16,7 +16,6 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
-				<li><a href="javascript:;">Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 			<!-- end breadcrumb -->
@@ -109,7 +108,7 @@
 			</div>
 			<!-- end row -->
 			<!-- begin row -->
-			<div class="col-md-12" style="margin-bottom: 10px">
+			<div class="col-md-12" style="margin-bottom: 30px">
 			    <div id="daterep" style="width: 100%; height: 500px;border:1px solid black;"></div>
 			    <script type="text/javascript">
 			        Highcharts.chart('daterep', {
@@ -191,8 +190,8 @@
 			    </script>
 			</div>
 
-			<div class="col-md-6">
-					<div id="evepertype" style=""></div>
+			<div class="col-md-6" style="margin-bottom: 30px">
+					<div id="evepertype" style="width: 100%; height: 500px;border:1px solid black;"></div>
 				    <script type="text/javascript">
 					        Highcharts.chart('evepertype', {
 					        chart: {
@@ -271,8 +270,8 @@
 				        });
 				    </script>    
 			</div>
-			<div class="col-md-6">
-					<div id="sponpertype" style=""></div>
+			<div class="col-md-6" style="margin-bottom: 30px">
+					<div id="sponpertype" style="width: 100%; height: 500px; border:1px solid black;"></div>
 				    <script type="text/javascript">
 					        Highcharts.chart('sponpertype', {
 					        chart: {
@@ -351,8 +350,8 @@
 				        });
 				    </script>    
 			</div>
-			<div class="col-md-12" style="margin-top: 15px; margin-bottom: 20px">
-				<div id="collection" style=""></div>
+			<div class="col-md-12" style="">
+				<div id="collection" style="width: 100%; height: 500px; border:1px solid black;"></div>
 			    <script type="text/javascript">
 
 			        Highcharts.chart('collection', {
@@ -441,6 +440,7 @@
 
 			</div>
 			<!-- end row -->
+			<br><br>
 		</div>
 		<!-- end #content -->
 		

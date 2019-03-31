@@ -43,5 +43,5 @@
 
     }
 
-     header('Location: attendancev2.php');
+     header('Location: attendance.php');
 ?>

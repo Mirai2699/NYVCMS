@@ -468,7 +468,7 @@
     			},
     			success: function(data){
     				// alert(data)
-    				// setTimeout(location.reload.bind(location), 1000)
+    				setTimeout(location.reload.bind(location), 1000)
     			},
     			error: function(response){
     				alert('Oops, something went wrong')

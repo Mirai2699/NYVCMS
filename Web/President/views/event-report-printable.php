@@ -65,7 +65,7 @@
            <br>
 
         </p>
-        <table id="data-table" class="table table-striped table-bordered">
+        <table id="data-table" class="table table-striped table-bordered" style="width: 100%">
                                     <thead>
                                         <tr>
                                             <th>Event Name</th>

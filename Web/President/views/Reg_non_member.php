@@ -204,7 +204,7 @@ if (isset($_GET['regEvent']))
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">Province * :</label>
+									<label class="control-label col-md-4 col-sm-4" for="fullname">Municipality * :</label>
 									<div class="col-md-6 col-sm-6">
 										<input class="form-control" type="text" id="fullname" name="nmr_municipality" placeholder="Required" data-parsley-required="true" />
 									</div>
@@ -237,7 +237,7 @@ if (isset($_GET['regEvent']))
                                 <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Birthdate :</label>
 									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="date" id="data-phone" data-parsley-type="number" name="nmr_birthdate" />
+										<input class="form-control" type="text" id="data-phone" data-parsley-type="number" placeholder="yyyy-mm-dd" name="nmr_birthdate" />
 									</div>
 								</div>
                                 	<div class="form-group">

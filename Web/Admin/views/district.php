@@ -331,7 +331,7 @@
     			url: '../functionalities/add_district.php',
     			async: false,
     			success: function(data){
-    				alert(data);
+    				alert("Successfully Added!");
     				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){
@@ -361,7 +361,7 @@
     					_myId:myId
     			},
     			success: function(data){
-    				// alert(data)
+    				alert("Updated Successfully!")
     				setTimeout(location.reload.bind(location), 1000)
     			},
     			error: function(response){

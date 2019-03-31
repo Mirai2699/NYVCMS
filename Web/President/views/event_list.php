@@ -41,32 +41,6 @@
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
-
-	<!-- begin #header -->
-		<div id="header" class="header navbar navbar-default navbar-fixed-top">
-			<!-- begin container-fluid -->
-			<div class="container-fluid">
-				<!-- begin mobile sidebar expand / collapse button -->
-				<!-- <div class="navbar-header"> -->
-					<a href="homepage.php" class="navbar-brand" style="margin-bottom: 3px">
-						<i class="fa fa-arrow-left" style="margin-right: 5px"></i> 
-						<span> Back to Homepage </span>
-                     
-                    </a>
-					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<!-- </div> -->
-				<!-- end mobile sidebar expand / collapse button -->
-				
-				
-			</div>
-			<!-- end container-fluid -->
-		</div>
-		<!-- end #header -->
 	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
@@ -74,11 +48,10 @@
 		
 		
 		<div id="content" class="content">
-			<br><br>
+			
 			<!-- begin page-header -->
 			<h1 class="page-header">List of Upcoming Events</h1>
 			<!-- end page-header -->
-			<br><br>
 			
 			<!-- begin timeline -->
 			<ul class="timeline">

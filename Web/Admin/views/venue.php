@@ -66,25 +66,25 @@
 					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">Barangay</label>
 					                                    <div class="col-md-9">
-					                                        <input type="text" id="txt_brngy" class="form-control" placeholder="Name"/>
+					                                        <input type="text" id="txt_brngy" class="form-control" placeholder="Barangay"/>
 					                                    </div>
 					                                </div>
 					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">City/Municipality</label>
 					                                    <div class="col-md-9">
-					                                        <input type="text" id="txt_city" class="form-control" placeholder="Name"/>
+					                                        <input type="text" id="txt_city" class="form-control" placeholder="City"/>
 					                                    </div>
 					                                </div>
 					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">Province</label>
 					                                    <div class="col-md-9">
-					                                        <input type="text" id="txt_province" class="form-control" placeholder="Name"/>
+					                                        <input type="text" id="txt_province" class="form-control" placeholder="Province"/>
 					                                    </div>
 					                                </div>
-					                                <div class="col-md-4">
 														<div class="form-group">
-		                                  				  <label class="col-md-3">Region</label>
-		                                  				 		<select required data-parsley-group="wizard-step-2" class="form-control" id="dd_region">
+		                                  				  <label class="col-md-3 control-label">Region</label>
+		                                  				  <div class="col-md-9">
+		                                  				 		<select required data-parsley-group="wizard-step-2" class="form-control" class="col-md-9" id="dd_region">
 			                                           				<option value="Ilocos Region">Ilocos Region</option>
 			                                          				<option value="Cagayan Valley">Cagayan Valley</option>
 			                                          				<option value="Central Luzon">Central Luzon</option>
@@ -104,7 +104,7 @@
 			                                          				<option value="SOCCSKSARGEN">SOCCSKSARGEN</option>
 			                                          				<option value="ARMM">ARMM</option>
 		                                     				   </select>
-		                                  				</div>
+		                                     				</div>
 		                              				 </div>
 					                            </form>
 					                        </div>
@@ -232,7 +232,8 @@
 												                                </div>
 												                                <div class='form-group'>
 								                                  				  <label class='col-md-3'>Region</label>
-								                                  				 		<select required data-parsley-group='wizard-step-2' class='form-control' value='".$date_region."' id='dd_region".$data_venid."''>
+								                                  				  <div class='col-md-9'>
+								                                  				 		<select required data-parsley-group='wizard-step-2' class='form-control' value='".$data_region."' id='dd_region".$data_venid."''>
 									                                           				<option value='Ilocos Region'>Ilocos Region</option>
 									                                          				<option value='Cagayan Valley'>Cagayan Valley</option>
 									                                          				<option value='Central Luzon'>Central Luzon</option>
@@ -252,6 +253,7 @@
 									                                          				<option value='SOCCSKSARGEN'>SOCCSKSARGEN</option>
 									                                          				<option value='ARMM'>ARMM</option>
 								                                     				   </select>
+								                                     				</div>
 								                                  				</div>
 												                            </form>
 												                        </div>
@@ -338,7 +340,7 @@
     			url: '../functionalities/add_venue.php',
     			async: false,
     			success: function(data){
-    				alert(data);
+    				alert('Successfully added');
     				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){
@@ -374,7 +376,7 @@
     			url:'../functionalities/update_venue.php',
     			async: false,
     			success: function(data){
-    				// alert(data)
+    				alert("Updated Successfully!")
     				setTimeout(location.reload.bind(location), 1000)
     			},
     			error: function(response){

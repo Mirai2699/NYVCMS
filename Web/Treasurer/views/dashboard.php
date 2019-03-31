@@ -16,7 +16,6 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
-				<li><a href="javascript:;">Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 			<!-- end breadcrumb -->
@@ -28,7 +27,7 @@
 				<!-- begin row -->
 				<div class="row">
 					
-					<div id="daterep" style="width: 99%; height: 400px;"></div>
+					<div id="daterep" style="width: 1070px; height: 100%; border:1px solid black;"></div>
 	                    <script type="text/javascript">
 
 	                        Highcharts.chart('daterep', {
@@ -201,8 +200,8 @@
 				</div>
 				<!-- end row -->
 				<br><br>
-				<div class="row">
-					<div id="collection" style="width: 99%; height: 400px;"></div>
+				<div class="row" style="margin-bottom: 20px">
+					<div id="collection" style="width: 1070px; height: 100%; border:1px solid black;"></div>
 	                    <script type="text/javascript">
 
 	                        Highcharts.chart('collection', {
@@ -213,7 +212,7 @@
 	                                text: 'Collection From Different Transactions For the Year <?php echo date("Y")?>'
 	                            },
 	                            xAxis: {
-	                                categories: ['Membership (Individual)', 'Membership (Organization)', 'Renewal (Individual)', 'Renewal (Organization)']
+	                                categories: ['Membership (Individual)', 'Membership (Organization)', 'Renewal (Individual)', 'Renewal (Organization)', 'Event Registration (Non-member)']
 	                            },
 	                            yAxis: {
 	                                title: {
@@ -230,7 +229,7 @@
 	                                }
 	                            },
 	                            series: [{
-	                                name: 'Yearly Collection',
+	                                name: 'Collection',
 	                                data: [
 	                                          <?php
 	                                              include("../../../dbconnection.php");  
@@ -276,6 +275,19 @@
 	                                                                    
 	                                                                    echo($row["AMOUNT4"]);
 	                                                                 }
+	                                           ?>,
+	                                           <?php
+	                                              include("../../../dbconnection.php");  
+	                                              $curryear = date('Y');
+	                                              $view_queryR5 = mysqli_query($connection,"SELECT IFNULL(SUM(re_regfee_nonmem),0.00) AS AMOUNT5 FROM ems_r_event AS E
+	                                              					 INNER JOIN ems_t_eventreg_nonmem AS ER
+	                                              					 ON E.re_event_id = ER.nmr_event_id
+	                                                                 WHERE nmr_status = 'Paid'");
+	                                                                 while($row = mysqli_fetch_assoc($view_queryR5))
+	                                                                 {   
+	                                                                    
+	                                                                    echo($row["AMOUNT5"]);
+	                                                                 }
 	                                           ?>
 	                                       ]
 	                            },
@@ -285,6 +297,7 @@
 	                    </script>
 
 				</div>
+				<br>
 			</div>
 		</div>
 		<!-- end #content -->

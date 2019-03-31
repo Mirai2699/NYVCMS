@@ -34,7 +34,7 @@
 							<li><a href="org-membership.php">Organization</a></li>
 						</ul>
 					</li>
-					<li class="has-sub">
+					<!-- <li class="has-sub">
 						<a href="javascript:;">
 							<i class="fa fa-copy"></i>
 				            <b class="caret pull-right"></b>
@@ -43,7 +43,7 @@
 						<ul class="sub-menu">
 							<li><a href="">List of Members by District</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 				<!-- end sidebar nav -->
 			</div>

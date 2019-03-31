@@ -42,7 +42,7 @@
               Date Created: <?php echo date('F d, Y')?>
             </td>
             <td style="width: 380px; text-align: right;border-color: white">
-              Report No: EVENT<?php echo date('Ymd')?>
+              Report No: SPONSOR<?php echo date('Ymd')?>
             </td>
           </tr>
         </table>

@@ -32,7 +32,15 @@
 						<div class="stats-icon"><i class="fa fa-calendar-o"></i></div>
 						<div class="stats-info">
 							<h4>EVENT TYPES</h4>
-							<p>200</p>	
+							<p>
+								<?php
+									$query1 = mysqli_query($connection, "Select count(*) etype from ems_r_event_type");
+									$count = 0;
+									if ($query1)
+										$count += mysqli_fetch_assoc($query1)["etype"];
+									echo $count;
+								?>
+							</p>	
 						</div>
 					</div>
 				</div>
@@ -43,7 +51,15 @@
 						<div class="stats-icon"><i class="fa fa-home"></i></div>
 						<div class="stats-info">
 							<h4>VENUES</h4>
-							<p>6</p>	
+							<p>
+								<?php
+									$query1 = mysqli_query($connection, "Select count(*) venue from ems_r_venue");
+									$count = 0;
+									if ($query1)
+										$count += mysqli_fetch_assoc($query1)["venue"];
+									echo $count;
+								?>
+							</p>	
 						</div>
 					</div>
 				</div>
@@ -54,22 +70,19 @@
 						<div class="stats-icon"><i class="fa fa-dot-circle-o"></i></div>
 						<div class="stats-info">
 							<h4>SUSTAINABLE DEVELOPMENT GOALS</h4>
-							<p>200</p>	
+							<p>
+								<?php
+									$query1 = mysqli_query($connection, "Select count(*) sdg from ems_r_sdg");
+									$count = 0;
+									if ($query1)
+										$count += mysqli_fetch_assoc($query1)["sdg"];
+									echo $count;
+								?>
+							</p>	
 						</div>
 					</div>
 				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-md-3 col-sm-6">
-					<div class="widget widget-stats bg-red">
-						<div class="stats-icon"><i class="fa fa-dot-circle-o"></i></div>
-						<div class="stats-info">
-							<h4>SUSTAINABLE DEVELOPMENT GOALS</h4>
-							<p>200</p>	
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
+				<!-- end col-3 -->	
 			</div>
 			<!-- end row -->
 			<!-- begin row -->

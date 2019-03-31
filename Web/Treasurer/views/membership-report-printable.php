@@ -25,7 +25,7 @@
 
 <div style="display: none">
 
-  <div id="expense" class="panel-body" style="color: black">
+  <div id="membership" class="panel-body" style="color: black">
      <!-- begin panel-body -->
      <!--For Details-->
      
@@ -43,18 +43,18 @@
               Date Created: <?php date_default_timezone_set('Asia/Manila'); echo date('F d, Y')?>
             </td>
             <td style="width: 380px; text-align: right;border-color: white">
-              Report No: EXP<?php date_default_timezone_set('Asia/Manila'); echo date('Ymd')?>
+              Report No: MEM<?php date_default_timezone_set('Asia/Manila'); echo date('Ymd')?>
             </td>
           </tr>
         </table>
         <hr>
-        <p style="font-size: 19px; font-weight:bold; text-align: center; margin-top: 20px">REPORT ON EXPENSES</p>
+        <p style="font-size: 19px; font-weight:bold; text-align: center; margin-top: 20px">REPORT ON PAID FOR MEMBERSHIP</p>
         <hr>
 
         <p style="font-size: 16px; text-align: justify">
           <b>Report Description:</b><br><br>
            &nbsp;&nbsp;&nbsp;
-           This report contains the details of all expenses.
+           This report contains the details of all paid for membership through bank.
            <br>
            &nbsp;&nbsp;&nbsp;
            Details in this report may be filtered according to the specifications and preferences set by the report generator.

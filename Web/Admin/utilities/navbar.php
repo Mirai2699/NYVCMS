@@ -35,7 +35,7 @@
 							<li><a href="venue.php">Venue</a></li>
 							<li><a href="sustainable-development-goal.php">Sustainable Development Goals</a></li>
 							<li><a href="district.php">District</a></li>
-							<li ><a href="user-role.php">User Role</a></li>
+							<!-- <li ><a href="user-role.php">User Role</a></li> -->
 						</ul>
 					</li>
 					

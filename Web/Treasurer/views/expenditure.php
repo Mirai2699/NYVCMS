@@ -201,7 +201,7 @@
     			url: '../functionalities/add_expenditure.php',
     			async: false,
     			success: function(data){
-    				alert(data);
+    				alert("Successfully Added!");
     				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){

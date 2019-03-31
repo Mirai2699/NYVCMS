@@ -41,7 +41,7 @@
 					                                <div class="form-group">
 					                                    <label class="col-md-3 control-label">Sponsor Type Name</label>
 					                                    <div class="col-md-9">
-					                                        <input type="text" id="txt_stype" class="form-control" placeholder="Event Type Name"/>
+					                                        <input type="text" id="txt_stype" class="form-control" placeholder="Sponsor Type"/>
 					                                    </div>
 					                                </div>
 					                            </form>
@@ -62,7 +62,7 @@
                                 <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a> -->
                             </div>
-                            <h4 class="panel-title">Events</h4>
+                            <h4 class="panel-title">Sponsor Type</h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -182,7 +182,7 @@
     			url: '../functionalities/add_sponsor_type.php',
     			async: false,
     			success: function(data){
-    				alert(data);
+    				alert('Successfully added!');
     				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){
@@ -210,7 +210,7 @@
     					_myId:myId
     			},
     			success: function(data){
-    				alert(data)
+    				alert('Successfully updated!')
     				setTimeout(location.reload.bind(location), 1000)
     			},
     			error: function(response){
