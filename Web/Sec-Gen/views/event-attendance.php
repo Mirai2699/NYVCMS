@@ -252,7 +252,7 @@ if (isset($_GET['viewAttendance']))
                                                         <td>".$date."</td>
                                                         <td style='width:65px'>
                                                         <center>
-                                                             <a href='event_to_sponsor.php?viewEvent='  class='btn btn-danger'><i class='fa fa-archive'></i></a>
+                                                             <a href='event-attendance.php?viewAttendance='  class='btn btn-danger'><i class='fa fa-archive'></i></a>
                                                             </center>
                                                         </td>
                                                       </tr> 

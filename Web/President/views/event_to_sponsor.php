@@ -128,7 +128,7 @@ if (isset($_GET['viewEvent']))
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Date Received</label>
-                                                            <input style="color: black; padding-right: 2px;" type="text" name="date[]" class="form-control" required="" minlength="3" min="1" max="100" placeholder="YYYY-MM-DD" />
+                                                            <input style="color: black; padding-right: 2px;" type="date" name="date[]" class="form-control" required="" placeholder="" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">

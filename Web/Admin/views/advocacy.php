@@ -12,11 +12,11 @@
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
 				<li><a href="javascript:;">System Configuration</a></li>
-				<li class="active">Event Type</li>
+				<li class="active">Advocacies</li>
 			</ol>
 			<!-- end breadcrumb -->
 			<!-- begin page-header -->
-			<h1 class="page-header">Event Type</h1>
+			<h1 class="page-header">Advocacies</h1>
 			<!-- end page-header -->
 			
 			<!-- begin row -->
@@ -24,7 +24,7 @@
 				<!-- begin col-12 -->
 			    <div class="col-md-12">
 			    	<p>
-						<td><a href="ui_modal_notification.html#modal-dialog" class="btn btn-sm btn-success" data-toggle="modal">Add Event Type</a></td>
+						<td><a href="ui_modal_notification.html#modal-dialog" class="btn btn-sm btn-success" data-toggle="modal">Add Advocacy</a></td>
 			    	</p>
 			    	<!-- #modal-dialog -->
 							<div class="modal fade" id="modal-dialog">
@@ -32,15 +32,15 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-											<h4 class="modal-title">Add Event Type</h4>
+											<h4 class="modal-title">Add Advocacy</h4>
 										</div>
 										<div class="modal-body">
 											<div class="panel-body">
 					                            <form class="form-horizontal">
 					                                <div class="form-group">
-					                                    <label class="col-md-3 control-label">Event Type</label>
+					                                    <label class="col-md-3 control-label">Advocacy</label>
 					                                    <div class="col-md-9">
-					                                        <input type="text" id="txt_stype" class="form-control" placeholder="Event Type"/>
+					                                        <input type="text" id="txt_advoc" class="form-control" placeholder="Advocacy"/>
 					                                    </div>
 					                                </div>
 					                            </form>
@@ -48,7 +48,7 @@
 										</div>
 										<div class="modal-footer">
 											<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
-											<a href="javascript:;" id="btn_addstype" class="btn btn-sm btn-success">Submit</a>
+											<a href="javascript:;" id="btn_addadvoc" class="btn btn-sm btn-success">Submit</a>
 										</div>
 									</div>
 								</div>
@@ -61,14 +61,14 @@
                                 <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a> -->
                             </div>
-                            <h4 class="panel-title">Event Type</h4>
+                            <h4 class="panel-title">Advocacies</h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table id="data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Event Type</th>
+                                            <th>Advocacy</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -76,38 +76,38 @@
 
                                     	<?php
 
-                                    		$query = "SELECT DISTINCT * FROM ems_r_event_type WHERE ret_status = 1";
+                                    		$query = "SELECT DISTINCT * FROM ems_r_advocacy WHERE advoc_activeflag = 1";
 
                                     		$runquery = mysqli_query($connection, $query);
 
                                     		while ($row = mysqli_fetch_assoc($runquery)){
 
-                                    			$data_stype = $row['ret_etype_name'];
-                                    			$datastypeid = $row['ret_etype_id'];
+                                    			$advoc = $row['advoc_name'];
+                                    			$id = $row['advoc_id'];
 
                                     			echo "<tr>
-                                    					<td>".$data_stype."</td>
-                                    					<td style='width:135px'>
-			                                            	<a href='ui_modal_notification.html#modal-edit".$datastypeid."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
-			                                            	<a href='javascript:;' onclick='btn_areventype(".$datastypeid.")' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
+                                    					<td>".$advoc."</td>
+                                    					<td style='width:80px'>
+			                                            	<a href='ui_modal_notification.html#modal-edit".$id."' class='btn  btn-success' data-toggle='modal'><i class='fa fa-edit'></i></a>
+			                                            	<a href='javascript:;' onclick='btn_areventype(".$id.")' class='btn btn-danger' data-toggle='modal'><i class='fa fa-times'></i></a>
 			                                            </td>
                                     				  </tr>
 
 
-	                                  					<div class='modal fade' id='modal-edit".$datastypeid."'>
+	                                  					<div class='modal fade' id='modal-edit".$id."'>
 															<div class='modal-dialog'>
 																<div class='modal-content'>
 																	<div class='modal-header'>
 																		<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-																		<h4 class='modal-title'>Update Event Type</h4>
+																		<h4 class='modal-title'>Update Advocacy</h4>
 																	</div>
 																	<div class='modal-body'>
 																		<div class='panel-body'>
 												                            <form class='form-horizontal'>
 												                                <div class='form-group'>
-												                                    <label class='col-md-3 control-label'>Sponsor Type</label>
+												                                    <label class='col-md-3 control-label'>Advocacy</label>
 												                                    <div class='col-md-9'>
-												                                        <input type='text' value='".$data_stype."' id='txt_stype_up".$datastypeid."' class='form-control' placeholder='Sponsor Type'/>
+												                                        <input type='text' value='".$advoc."' id='txt_advoc_up".$id."' class='form-control' placeholder='Advocacy'/>
 												                                    </div>
 												                                </div>
 												                            </form>
@@ -115,7 +115,7 @@
 																	</div>
 																	<div class='modal-footer'>
 																		<a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Close</a>
-																		<a href='javascript:;' onclick='btn_upeventype(".$datastypeid.")' class='btn btn-sm btn-success'>Submit</a>
+																		<a href='javascript:;' onclick='btn_upadvoc(".$id.")' class='btn btn-sm btn-success'>Submit</a>
 																	</div>
 																</div>
 															</div>
@@ -166,19 +166,19 @@
     </script>
 
     <script type="text/javascript">
-    	$('#btn_addstype').click(function(){
+    	$('#btn_addadvoc').click(function(){
     		// alert();
 
-    		let stype = $('#txt_stype').val();
+    		let advoc = $('#txt_advoc').val();
 
     		// alert(stype)
 
     		$.ajax({
     			type: 'POST',
     			data:{
-    					_stype:stype
+    					_advoc:advoc
     				},
-    			url: '../functionalities/add_event_type.php',
+    			url: '../functionalities/add_advocacy.php',
     			async: false,
     			success: function(data){
     				alert('Successfully Added!');
@@ -193,19 +193,19 @@
     	})
 
 
-    	function btn_upeventype(myId){
+    	function btn_upadvoc(myId){
     		// alert(myId)
 
-    		let new_stype = $('#txt_stype_up'+myId).val()
+    		let newadvoc = $('#txt_advoc_up'+myId).val()
 
     		// alert(new_eventtype+" | "+new_evendescription)
 
     		$.ajax({
     			type: 'POST',
-    			url:'../functionalities/update_event_type.php',
+    			url:'../functionalities/update_advocacy.php',
     			async: false,
     			data:{
-    					_new_stype: new_stype,
+    					_newadvoc: newadvoc,
     					_myId:myId
     			},
     			success: function(data){

@@ -17,6 +17,7 @@ if (isset($_GET['viewItems']))
         <div id="content" class="content">
             <!-- begin breadcrumb -->
             <ol class="breadcrumb pull-right">
+                <li><a href="logistics.php">Logistics </a></li>
                 <li><a href="javascript:;">Sponsored Items </a></li>
             </ol>
             <!-- end breadcrumb -->
@@ -37,7 +38,7 @@ if (isset($_GET['viewItems']))
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                             </div> -->
-                            <h4 class="panel-title">Adding of Items</h4>
+                            <h4 class="panel-title">Sponsored Items</h4>
                         </div>
                         <div class="panel-body">
                             
@@ -100,49 +101,35 @@ if (isset($_GET['viewItems']))
                                                 <div class="row group">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label>Name</label>
-                                                            <input type="" name="name[]" class="form-control" placeholder="Name" required>
+                                                            <label>Item</label>
+                                                            <input type="" name="item[]" class="form-control" placeholder="Name" required>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label>Date Attended</label>
-                                                            <input style="color: black; padding-right: 2px;" type="date" name="date[]" class="form-control" required minlength="3" min="1" max="100"/>
-                                                        </div>
-                                                    </div>      
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label>Age</label>
-                                                            <input style="color: black; padding-right: 2px;" type="digits" data-parsley-type="digits" name="age[]" class="form-control" required="" min="1" max="100" placeholder="Age" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                          <label class="col-md-3">Gender:</label>
-                                                                <select data-parsley-group="wizard-step-2" class="form-control" name="gender[]"  required="">
-                                                                    <option value="" selected disabled>-- Select Gender--</option>
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                               </select>
-                                                        </div>
-                                                     </div>
-                                                     <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label>Contact No.</label>
-                                                            <input style="color: black; padding-right: 2px;" type="digits" data-parsley-type="number" name="contactno[]" class="form-control" required="" minlength="3" min="1" max="100" placeholder="09xxxxxxxxx"/>
+                                                            <label>Quantity</label>
+                                                            <input type="" name="quantity[]" date-parsley-type="digits" class="form-control" placeholder="8888" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label>SDG</label>
-                                                            <select class="form-control" name="sdg[]">
-                                                                <option value="" selected disabled>-- Select SDG--</option>
+                                                            <label>Sponsor</label>
+                                                            <select class="form-control" name="sponsor[]">
+                                                                <option value="" selected disabled>-- Select Sponsor--</option>
                                                                    <?php
-                                                                        $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_sdg` WHERE rsd_sdg_status = 1");
+                                                                        $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_sponsor` AS S
+                                                                            INNER JOIN `ems_r_sponsorship` AS SS
+                                                                            ON S.rs_sponsor_id = SS.rss_sponsor_id
+                                                                            INNER JOIN `ems_r_event` AS E
+                                                                            ON SS.rss_event_id = E.re_event_id
+                                                                            WHERE S.rs_status = 1
+                                                                            AND E.re_event_status = 1
+                                                                            AND SS.rss_activeflag = 1
+                                                                            AND SS.rss_event_id = ".$ids."");
                                                                         while($row = mysqli_fetch_assoc($view_query))
                                                                     {   
-                                                                        $name = $row["rsd_sdg_name"];
-                                                                        $id = $row["rsd_sdg_id"]; 
+                                                                        $name = $row["rs_sponsor_name"];
+                                                                        $id = $row["rs_sponsor_id"]; 
                                   
                                                                     ?>    
                                                                 <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
@@ -150,6 +137,12 @@ if (isset($_GET['viewItems']))
                                                                      }
                                                                 ?>  
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Date Received</label>
+                                                            <input type="date" name="date[]" class="form-control" placeholder="" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -175,7 +168,7 @@ if (isset($_GET['viewItems']))
                                                                 
                                                             </div>
                                                             <br>
-                                                          <h1>Do you wanted to add the attendee/s?</h1>
+                                                          <h1>Are you sure you want to add the item/s?</h1>
                                                             <div class="panel" style="height: 50%; width: 100%">
                                                                 <br>
                                                                 <button type="submit" class="btn btn-success btn-lg" name="btn_addItem" value="<?php echo $ids; ?>">   Yes   </button> &nbsp&nbsp&nbsp&nbsp
@@ -207,13 +200,10 @@ if (isset($_GET['viewItems']))
                                 <table id="data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
-                                            <th>Contact No</th>
-                                            <th>SDG</th>
-                                            <th>Event</th>
-                                            <th>Date</th>
+                                            <th>Item</th>
+                                            <th>Quantity</th>
+                                            <th>Sponsor</th>
+                                            <th>Date Received</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -222,37 +212,34 @@ if (isset($_GET['viewItems']))
 
                                             // $query = "SELECT * FROM (`ems_r_sponsor` as sp RIGHT JOIN `ems_r_sponsorship` as pp on pp.rss_sponsor_id = sp.rs_sponsor_id) left join ems_r_event as ev on pp.rss_event_id = ev.re_event_id where ev.re_event_id =".$ids."";
 
-                                        $query = "SELECT * FROM ems_t_attendance AS A
-                                        INNER JOIN ems_r_event AS E
-                                        ON A.ta_event_id = E.re_event_id
-                                        INNER JOIN ems_r_sdg AS S
-                                        ON S.rsd_sdg_id = A.ta_sdg_id
-                                        where E.re_event_id =".$ids."";
+                                        $query = "SELECT * FROM `ems_r_sponsor` AS S
+                                            INNER JOIN `ems_r_logistics` as L
+                                            ON S.rs_sponsor_id = L.rl_sponsor_id
+                                            INNER JOIN `ems_r_event` AS E
+                                            ON L.rl_event_id = E.re_event_id
+                                            WHERE S.rs_status = 1
+                                            AND E.re_event_status = 1
+                                            AND L.rl_status = 1
+                                            AND L.rl_event_id = ".$ids."";
 
                                             $runquery = mysqli_query($connection, $query);
 
                                             while ($row = mysqli_fetch_assoc($runquery)){
 
                                                 
-                                            $name = $row["ta_name"];
-                                            $age = $row['ta_age'];
-                                            $gender = $row['ta_gender'];
-                                            $conno = $row['ta_contact_no'];
-                                            $sdg = $row['rsd_sdg_name'];
-                                            $event = $row["re_event_name"]; 
-                                            $date = $row["ta_date_attended"]; 
+                                            $item = $row["rl_item_name"];
+                                            $quantity = $row['rl_quantity'];
+                                            $sponsor = $row['rs_sponsor_name'];
+                                            $date = $row['rl_date_received'];
 
                                                 echo "<tr>
-                                                        <td>".$name."</td>
-                                                        <td>".$age."</td>
-                                                        <td>".$gender."</td>
-                                                        <td>".$conno."</td>
-                                                        <td>".$sdg."</td>
-                                                        <td>".$event."</td>
+                                                        <td>".$item."</td>
+                                                        <td>".$quantity."</td>
+                                                        <td>".$sponsor."</td>
                                                         <td>".$date."</td>
                                                         <td style='width:65px'>
                                                         <center>
-                                                             <a href='event_to_sponsor.php?viewEvent='  class='btn btn-danger'><i class='fa fa-archive'></i></a>
+                                                             <a href='event-logistics.php?viewItems='  class='btn btn-danger'><i class='fa fa-archive'></i></a>
                                                             </center>
                                                         </td>
                                                       </tr> 

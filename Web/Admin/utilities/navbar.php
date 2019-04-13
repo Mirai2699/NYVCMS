@@ -32,8 +32,10 @@
 						<ul class="sub-menu">
 							<li><a href="event-type.php">Event Type</a></li>
 							<li><a href="sponsor-type.php">Sponsor Type</a></li>
+							<li><a href="membership-type.php">Membership Type</a></li>
 							<li><a href="venue.php">Venue</a></li>
 							<li><a href="sustainable-development-goal.php">Sustainable Development Goals</a></li>
+							<li><a href="advocacy.php">Advocacies</a></li>
 							<li><a href="district.php">District</a></li>
 							<!-- <li ><a href="user-role.php">User Role</a></li> -->
 						</ul>

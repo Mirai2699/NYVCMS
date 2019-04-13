@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2019 at 04:55 AM
+-- Generation Time: Apr 13, 2019 at 06:29 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -43,9 +43,27 @@ CREATE TABLE `ems_r_activity` (
 --
 
 INSERT INTO `ems_r_activity` (`ra_activity_id`, `ra_activity_name`, `ra_activity_description`, `ra_activity_starttime`, `ra_activity_pic`, `ra_activity_status`, `ra_event_id`) VALUES
-(1, 'Opening Remarks', 'Desc', '08:00', 'Clark Ian Woods', 1, 7),
-(2, 'Opening Remarks', 'Villy Ormido', '08:00', '', 1, 10),
-(3, 'Sample', 'HAha', '09:00', '', 1, 10);
+(1, 'Sample', 'desc', '08:00', 'staff1', 1, 1),
+(2, 'sample1', 'desc1', '09:00', 'staff2', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ems_r_advocacy`
+--
+
+CREATE TABLE `ems_r_advocacy` (
+  `advoc_id` int(11) NOT NULL,
+  `advoc_name` varchar(50) NOT NULL,
+  `advoc_activeflag` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_r_advocacy`
+--
+
+INSERT INTO `ems_r_advocacy` (`advoc_id`, `advoc_name`, `advoc_activeflag`) VALUES
+(1, 'Health', 1);
 
 -- --------------------------------------------------------
 
@@ -66,12 +84,12 @@ CREATE TABLE `ems_r_district` (
 --
 
 INSERT INTO `ems_r_district` (`rd_dis_id`, `rd_dis_name`, `rd_dis_description`, `rd_dis_head`, `rd_dis_status`) VALUES
-(1, 'District 1', 'Ilocos Region, Cagayan Valley, CAR', 'Roard', 1),
-(2, 'District 2', 'Central Luzon, NCR', 'Tian', 1),
-(3, 'District 3', 'CALABARZON, MIMAROPA, Bicol Region', 'Rey', 1),
-(4, 'District 4', 'Eastern Visayas, Western Visayas, Central Visayas', 'Mami', 1),
-(5, 'District 5', 'Zamboanga Peninsula, Northern Mindanao, CARAGA', 'Jean Ann', 1),
-(6, 'District 6', 'Davao Region, SOCCSKSARGEN, and ARMM', 'Ronelyn Villegas', 1);
+(1, 'District 1', 'District 1', 'Ronelyn Villegas', 1),
+(2, 'District 2', 'District 2', 'Carlo Guiterrez', 1),
+(3, 'District 3', 'District 3', 'Ceriaco Respecia', 1),
+(4, 'District 4', 'District 4', 'Esperato Ilaida', 1),
+(5, 'District 5', 'District 5', 'Marielle Valencia', 1),
+(6, 'District 6', 'District 6', 'Cristian Balatbat', 1);
 
 -- --------------------------------------------------------
 
@@ -98,10 +116,7 @@ CREATE TABLE `ems_r_event` (
 --
 
 INSERT INTO `ems_r_event` (`re_event_id`, `re_event_name`, `re_event_description`, `re_event_startdate`, `re_event_enddate`, `re_regfee_mem`, `re_regfee_nonmem`, `re_event_status`, `re_etype_id`, `re_venue_id`, `re_event_stat`) VALUES
-(7, 'Mismo: Youth Volunteers Summit 2019', 'The first ever Youth Volunteers Summit in Visayas!', '2019-04-01', '2019-04-01', '250.00', '500.00', 1, 6, 1, 'Pending'),
-(8, 'Mga Munting Hiling ni Lolo at Lola', 'Christmas for a cause.', '2019-07-30', '2019-07-30', '500.00', '1000.00', 1, 2, 2, 'Pending'),
-(9, 'Sample', 'Sample', '2019-04-18', '2019-04-18', '300.00', '500.00', 1, 3, 0, 'Pending'),
-(10, 'graduation', '2019', '2019-05-17', '2019-05-17', '700.00', '1000.00', 1, 4, 1, 'Pending');
+(1, 'Mismo: Youth Volunteers Summit 2019', 'Seminar', '2019-04-06', '2019-04-06', '500.00', '1000.00', 1, 1, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -112,7 +127,6 @@ INSERT INTO `ems_r_event` (`re_event_id`, `re_event_name`, `re_event_description
 CREATE TABLE `ems_r_event_type` (
   `ret_etype_id` int(11) NOT NULL,
   `ret_etype_name` varchar(50) NOT NULL,
-  `ret_etype_description` varchar(200) NOT NULL,
   `ret_status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,15 +134,11 @@ CREATE TABLE `ems_r_event_type` (
 -- Dumping data for table `ems_r_event_type`
 --
 
-INSERT INTO `ems_r_event_type` (`ret_etype_id`, `ret_etype_name`, `ret_etype_description`, `ret_status`) VALUES
-(1, 'Sample', 'Hahaha', 0),
-(2, 'Gift Giving', 'sample', 1),
-(3, 'Trial', 'Puro tawa, haha.', 1),
-(4, 'Seminar', '', 1),
-(5, 'General Assembly', 'Commits', 1),
-(6, 'Youth Volunteers Summit', 'Description', 1),
-(7, 'Seminar1', 'Description', 1),
-(8, 'Event', 'Type', 1);
+INSERT INTO `ems_r_event_type` (`ret_etype_id`, `ret_etype_name`, `ret_status`) VALUES
+(1, 'Seminar', 1),
+(2, 'Gift Giving', 1),
+(3, 'Sample', 1),
+(4, 'Reunion', 1);
 
 -- --------------------------------------------------------
 
@@ -164,11 +174,9 @@ CREATE TABLE `ems_r_individual_info` (
 --
 
 INSERT INTO `ems_r_individual_info` (`rii_individ`, `rii_name`, `rii_age`, `rii_gender`, `rii_conno`, `rii_email`, `rii_barangay`, `rii_city`, `rii_province`, `rii_region`, `rii_conperson`, `rii_conpersonno`, `rii_educattainment`, `rii_yeargraduated`, `rii_degree`, `rii_awards`, `rii_company`, `rii_position`, `rii_advoc`, `rii_activeflag`) VALUES
-(1, 'Jean Ann Ramos', 20, 'Female', '09162395162', 'jeanchangowo@gmail.com', '', 'Rey Anthony Ramos', '09374829483', 'Tertiary', 'N/A', 'N/A', 'Minuyan', 'San ', 'Bulacan', 'Central Luzon', 'N/A', 'N/A', 'Education', 1),
-(2, 'Shiela Mae Velga', 19, 'Female', '09374829382', 'shiela@gmail.com', '', 'Ella Endrada', '09374829182', 'Tertiary', 'N/A', 'N/A', 'Lagro', 'Quzo', 'N/A', 'NCR', 'N/A', 'N/A', 'Education', 1),
-(3, 'Jade Paler', 20, 'Female', '09374829384', 'jadepaler@gmail.com', '', 'Jade Paler', '09374827483', 'Tertiary', 'N/A', 'N/A', 'Sta. Lucia', 'Quez', 'N/A', 'NCR', 'N/A', 'N/A', 'Education', 1),
-(4, 'Buenconsejo Pagdanganan Jr.', 21, 'Male', '09217187992', 'sehjpagdanganan28@gmail.cpm', '', 'Grace Pagdanganan', '09158040713', 'Tertiary', 'N/A', 'N/A', 'Greater Lagro', 'Quez', 'Metro Manila', 'NCR', 'telep', 'tsr', 'Empowerment', 1),
-(5, 'Samuel John Pascual', 18, 'Male', '09775436543', 'pascualsamueljohn@gmail.com', '', 'Jean Ann Ramos', '09162395162', 'Secondary', 'N/A', 'N/A', 'Minuyan', 'Quez', 'Metro Manila', 'NCR', 'N/A', 'N/A', 'Education', 1);
+(1, 'Jean Ann Ramos', 20, 'Female', '09162395162', 'jeanchangowo@gmail.com', '', 'Rey Anthony Ramos', '09465738493', 'Tertiary', 'N/A', 'N/A', 'Minuyan', 'San ', 'Bulacan', 'Central Luzon', 'N/A', 'N/A', 'Education', 1),
+(2, 'Villy Ormido', 20, 'Male', '09374829312', 'villy@gmail.com', '', 'Jhe Estoque', '0937483921', 'Tertiary', 'N/A', 'N/A', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'N/A', 'N/A', 'Education', 1),
+(3, 'Leandro Avena IV', 22, 'Male', '09483927584', 'ianavena@yahoo.com', '', 'Ian Avena', '09123456789', 'Tertiary', '2018', 'BSIT', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'QCPU', 'Instructor', 'Education', 1);
 
 -- --------------------------------------------------------
 
@@ -191,8 +199,29 @@ CREATE TABLE `ems_r_logistics` (
 --
 
 INSERT INTO `ems_r_logistics` (`rl_id`, `rl_item_name`, `rl_quantity`, `rl_date_received`, `rl_status`, `rl_event_id`, `rl_sponsor_id`) VALUES
-(4, 'Water', 100, '2019-03-19', 1, 7, 3),
-(5, 'Cake', 100, '2019-03-15', 1, 8, 2);
+(1, 'Cookies', 100, '2019-04-14', 1, 1, 2),
+(2, 'Keychains', 100, '2019-04-08', 1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ems_r_membership_type`
+--
+
+CREATE TABLE `ems_r_membership_type` (
+  `mtype_id` int(11) NOT NULL,
+  `mtype_name` varchar(50) NOT NULL,
+  `mtype_fee` decimal(10,2) NOT NULL,
+  `mtype_activeflag` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_r_membership_type`
+--
+
+INSERT INTO `ems_r_membership_type` (`mtype_id`, `mtype_name`, `mtype_fee`, `mtype_activeflag`) VALUES
+(1, 'Individuals', '300.00', 1),
+(2, 'Organization', '500.00', 1);
 
 -- --------------------------------------------------------
 
@@ -224,8 +253,7 @@ CREATE TABLE `ems_r_org_info` (
 --
 
 INSERT INTO `ems_r_org_info` (`roi_orgid`, `roi_orgname`, `roi_date_established`, `roi_barangay`, `roi_city`, `roi_province`, `roi_region`, `roi_numofmem`, `roi_orgconno`, `roi_orgemail`, `roi_repname`, `roi_repconno`, `roi_classification`, `roi_subclassification`, `roi_advoc`, `roi_activeflag`) VALUES
-(1, 'Commits', '0000-00-00', 'Commonwelath', 'Quezon City', 'N/A', 'NCR', 200, '09375829387', 'commits@gmail.com', 'Malene Dizon', '09364728371', 'Youth-serving Organization', 'School Based', 'Education', 1),
-(2, 'FBTO', '2019-03-23', 'Commonwealth', 'Quezon City', 'N/A', 'NCR', 200, '09362748391', 'fbto@gmail.com', 'Carlo Guiterrez', '0936748219', 'Youth Organization', 'School Based', 'Education', 1);
+(1, 'Commits', '2004-06-15', 'Commonwealth', 'Quezon City', 'Metro Manila', 'NCR', 299, '09473867485', 'commits@gmail.com', 'Malened Dizon', '09574829452', 'Youth Organization', 'School Based', 'Education', 1);
 
 -- --------------------------------------------------------
 
@@ -281,12 +309,24 @@ CREATE TABLE `ems_r_sdg` (
 --
 
 INSERT INTO `ems_r_sdg` (`rsd_sdg_id`, `rsd_sdg_name`, `rsd_sdg_description`, `rsd_sdg_status`) VALUES
-(2, 'No Poverty', 'End poverty in all its forms everywhere.', 1),
-(5, 'Zero Hunger', '', 1),
-(6, 'Sample 1', '', 1),
-(7, 'Sam', 'haha', 1),
-(8, 'Zero Waste', 'Description', 1),
-(9, 'No Corruptions', 'Corruptz', 1);
+(1, 'No Poverty', 'End poverty in all its forms everywhere.', 1),
+(2, 'Zero Hunger', 'End hunger, achieve food security, and promote sustainable agriculture.', 1),
+(3, 'Good Health and Well Being', 'Ensure healthy lives and promote well-being for all at all ages.', 1),
+(4, 'Quality Education', 'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.', 1),
+(5, 'Gender Equality', 'Achieve gender equality and empower all women and girls.', 1),
+(6, 'Clean Water and Sanitation', 'Ensure availability and sustainable management of water and sanitation of all.', 1),
+(7, 'Affordable and Clean', 'Ensure access to affordable, reliable, sustainable and modern energy for all.', 1),
+(8, 'Decent Work and Economic Growth', 'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work.', 1),
+(9, 'Industry, Innovation, and Infrastracture', 'Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation.', 1),
+(10, 'Reduced Inequalities', 'Reduce inequality within and among countries.', 1),
+(11, 'Sustainable Cities and Communities', 'Make cities and human settlements inclusive, safe, resilient, and sustainable.', 1),
+(12, 'Responsible Consumption and Production', 'Ensure sustainable consumption and production patterns.', 1),
+(13, 'Climate Action', 'Take urgent action to combat climate change and its impacts.', 1),
+(14, 'Life Below Water', 'Conserve and sustain-ably use the oceans, seas,  and marine resources for sustainable development.', 1),
+(15, 'Life on Land', 'Protect and promote terrestrial ecosystems, forests, land, and biodiversity. ', 1),
+(16, 'Peace, Justice, and Strong Institutions', 'Promote peaceful societies, accountable institutions, and access to justice for all.', 1),
+(17, 'Partnerships For The Goals', 'Strengthen global partnerships for sustainable development.', 1),
+(18, 'sample', 'sample SDG', 1);
 
 -- --------------------------------------------------------
 
@@ -308,11 +348,10 @@ CREATE TABLE `ems_r_sponsor` (
 --
 
 INSERT INTO `ems_r_sponsor` (`rs_sponsor_id`, `rs_sponsor_name`, `rs_sponsor_contact_no`, `rs_sponsor_address`, `rs_status`, `rs_stype_id`) VALUES
-(2, 'Ceriaco Respecia', '09123456789', 'Tandang Sora', 1, 1),
-(3, 'Wilkins', '09837465783', 'Manila', 1, 2),
-(4, 'Cristian Balatbat', '09357483747', 'Fairview', 1, 1),
-(5, 'Commits', '09483927584', 'PUP QC', 1, 3),
-(6, 'Jack n Jill', '09263748291', 'Manila', 1, 2);
+(1, 'Czaira Faner', '09483927584', 'Palmera, San Jose del Monte, Bulacan', 1, 1),
+(2, 'FBTO', '09475938495', 'PUP QC', 1, 2),
+(3, 'Ian Avena', '09887654321', 'Montalban', 1, 1),
+(4, 'Eunice Jael Pascual', '09478593847', 'Manila', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -334,9 +373,9 @@ CREATE TABLE `ems_r_sponsorship` (
 --
 
 INSERT INTO `ems_r_sponsorship` (`rss_sponsorship_id`, `rss_sponsor_id`, `rss_event_id`, `rss_amount`, `rss_received_date`, `rss_activeflag`) VALUES
-(1, 2, 7, '15000.00', '2019-03-12', 1),
-(2, 4, 10, '200.00', '2019-03-13', 1),
-(3, 3, 7, '3000.00', '2019-03-20', 1);
+(1, 2, 1, '10000.00', '2019-03-03', 1),
+(2, 3, 1, '2000.00', '2019-04-13', 1),
+(3, 1, 1, '5000.00', '2019-04-11', 1);
 
 -- --------------------------------------------------------
 
@@ -355,9 +394,9 @@ CREATE TABLE `ems_r_sponsor_type` (
 --
 
 INSERT INTO `ems_r_sponsor_type` (`rst_stype_id`, `rst_stype_name`, `rst_stype_status`) VALUES
-(1, 'Public Figure', 1),
-(2, 'Company', 1),
-(3, 'Organization', 1);
+(1, 'Individual', 1),
+(2, 'Organization', 1),
+(3, 'Company', 1);
 
 -- --------------------------------------------------------
 
@@ -395,17 +434,6 @@ CREATE TABLE `ems_r_user_role` (
   `rur_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ems_r_user_role`
---
-
-INSERT INTO `ems_r_user_role` (`rur_roleid`, `rur_rolename`, `rur_activeflag`) VALUES
-(1, 'Admin', 1),
-(2, 'President', 1),
-(3, 'Vice President', 1),
-(4, 'Treasurer', 1),
-(5, 'Sec-Gen', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -425,6 +453,13 @@ CREATE TABLE `ems_r_venue` (
   `rv_ven_contactno` varchar(11) NOT NULL,
   `rv_ven_status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_r_venue`
+--
+
+INSERT INTO `ems_r_venue` (`rv_ven_id`, `rv_ven_name`, `rv_ven_barangay`, `rv_ven_city`, `rv_ven_province`, `rv_ven_region`, `rv_ven_disid`, `rv_ven_capacity`, `rv_ven_conper`, `rv_ven_contactno`, `rv_ven_status`) VALUES
+(1, 'PUP QC', 'Commonwealth', 'Quezon City', 'Metro Manila', 'NCR', 0, 1000, 'Esperato Ilaida Jr.', '09483758439', 1);
 
 -- --------------------------------------------------------
 
@@ -449,7 +484,9 @@ CREATE TABLE `ems_t_attendance` (
 --
 
 INSERT INTO `ems_t_attendance` (`ta_attendance_id`, `ta_date_attended`, `ta_name`, `ta_age`, `ta_gender`, `ta_contact_no`, `ta_sdg_id`, `ta_event_id`, `ta_activeflag`) VALUES
-(2, '0000-00-00', 'Jean Ann Ramos', 20, 'Female', '09374856473', 2, 7, 1);
+(1, '2019-03-31', 'Jean Ann Ramos', 20, 'Female', '09362849321', 5, 1, 1),
+(2, '2019-04-11', 'Gerard Maglaque', 20, 'Male', '09362849321', 2, 1, 1),
+(3, '2019-04-11', 'Sample', 20, 'Female', '09274882731', 14, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -468,14 +505,6 @@ CREATE TABLE `ems_t_eventreg_mem` (
   `term_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ems_t_eventreg_mem`
---
-
-INSERT INTO `ems_t_eventreg_mem` (`term_regid`, `term_eventid`, `term_indivmemid`, `term_date`, `term_transcode`, `term_paymenttype`, `term_status`, `term_activeflag`) VALUES
-(1, 8, 1, '0000-00-00', '', 'Onsite', 'Paid', 1),
-(2, 8, 1, '2019-03-23', '', 'Bank', 'Paid', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -487,8 +516,11 @@ CREATE TABLE `ems_t_eventreg_nonmem` (
   `nmr_transcode` varchar(10) NOT NULL,
   `nmr_datereg` date NOT NULL,
   `nmr_name` varchar(50) NOT NULL,
+  `nmr_barangay` varchar(50) NOT NULL,
+  `nmr_city` varchar(50) NOT NULL,
+  `nmr_province` varchar(50) NOT NULL,
+  `nmr_region` varchar(50) NOT NULL,
   `nmr_age` int(11) NOT NULL,
-  `nmr_address` varchar(100) NOT NULL,
   `nmr_birthdate` date NOT NULL,
   `nmr_gender` varchar(20) NOT NULL,
   `nmr_phone` varchar(100) NOT NULL,
@@ -506,9 +538,9 @@ CREATE TABLE `ems_t_eventreg_nonmem` (
 -- Dumping data for table `ems_t_eventreg_nonmem`
 --
 
-INSERT INTO `ems_t_eventreg_nonmem` (`nmr_id`, `nmr_transcode`, `nmr_datereg`, `nmr_name`, `nmr_age`, `nmr_address`, `nmr_birthdate`, `nmr_gender`, `nmr_phone`, `nmr_email`, `nmr_advoc`, `nmr_org`, `nmr_represent`, `nmr_status`, `nmr_event_id`, `nmr_paymenttype`, `nmr_disid`) VALUES
-(2, 'RfEBLjm0VC', '0000-00-00', 'Jean Ann Ramos', 20, '67', '2012-01-20', 'Male', '09162395162', 'jeanchangowo@gmail.com', 'Economic Empowerment', 'Polytechnic University of The Philippines - Quezon City Branch', 'Community-based Organization', 'Paid', 7, 'Onsite', 0),
-(3, 'RmfxPrIVbq', '2019-03-28', 'Sofhialyn Ewayan', 19, 'Quezon City', '1999-03-28', 'Female', '09374826473', 'sofhialyn@gmail.com', 'Education', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 7, 'Bank', 0);
+INSERT INTO `ems_t_eventreg_nonmem` (`nmr_id`, `nmr_transcode`, `nmr_datereg`, `nmr_name`, `nmr_barangay`, `nmr_city`, `nmr_province`, `nmr_region`, `nmr_age`, `nmr_birthdate`, `nmr_gender`, `nmr_phone`, `nmr_email`, `nmr_advoc`, `nmr_org`, `nmr_represent`, `nmr_status`, `nmr_event_id`, `nmr_paymenttype`, `nmr_disid`) VALUES
+(1, 'qf6XOUHJj9', '2019-03-30', 'Jean Ann Ramos', '', 'San Jose del Monte', 'Bulacan', 'Central Luzon', 20, '2019-03-30', 'Female', '09162395162', 'jeanchangowo@gmail.com', 'Education', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 1, 'Bank', 0),
+(2, 'esFaRuC1XG', '2019-03-30', 'Jean Ann Ramos', '', 'San Jose del Monte', 'Bulacan', 'NCR', 20, '2019-03-31', 'Female', '09162395162', 'jeanchangowo@gmail.com', 'Governance', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 1, 'Bank', 0);
 
 -- --------------------------------------------------------
 
@@ -530,10 +562,7 @@ CREATE TABLE `ems_t_expenditures` (
 --
 
 INSERT INTO `ems_t_expenditures` (`te_expenditure_id`, `te_expense`, `te_amount`, `te_purpose`, `te_date`, `te_status`) VALUES
-(1, 'Sample', '200.00', 'Purpose', '2019-01-09', 1),
-(2, 'Expense', '200.00', 'Wala lang', '2019-02-13', 1),
-(3, 'Sample1', '15000.00', 'ouwdpgrgj', '2019-03-07', 1),
-(4, 'Lowell', '1567.28', 'ewewew', '2019-04-19', 1);
+(1, 'Gift', '1000.00', 'Purpose', '2019-03-30', 1);
 
 -- --------------------------------------------------------
 
@@ -557,11 +586,9 @@ CREATE TABLE `ems_t_individual_membership` (
 --
 
 INSERT INTO `ems_t_individual_membership` (`tim_indivmemid`, `tim_transcode`, `tim_amount`, `tim_date`, `tim_individ`, `tim_disid`, `tim_status`, `tim_activeflag`) VALUES
-(1, 'LIEKQBbshR', '150.00', '2019-03-04', 1, 2, 'Paid', 1),
-(2, 'ehzmuGVs8c', '150.00', '2019-03-05', 2, 2, 'Paid', 1),
-(3, 'nAl2q4CveU', '150.00', '2019-03-23', 3, 2, 'Renewal', 1),
-(4, '1iORADJw7I', '150.00', '2019-03-23', 4, 2, 'Paid', 1),
-(5, 'PWjRbZlIsE', '150.00', '2019-03-25', 5, 2, 'Pending', 1);
+(1, 'BL2grtTmxl', '150.00', '2019-03-30', 1, 2, 'Paid', 1),
+(2, 'Hagj0R3YFf', '150.00', '2019-03-30', 2, 2, 'Paid', 1),
+(3, 'Bqgl8h0Kxn', '150.00', '2019-03-30', 3, 2, 'Paid', 1);
 
 -- --------------------------------------------------------
 
@@ -585,8 +612,7 @@ CREATE TABLE `ems_t_org_membership` (
 --
 
 INSERT INTO `ems_t_org_membership` (`tom_orgmemid`, `tom_transcode`, `tom_amount`, `tom_date`, `tom_orgid`, `tom_disid`, `tom_status`, `tom_activeflag`) VALUES
-(1, 'lftYukxoST', '500.00', '0000-00-00', 1, 2, 'Paid', 1),
-(2, '2iewVpO8EH', '500.00', '2019-03-23', 2, 2, 'Paid', 1);
+(1, 'JgKX4rQy0b', '500.00', '2019-03-30', 1, 2, 'Paid', 1);
 
 -- --------------------------------------------------------
 
@@ -604,13 +630,6 @@ CREATE TABLE `ems_t_payment_eventregmem_bank` (
   `tpeb_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ems_t_payment_eventregmem_bank`
---
-
-INSERT INTO `ems_t_payment_eventregmem_bank` (`tpeb_paymentid`, `tpeb_regid`, `tpeb_date`, `tpeb_bank`, `tpeb_branch`, `tpeb_controlno`, `tpeb_activeflag`) VALUES
-(1, 2, '2019-03-28', 'East West Bank', 'Tungkong Mangga', '23752935', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -624,13 +643,6 @@ CREATE TABLE `ems_t_payment_eventregmem_onsite` (
   `tpeo_receivedby` varchar(50) NOT NULL,
   `tpeo_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ems_t_payment_eventregmem_onsite`
---
-
-INSERT INTO `ems_t_payment_eventregmem_onsite` (`tpeo_paymentid`, `tpeo_regid`, `tpeo_date`, `tpeo_receivedby`, `tpeo_activeflag`) VALUES
-(1, 1, '2019-03-28', 'Villy Ormido', 1);
 
 -- --------------------------------------------------------
 
@@ -653,7 +665,8 @@ CREATE TABLE `ems_t_payment_eventregnonmem_bank` (
 --
 
 INSERT INTO `ems_t_payment_eventregnonmem_bank` (`tpnb_paymentid`, `tpnb_regid`, `tpnb_date`, `tpnb_bank`, `tpnb_branch`, `tpnb_controlno`, `tpnb_activeflag`) VALUES
-(1, 3, '2019-03-28', 'Chinabank', 'Fairview', '827364525', 1);
+(1, 1, '2019-03-30', 'BDO', 'Fairview', '56736', 1),
+(2, 2, '0000-00-00', 'BDO', 'Fairview', '908765432', 1);
 
 -- --------------------------------------------------------
 
@@ -668,13 +681,6 @@ CREATE TABLE `ems_t_payment_eventregnonmem_onsite` (
   `tpno_receivedby` varchar(50) NOT NULL,
   `tpno_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ems_t_payment_eventregnonmem_onsite`
---
-
-INSERT INTO `ems_t_payment_eventregnonmem_onsite` (`tpno_paymentid`, `tpno_regid`, `tpno_date`, `tpno_receivedby`, `tpno_activeflag`) VALUES
-(1, 2, '2019-03-28', 'Villy Ormido', 1);
 
 -- --------------------------------------------------------
 
@@ -697,9 +703,9 @@ CREATE TABLE `ems_t_payment_indivmem` (
 --
 
 INSERT INTO `ems_t_payment_indivmem` (`tpi_paymentid`, `tpi_indivmemid`, `tpb_date`, `tpb_bank`, `tpb_branch`, `tpb_controlno`, `tpb_activeflag`) VALUES
-(1, 1, '2019-03-22', 'East West Bank', 'Tungkong Mangga', '34827593', 1),
-(2, 3, '2019-03-23', 'BDO', 'Fairview', '34985792', 1),
-(7, 4, '2019-03-25', 'BDO', 'Don Antonio', '6756856', 1);
+(1, 1, '2019-03-30', 'East West Bank', 'Tungkong Mangga', '9484029485', 1),
+(2, 2, '2019-03-30', 'East West Bank', 'Fairview', '457203496', 1),
+(3, 3, '2019-03-31', 'Landbank', 'Fairview', '0349572745', 1);
 
 -- --------------------------------------------------------
 
@@ -722,8 +728,7 @@ CREATE TABLE `ems_t_payment_orgmem` (
 --
 
 INSERT INTO `ems_t_payment_orgmem` (`tpo_payorgid`, `tpo_orgmemid`, `tpo_datereceived`, `tpo_bank`, `tpo_branch`, `tpo_controlno`, `tpo_activeflag`) VALUES
-(1, 1, '2019-03-22', 'Landbank', 'Don Antonio', '94869304', 1),
-(2, 2, '2019-03-25', 'BDO', 'SM San Jose del Mont', '67564878', 1);
+(1, 1, '2019-03-30', 'BDO', 'Don Antonio', '34058', 1);
 
 -- --------------------------------------------------------
 
@@ -746,8 +751,9 @@ CREATE TABLE `ems_t_payment_renewal_indiv` (
 --
 
 INSERT INTO `ems_t_payment_renewal_indiv` (`tpri_paymentid`, `tpri_indivrenid`, `tpri_date`, `tpri_bank`, `tpri_branch`, `tpri_controlno`, `tpri_activeflag`) VALUES
-(1, 2, '2019-03-23', 'East West Bank', 'Tungkong Mangga', '9452450245', 1),
-(2, 3, '2019-03-23', 'BDO', 'SM Fairview', '498572935', 1);
+(1, 1, '2019-03-30', 'BDO', 'SM Fairview', '348524395', 1),
+(2, 2, '2019-03-30', 'BDO', 'Fairview', '4935023475', 1),
+(3, 3, '2019-03-31', 'BDO', 'Fairview', '4935023475', 1);
 
 -- --------------------------------------------------------
 
@@ -764,13 +770,6 @@ CREATE TABLE `ems_t_payment_renewal_org` (
   `tpro_controlno` varchar(20) NOT NULL,
   `tpro_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ems_t_payment_renewal_org`
---
-
-INSERT INTO `ems_t_payment_renewal_org` (`tpro_paymentid`, `tpro_orgrenid`, `tpro_date`, `tpro_bank`, `tpro_branch`, `tpro_controlno`, `tpro_activeflag`) VALUES
-(2, 2, '2019-03-23', 'BDO', 'SM Fairview', '09342748392', 1);
 
 -- --------------------------------------------------------
 
@@ -793,9 +792,9 @@ CREATE TABLE `ems_t_renewal_indiv` (
 --
 
 INSERT INTO `ems_t_renewal_indiv` (`tri_indivrenid`, `tri_indivmemid`, `tri_transcode`, `tri_amount`, `tri_date`, `tri_status`, `tri_activeflag`) VALUES
-(2, 1, 'OLuUKAa3yX', '100.00', '0000-00-00', 'Paid', 1),
-(3, 3, '0hmSnItq93', '100.00', '2019-03-23', 'Paid', 1),
-(4, 3, '62r54RCwDK', '100.00', '2019-03-23', 'Pending', 1);
+(1, 1, 'B2EiD1V7wa', '100.00', '2019-03-30', 'Paid', 1),
+(2, 2, 'JoZ0GqUDp4', '100.00', '2019-03-30', 'Paid', 1),
+(3, 1, 'y1vOIXJ6qb', '100.00', '2019-03-31', 'Paid', 1);
 
 -- --------------------------------------------------------
 
@@ -814,14 +813,6 @@ CREATE TABLE `ems_t_renewal_org` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ems_t_renewal_org`
---
-
-INSERT INTO `ems_t_renewal_org` (`tro_orgrenid`, `tro_orgmemid`, `tro_transcode`, `tro_amount`, `tro_date`, `tro_status`, `tro_activeflag`) VALUES
-(1, 1, '2HBbaIxRms', '300.00', '2019-03-22', 'Paid', 1),
-(2, 1, 'QyFXe1oIRC', '300.00', '2019-03-23', 'Paid', 1);
-
---
 -- Indexes for dumped tables
 --
 
@@ -831,6 +822,12 @@ INSERT INTO `ems_t_renewal_org` (`tro_orgrenid`, `tro_orgmemid`, `tro_transcode`
 ALTER TABLE `ems_r_activity`
   ADD PRIMARY KEY (`ra_activity_id`),
   ADD KEY `FK_ACTIVITY_EVENT` (`ra_event_id`);
+
+--
+-- Indexes for table `ems_r_advocacy`
+--
+ALTER TABLE `ems_r_advocacy`
+  ADD PRIMARY KEY (`advoc_id`);
 
 --
 -- Indexes for table `ems_r_district`
@@ -864,6 +861,12 @@ ALTER TABLE `ems_r_logistics`
   ADD PRIMARY KEY (`rl_id`),
   ADD KEY `FK_LOGISTICS_EVENT` (`rl_event_id`),
   ADD KEY `FK_LOGISTICS_SPONSOR` (`rl_sponsor_id`);
+
+--
+-- Indexes for table `ems_r_membership_type`
+--
+ALTER TABLE `ems_r_membership_type`
+  ADD PRIMARY KEY (`mtype_id`);
 
 --
 -- Indexes for table `ems_r_org_info`
@@ -1039,7 +1042,13 @@ ALTER TABLE `ems_t_renewal_org`
 -- AUTO_INCREMENT for table `ems_r_activity`
 --
 ALTER TABLE `ems_r_activity`
-  MODIFY `ra_activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ra_activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ems_r_advocacy`
+--
+ALTER TABLE `ems_r_advocacy`
+  MODIFY `advoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_r_district`
@@ -1051,31 +1060,37 @@ ALTER TABLE `ems_r_district`
 -- AUTO_INCREMENT for table `ems_r_event`
 --
 ALTER TABLE `ems_r_event`
-  MODIFY `re_event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `re_event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_r_event_type`
 --
 ALTER TABLE `ems_r_event_type`
-  MODIFY `ret_etype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ret_etype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ems_r_individual_info`
 --
 ALTER TABLE `ems_r_individual_info`
-  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_r_logistics`
 --
 ALTER TABLE `ems_r_logistics`
-  MODIFY `rl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `rl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ems_r_membership_type`
+--
+ALTER TABLE `ems_r_membership_type`
+  MODIFY `mtype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_r_org_info`
 --
 ALTER TABLE `ems_r_org_info`
-  MODIFY `roi_orgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `roi_orgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_r_region`
@@ -1087,13 +1102,13 @@ ALTER TABLE `ems_r_region`
 -- AUTO_INCREMENT for table `ems_r_sdg`
 --
 ALTER TABLE `ems_r_sdg`
-  MODIFY `rsd_sdg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `rsd_sdg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `ems_r_sponsor`
 --
 ALTER TABLE `ems_r_sponsor`
-  MODIFY `rs_sponsor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `rs_sponsor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ems_r_sponsorship`
@@ -1117,109 +1132,109 @@ ALTER TABLE `ems_r_users`
 -- AUTO_INCREMENT for table `ems_r_user_role`
 --
 ALTER TABLE `ems_r_user_role`
-  MODIFY `rur_roleid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `rur_roleid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_r_venue`
 --
 ALTER TABLE `ems_r_venue`
-  MODIFY `rv_ven_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rv_ven_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_attendance`
 --
 ALTER TABLE `ems_t_attendance`
-  MODIFY `ta_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ta_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_t_eventreg_mem`
 --
 ALTER TABLE `ems_t_eventreg_mem`
-  MODIFY `term_regid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `term_regid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_t_eventreg_nonmem`
 --
 ALTER TABLE `ems_t_eventreg_nonmem`
-  MODIFY `nmr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nmr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ems_t_expenditures`
 --
 ALTER TABLE `ems_t_expenditures`
-  MODIFY `te_expenditure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `te_expenditure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_individual_membership`
 --
 ALTER TABLE `ems_t_individual_membership`
-  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_t_org_membership`
 --
 ALTER TABLE `ems_t_org_membership`
-  MODIFY `tom_orgmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tom_orgmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregmem_bank`
 --
 ALTER TABLE `ems_t_payment_eventregmem_bank`
-  MODIFY `tpeb_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tpeb_paymentid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregmem_onsite`
 --
 ALTER TABLE `ems_t_payment_eventregmem_onsite`
-  MODIFY `tpeo_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tpeo_paymentid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregnonmem_bank`
 --
 ALTER TABLE `ems_t_payment_eventregnonmem_bank`
-  MODIFY `tpnb_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tpnb_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_eventregnonmem_onsite`
 --
 ALTER TABLE `ems_t_payment_eventregnonmem_onsite`
-  MODIFY `tpno_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tpno_paymentid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_indivmem`
 --
 ALTER TABLE `ems_t_payment_indivmem`
-  MODIFY `tpi_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `tpi_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_orgmem`
 --
 ALTER TABLE `ems_t_payment_orgmem`
-  MODIFY `tpo_payorgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tpo_payorgid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_renewal_indiv`
 --
 ALTER TABLE `ems_t_payment_renewal_indiv`
-  MODIFY `tpri_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tpri_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_renewal_org`
 --
 ALTER TABLE `ems_t_payment_renewal_org`
-  MODIFY `tpro_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tpro_paymentid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ems_t_renewal_indiv`
 --
 ALTER TABLE `ems_t_renewal_indiv`
-  MODIFY `tri_indivrenid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tri_indivrenid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ems_t_renewal_org`
 --
 ALTER TABLE `ems_t_renewal_org`
-  MODIFY `tro_orgrenid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tro_orgrenid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

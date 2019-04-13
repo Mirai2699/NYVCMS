@@ -34,6 +34,11 @@
 							<li><a href="org-membership.php">Organization</a></li>
 						</ul>
 					</li>
+					<li><a href="membership-fee.php">
+							<i class="fa fa-dashboard"></i>
+							<span>Membership Fee</span>
+						</a>
+					</li>
 					<!-- <li class="has-sub">
 						<a href="javascript:;">
 							<i class="fa fa-copy"></i>
