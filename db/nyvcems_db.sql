@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2019 at 06:29 PM
+-- Generation Time: Apr 15, 2019 at 10:07 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -149,7 +149,7 @@ INSERT INTO `ems_r_event_type` (`ret_etype_id`, `ret_etype_name`, `ret_status`) 
 CREATE TABLE `ems_r_individual_info` (
   `rii_individ` int(11) NOT NULL,
   `rii_name` varchar(50) NOT NULL,
-  `rii_age` int(11) NOT NULL,
+  `rii_bday` date NOT NULL,
   `rii_gender` varchar(6) NOT NULL,
   `rii_conno` varchar(11) NOT NULL,
   `rii_email` varchar(50) NOT NULL,
@@ -173,10 +173,12 @@ CREATE TABLE `ems_r_individual_info` (
 -- Dumping data for table `ems_r_individual_info`
 --
 
-INSERT INTO `ems_r_individual_info` (`rii_individ`, `rii_name`, `rii_age`, `rii_gender`, `rii_conno`, `rii_email`, `rii_barangay`, `rii_city`, `rii_province`, `rii_region`, `rii_conperson`, `rii_conpersonno`, `rii_educattainment`, `rii_yeargraduated`, `rii_degree`, `rii_awards`, `rii_company`, `rii_position`, `rii_advoc`, `rii_activeflag`) VALUES
-(1, 'Jean Ann Ramos', 20, 'Female', '09162395162', 'jeanchangowo@gmail.com', '', 'Rey Anthony Ramos', '09465738493', 'Tertiary', 'N/A', 'N/A', 'Minuyan', 'San ', 'Bulacan', 'Central Luzon', 'N/A', 'N/A', 'Education', 1),
-(2, 'Villy Ormido', 20, 'Male', '09374829312', 'villy@gmail.com', '', 'Jhe Estoque', '0937483921', 'Tertiary', 'N/A', 'N/A', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'N/A', 'N/A', 'Education', 1),
-(3, 'Leandro Avena IV', 22, 'Male', '09483927584', 'ianavena@yahoo.com', '', 'Ian Avena', '09123456789', 'Tertiary', '2018', 'BSIT', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'QCPU', 'Instructor', 'Education', 1);
+INSERT INTO `ems_r_individual_info` (`rii_individ`, `rii_name`, `rii_bday`, `rii_gender`, `rii_conno`, `rii_email`, `rii_barangay`, `rii_city`, `rii_province`, `rii_region`, `rii_conperson`, `rii_conpersonno`, `rii_educattainment`, `rii_yeargraduated`, `rii_degree`, `rii_awards`, `rii_company`, `rii_position`, `rii_advoc`, `rii_activeflag`) VALUES
+(1, 'Jean Ann Ramos', '2019-04-01', 'Female', '09162395162', 'jeanchangowo@gmail.com', '', 'Rey Anthony Ramos', '09465738493', 'Tertiary', 'N/A', 'N/A', 'Minuyan', 'San ', 'Bulacan', 'Central Luzon', 'N/A', 'N/A', 'Education', 1),
+(2, 'Villy Ormido', '2019-03-28', 'Male', '09374829312', 'villy@gmail.com', '', 'Jhe Estoque', '0937483921', 'Tertiary', 'N/A', 'N/A', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'N/A', 'N/A', 'Education', 1),
+(3, 'Leandro Avena IV', '2019-03-31', 'Male', '09483927584', 'ianavena@yahoo.com', '', 'Ian Avena', '09123456789', 'Tertiary', '2018', 'BSIT', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'QCPU', 'Instructor', 'Education', 1),
+(4, 'Jomella Caneda', '2019-03-29', 'Female', '09887654321', 'jomella@gmail.com', '', 'Jean Ann Ramos', '09162395162', 'Tertiary', 'N/A', 'N/A', 'Minuyan', 'San ', 'Bulacan', 'Central Luzon', 'N/A', 'N/A', 'Empowerment', 1),
+(5, 'Janelle Caneda', '2001-04-15', 'Female', '0937483923', 'janellecaneda@yahoo.com', '', 'Rosalinda Caneda', '09375849302', 'Secondary', 'N/A', 'N/A', 'Commonwealth', 'Quez', 'Metro Manila', 'NCR', 'N/A', 'N/A', 'Global Mobility', 1);
 
 -- --------------------------------------------------------
 
@@ -588,7 +590,9 @@ CREATE TABLE `ems_t_individual_membership` (
 INSERT INTO `ems_t_individual_membership` (`tim_indivmemid`, `tim_transcode`, `tim_amount`, `tim_date`, `tim_individ`, `tim_disid`, `tim_status`, `tim_activeflag`) VALUES
 (1, 'BL2grtTmxl', '150.00', '2019-03-30', 1, 2, 'Paid', 1),
 (2, 'Hagj0R3YFf', '150.00', '2019-03-30', 2, 2, 'Paid', 1),
-(3, 'Bqgl8h0Kxn', '150.00', '2019-03-30', 3, 2, 'Paid', 1);
+(3, 'Bqgl8h0Kxn', '150.00', '2019-03-30', 3, 2, 'Paid', 1),
+(4, 'UBx83sDEih', '150.00', '2019-04-15', 4, 2, 'Pending', 1),
+(5, 'l6jrhnZHRs', '150.00', '2019-04-15', 5, 2, 'Pending', 1);
 
 -- --------------------------------------------------------
 
@@ -1072,7 +1076,7 @@ ALTER TABLE `ems_r_event_type`
 -- AUTO_INCREMENT for table `ems_r_individual_info`
 --
 ALTER TABLE `ems_r_individual_info`
-  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ems_r_logistics`
@@ -1084,7 +1088,7 @@ ALTER TABLE `ems_r_logistics`
 -- AUTO_INCREMENT for table `ems_r_membership_type`
 --
 ALTER TABLE `ems_r_membership_type`
-  MODIFY `mtype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `mtype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ems_r_org_info`
@@ -1102,7 +1106,7 @@ ALTER TABLE `ems_r_region`
 -- AUTO_INCREMENT for table `ems_r_sdg`
 --
 ALTER TABLE `ems_r_sdg`
-  MODIFY `rsd_sdg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `rsd_sdg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ems_r_sponsor`
@@ -1168,7 +1172,7 @@ ALTER TABLE `ems_t_expenditures`
 -- AUTO_INCREMENT for table `ems_t_individual_membership`
 --
 ALTER TABLE `ems_t_individual_membership`
-  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ems_t_org_membership`
