@@ -114,10 +114,10 @@
 															<input type="text" data-parsley-group="wizard-step-1" id="txt_name" placeholder="Name" class="form-control" required />
 														</div>
 	                                                </div>
-	                                                <div class="col-md-1">
+	                                                <div class="col-md-2">
 														<div class="form-group">
-															<label>Age:</label>
-															<input type="text" data-parsley-group="wizard-step-1" id="txt_age" placeholder="" class="form-control" data-parsley-type="digits" required />
+															<label>Birthday:</label>
+															<input type="text" data-parsley-group="wizard-step-1" id="date_bday" class="form-control" required />
 														</div>
 	                                                </div>
 
@@ -354,6 +354,13 @@
 		$(document).ready(function() {
 			App.init();
 			FormWizardValidation.init();
+			$('#date_bday').datepicker({
+				dateFormat: "yy-mm-dd",
+				changeMonth: true,
+				changeYear: true,
+				minDate: '-40Y',
+				maxDate: '-18Y'
+			})
 		});
 	</script>
 	<script>
@@ -371,7 +378,7 @@
     		// alert();
 
     		let name = $('#txt_name').val();
-    		let age = $('#txt_age').val();
+    		let bday = $('#date_bday').val();
     		let gender = $('#dd_gender').val();
     		let conno = $('#txt_conno').val();
     		let email = $('#txt_email').val();
@@ -396,7 +403,7 @@
     			type: 'POST',
     			data:{
     					_name:name,
-    					_age:age,
+    					_bday:bday,
     					_gender:gender,
     					_conno:conno,
     					_email:email,
