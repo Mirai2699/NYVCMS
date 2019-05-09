@@ -297,7 +297,7 @@
     			url: '../functionalities/add_event.php',
     			async: false,
     			success: function(data){
-    				alert(data);
+    				alert("You have successfully added an event!");
     				setTimeout(location.reload.bind(location), 1000);
     			},
     			error: function(reponse){

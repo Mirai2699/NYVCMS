@@ -12,7 +12,6 @@
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
 			<ol class="breadcrumb pull-right">
-				<li><a href="javascript:;">Home</a></li>
 				<li><a href="javascript:;">Reports</a></li>
 				<li class="active"><a href="event-report.php">List of Events</a></li>
 			</ol>

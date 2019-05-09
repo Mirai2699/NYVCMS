@@ -110,26 +110,10 @@ if (isset($_GET['viewAttendance']))
                                                             <input style="color: black; padding-right: 2px;" type="date" name="date[]" class="form-control" required minlength="3" min="1" max="100"/>
                                                         </div>
                                                     </div>      
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label>Age</label>
-                                                            <input style="color: black; padding-right: 2px;" type="digits" data-parsley-type="digits" name="age[]" class="form-control" required="" min="1" max="100" placeholder="Age" />
-                                                        </div>
-                                                    </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                          <label class="col-md-3">Gender:</label>
-                                                                <select data-parsley-group="wizard-step-2" class="form-control" name="gender[]"  required="">
-                                                                    <option value="" selected disabled>-- Select Gender--</option>
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                               </select>
-                                                        </div>
-                                                     </div>
-                                                     <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label>Contact No.</label>
-                                                            <input style="color: black; padding-right: 2px;" type="digits" data-parsley-type="number" name="contactno[]" class="form-control" required="" minlength="3" min="1" max="100" placeholder="09xxxxxxxxx"/>
+                                                            <label>Time of Arrival</label>
+                                                            <input style="color: black; padding-right: 2px;" type="time" name="time[]" class="form-control" required="" placeholder="" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -208,9 +192,7 @@ if (isset($_GET['viewAttendance']))
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
-                                            <th>Contact No</th>
+                                            <th>ETA</th>
                                             <th>SDG</th>
                                             <th>Event</th>
                                             <th>Date</th>
@@ -235,18 +217,14 @@ if (isset($_GET['viewAttendance']))
 
                                                 
                                             $name = $row["ta_name"];
-                                            $age = $row['ta_age'];
-                                            $gender = $row['ta_gender'];
-                                            $conno = $row['ta_contact_no'];
+                                            $time = $row['ta_time'];
                                             $sdg = $row['rsd_sdg_name'];
                                             $event = $row["re_event_name"]; 
                                             $date = $row["ta_date_attended"]; 
 
                                                 echo "<tr>
                                                         <td>".$name."</td>
-                                                        <td>".$age."</td>
-                                                        <td>".$gender."</td>
-                                                        <td>".$conno."</td>
+                                                        <td>".$time."</td>
                                                         <td>".$sdg."</td>
                                                         <td>".$event."</td>
                                                         <td>".$date."</td>

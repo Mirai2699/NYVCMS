@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2019 at 10:07 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: May 09, 2019 at 11:10 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -116,7 +116,8 @@ CREATE TABLE `ems_r_event` (
 --
 
 INSERT INTO `ems_r_event` (`re_event_id`, `re_event_name`, `re_event_description`, `re_event_startdate`, `re_event_enddate`, `re_regfee_mem`, `re_regfee_nonmem`, `re_event_status`, `re_etype_id`, `re_venue_id`, `re_event_stat`) VALUES
-(1, 'Mismo: Youth Volunteers Summit 2019', 'Seminar', '2019-04-06', '2019-04-06', '500.00', '1000.00', 1, 1, 1, 'Pending');
+(1, 'Mismo: Youth Volunteers Summit 2019', 'Seminar', '2019-04-06', '2019-04-06', '500.00', '1000.00', 1, 1, 1, 'Pending'),
+(2, 'Innovate Integrate Motivate', 'Desc', '2019-05-11', '2019-05-11', '500.00', '1000.00', 1, 1, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -473,9 +474,7 @@ CREATE TABLE `ems_t_attendance` (
   `ta_attendance_id` int(11) NOT NULL,
   `ta_date_attended` date NOT NULL,
   `ta_name` varchar(50) NOT NULL,
-  `ta_age` int(11) NOT NULL,
-  `ta_gender` varchar(6) NOT NULL,
-  `ta_contact_no` varchar(11) NOT NULL,
+  `ta_time` time NOT NULL,
   `ta_sdg_id` int(11) NOT NULL,
   `ta_event_id` int(11) NOT NULL,
   `ta_activeflag` tinyint(1) NOT NULL DEFAULT '1'
@@ -485,10 +484,11 @@ CREATE TABLE `ems_t_attendance` (
 -- Dumping data for table `ems_t_attendance`
 --
 
-INSERT INTO `ems_t_attendance` (`ta_attendance_id`, `ta_date_attended`, `ta_name`, `ta_age`, `ta_gender`, `ta_contact_no`, `ta_sdg_id`, `ta_event_id`, `ta_activeflag`) VALUES
-(1, '2019-03-31', 'Jean Ann Ramos', 20, 'Female', '09362849321', 5, 1, 1),
-(2, '2019-04-11', 'Gerard Maglaque', 20, 'Male', '09362849321', 2, 1, 1),
-(3, '2019-04-11', 'Sample', 20, 'Female', '09274882731', 14, 1, 1);
+INSERT INTO `ems_t_attendance` (`ta_attendance_id`, `ta_date_attended`, `ta_name`, `ta_time`, `ta_sdg_id`, `ta_event_id`, `ta_activeflag`) VALUES
+(1, '2019-03-31', 'Jean Ann Ramos', '00:00:20', 5, 1, 1),
+(2, '2019-04-11', 'Gerard Maglaque', '00:00:20', 2, 1, 1),
+(3, '2019-04-11', 'Sample', '00:00:20', 14, 1, 1),
+(4, '2019-05-09', 'Samuel John Pascual', '14:00:00', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -506,6 +506,14 @@ CREATE TABLE `ems_t_eventreg_mem` (
   `term_status` varchar(10) NOT NULL DEFAULT 'Pending',
   `term_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ems_t_eventreg_mem`
+--
+
+INSERT INTO `ems_t_eventreg_mem` (`term_regid`, `term_eventid`, `term_indivmemid`, `term_date`, `term_transcode`, `term_paymenttype`, `term_status`, `term_activeflag`) VALUES
+(5, 1, 1, '2019-05-09', 'VIsKZPM0iT', 'Bank', 'Pending', 1),
+(6, 1, 3, '2019-05-09', 'zqG7SDUv59', 'Onsite', 'Pending', 1);
 
 -- --------------------------------------------------------
 
@@ -542,7 +550,8 @@ CREATE TABLE `ems_t_eventreg_nonmem` (
 
 INSERT INTO `ems_t_eventreg_nonmem` (`nmr_id`, `nmr_transcode`, `nmr_datereg`, `nmr_name`, `nmr_barangay`, `nmr_city`, `nmr_province`, `nmr_region`, `nmr_age`, `nmr_birthdate`, `nmr_gender`, `nmr_phone`, `nmr_email`, `nmr_advoc`, `nmr_org`, `nmr_represent`, `nmr_status`, `nmr_event_id`, `nmr_paymenttype`, `nmr_disid`) VALUES
 (1, 'qf6XOUHJj9', '2019-03-30', 'Jean Ann Ramos', '', 'San Jose del Monte', 'Bulacan', 'Central Luzon', 20, '2019-03-30', 'Female', '09162395162', 'jeanchangowo@gmail.com', 'Education', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 1, 'Bank', 0),
-(2, 'esFaRuC1XG', '2019-03-30', 'Jean Ann Ramos', '', 'San Jose del Monte', 'Bulacan', 'NCR', 20, '2019-03-31', 'Female', '09162395162', 'jeanchangowo@gmail.com', 'Governance', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 1, 'Bank', 0);
+(2, 'esFaRuC1XG', '2019-03-30', 'Jean Ann Ramos', '', 'San Jose del Monte', 'Bulacan', 'NCR', 20, '2019-03-31', 'Female', '09162395162', 'jeanchangowo@gmail.com', 'Governance', 'Polytechnic University of The Philippines - Quezon City Branch', 'School-based Organization', 'Paid', 1, 'Bank', 0),
+(8, '04yL7Tmw6I', '2019-05-09', 'Jomella Caneda', 'Commonwealth', 'Quezon City', 'Metro Manila', 'NCR', 20, '2019-05-09', 'Female', '09374836273', 'jomellarcaneda@gmail.com', 'Education', 'Technological University of the Philippines', 'School-based Organization', 'Pending', 1, 'Bank', 0);
 
 -- --------------------------------------------------------
 
@@ -1064,7 +1073,7 @@ ALTER TABLE `ems_r_district`
 -- AUTO_INCREMENT for table `ems_r_event`
 --
 ALTER TABLE `ems_r_event`
-  MODIFY `re_event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `re_event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ems_r_event_type`
@@ -1148,19 +1157,19 @@ ALTER TABLE `ems_r_venue`
 -- AUTO_INCREMENT for table `ems_t_attendance`
 --
 ALTER TABLE `ems_t_attendance`
-  MODIFY `ta_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ta_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ems_t_eventreg_mem`
 --
 ALTER TABLE `ems_t_eventreg_mem`
-  MODIFY `term_regid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `term_regid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ems_t_eventreg_nonmem`
 --
 ALTER TABLE `ems_t_eventreg_nonmem`
-  MODIFY `nmr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nmr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ems_t_expenditures`

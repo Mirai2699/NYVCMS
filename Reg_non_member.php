@@ -66,7 +66,7 @@ if (isset($_GET['regEvent']))
 									<label class="control-label col-md-4 col-sm-4" for="message">Register as :</label>
 									<div class="col-md-6 col-sm-6">
                                         <select class="form-control regType" id="reg" name="nmr_advoc" >
-                                   			<option value="Health"></option>
+                                   			<option value=""></option>
                               				<option value="Member">Member</option>
                               				<option value="Non member">Non member</option>
                               			</select>
@@ -89,11 +89,11 @@ if (isset($_GET['regEvent']))
                         </div>
                         <div class="panel-body panel-form">
                             <form class="form-horizontal form-bordered" role="form" method="POST" action="add_reg_mem.php" >
-                                 <div class="form-group">
+                            	<div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Event * :</label>
 									<div class="col-md-6">
                                         
-                                        <select class="form-control" id="dd_event" name="nmr_event_id" data-parsley-required="true" placeholder="Gender">
+                                        <select class="form-control" id="mr_event_id" name="mr_event_id" placeholder="Gender" >
                                                                   <?php
                                                                         $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_event` WHERE re_event_id = $ids");
                                                                         while($row = mysqli_fetch_assoc($view_query))
@@ -109,12 +109,54 @@ if (isset($_GET['regEvent']))
                                         </select>
 									</div>
 								</div>
+                                <!-- <div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Event * :</label>
+									<div class="col-md-6">
+                                        
+                                        <select class="form-control" id="dd_event" name="mr_event_id" data-parsley-required="true" placeholder="Gender" disabled="">
+                                                                  <?php
+                                                                        $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_event` WHERE re_event_id = $ids");
+                                                                        while($row = mysqli_fetch_assoc($view_query))
+                                                                    {   
+                                                                        $e_name = $row["re_event_name"];
+                                                                        $e_no = $row["re_event_id"]; 
+                                  
+                                                                    ?>     
+					                                            <option value="<?php echo $e_no; ?>"><?php echo $e_name; ?></option>
+                                                                <?php
+                                                                     }
+                                                                ?> 
+                                        </select>
+									</div>
+								</div> -->
 								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Name * :</label>
+									<div class="col-md-6">
+                                        
+                                        <select class="form-control" id="fullname" name="fullname" data-parsley-required="true" placeholder="Name">
+                                        	<option></option>
+	                                          <?php
+	                                                $view_query = mysqli_query($connection,"SELECT * FROM ems_t_individual_membership AS M  INNER JOIN ems_r_individual_info AS I ON M.tim_individ = I.rii_individ WHERE M.tim_status = 'Paid' AND M.tim_activeflag = 1");
+
+	                                                while($row = mysqli_fetch_assoc($view_query))
+	                                            {   
+	                                                $name = $row["rii_name"];
+	                                                $id = $row["tim_indivmemid"];
+	          
+	                                            ?>
+	                                        <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+	                                        <?php
+	                                             }
+	                                        ?> 
+                                        </select>
+									</div>
+								</div>
+								<!-- <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="fullname">Name * :</label>
 									<div class="col-md-6 col-sm-6">
 										<input class="form-control" type="text" id="fullname" name="fullname" placeholder="Required" data-parsley-required="true" />
 									</div>
-								</div>
+								</div> -->
                                 <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Type of payment * :</label>
 									<div class="col-md-6 col-sm-6">
@@ -157,7 +199,7 @@ if (isset($_GET['regEvent']))
 									<label class="control-label col-md-4 col-sm-4" for="message">Event * :</label>
 									<div class="col-md-6">
                                         
-                                        <select class="form-control" id="dd_event" name="nmr_event_id" placeholder="Gender">
+                                        <select class="form-control" id="nmr_event_id" name="nmr_event_id" placeholder="Gender" >
                                                                   <?php
                                                                         $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_event` WHERE re_event_id = $ids");
                                                                         while($row = mysqli_fetch_assoc($view_query))
@@ -194,7 +236,7 @@ if (isset($_GET['regEvent']))
 								<div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="fullname">Barangay * :</label>
 									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="nmr_brgy" placeholder="Required" data-parsley-required="true" />
+										<input class="form-control" type="text" id="fullname" name="nmr_brngy" placeholder="Required" data-parsley-required="true" />
 									</div>
 								</div>
 								<div class="form-group">

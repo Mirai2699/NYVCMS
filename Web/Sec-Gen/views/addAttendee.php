@@ -15,14 +15,12 @@
         die();
     }
     
-    $stmt = $dbh->prepare("INSERT INTO ems_t_attendance(ta_date_attended, ta_name, ta_age, ta_gender, ta_contact_no, ta_sdg_id, ta_event_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $dbh->prepare("INSERT INTO ems_t_attendance(ta_date_attended, ta_name, ta_time, ta_sdg_id, ta_event_id) VALUES (?, ?, ?, ?, ?)");
     $stmt->bindParam(1, $date);
     $stmt->bindParam(2, $name);
-    $stmt->bindParam(3, $age);
-    $stmt->bindParam(4, $gender);
-    $stmt->bindParam(5, $contactno);
-    $stmt->bindParam(6, $sdg);
-    $stmt->bindParam(7, $id);
+    $stmt->bindParam(3, $time);
+    $stmt->bindParam(4, $sdg);
+    $stmt->bindParam(5, $id);
 
     
     $event = $_POST['btn_addAttendee']; 
@@ -32,9 +30,7 @@
     {
         $name = $arr['name'][$i];
         $date = $arr['date'][$i];
-        $age = $arr['age'][$i];
-        $gender = $arr['gender'][$i];
-        $contactno = $arr['contactno'][$i];
+        $time = $arr['time'][$i];
         $sdg = $arr['sdg'][$i];
         $id = $event;
         

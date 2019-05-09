@@ -39,7 +39,7 @@
            Province of Batangas<br>
            Municipality of Tuy<br>
         </p> -->
-        <p><img id="rlogo" src="../../../resources/images/nvyc.png"></p>
+        <p><img id="rlogo"></p>
         <p style="font-size: 16px; font-weight:bold; text-align: center; margin-top: 20px; margin-bottom: 40px">NATIONAL YOUTH VOLUNTEERS COALITION</p>
         <table>
           <tr>
@@ -120,3 +120,9 @@
      <!-- end panel-body -->
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#rlogo').append("<src='../../../resources/images/nvyc.png'/>");
+  });
+</script>
