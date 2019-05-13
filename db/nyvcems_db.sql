@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2019 at 12:56 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.4
+-- Generation Time: May 13, 2019 at 02:02 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -179,7 +179,8 @@ INSERT INTO `ems_r_individual_info` (`rii_individ`, `rii_name`, `rii_bday`, `rii
 (2, 'Villy Ormido', '2019-03-28', 'Male', '09374829312', 'villy@gmail.com', 'Commonwealth', 'Quezon City', 'Metro Manila', 'NCR', 'Jhe Estoque', '0937483921', 'Tertiary', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Education', 1),
 (3, 'Leandro Avena IV', '2019-03-31', 'Male', '09483927584', 'ianavena@yahoo.com', 'Commonwealth', 'Quezon City', 'Metro Manila', 'NCR', 'Ian Avena', '09123456789', 'Tertiary', '2018', 'BSIT', 'N/A', 'QCPU', 'Instructor', 'Education', 1),
 (4, 'Jomella Caneda', '2019-03-29', 'Female', '09887654321', 'jomella@gmail.com', 'Unknown', 'Unknown', 'Unknown', 'Central Visayas', 'Rosalinda Caneda', 'N/A', 'Tertiay', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Empowerment', 1),
-(5, 'Janelle Caneda', '2001-04-15', 'Female', '0937483923', 'janellecaneda@yahoo.com', 'Unknown', 'San Jose del Monte', 'Bulacan', 'Central Luzon', 'Rosalinda Caneda', '09375849302', 'Secondary', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Global Mobility', 1);
+(5, 'Janelle Caneda', '2001-04-15', 'Female', '0937483923', 'janellecaneda@yahoo.com', 'Unknown', 'San Jose del Monte', 'Bulacan', 'Central Luzon', 'Rosalinda Caneda', '09375849302', 'Secondary', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Global Mobility', 1),
+(6, 'Mirai Kuriyama', '2000-05-31', 'Female', '09876543211', 'miraikuriyama@yahoo.com', 'Laoag', 'Laoag', 'Ilocos Norte', 'Ilocos Region', 'Cristian Balatbat', '09876543212', 'College Undergraduate', '2019', 'BSIT', 'Summa Cum-Laude', 'N/A', 'N/A', 'Economic Empowerment', 1);
 
 -- --------------------------------------------------------
 
@@ -589,6 +590,7 @@ CREATE TABLE `ems_t_individual_membership` (
   `tim_date` date NOT NULL,
   `tim_individ` int(11) NOT NULL,
   `tim_disid` int(11) NOT NULL,
+  `tim_region_id` int(10) NOT NULL,
   `tim_status` varchar(20) DEFAULT 'Pending',
   `tim_activeflag` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -597,12 +599,13 @@ CREATE TABLE `ems_t_individual_membership` (
 -- Dumping data for table `ems_t_individual_membership`
 --
 
-INSERT INTO `ems_t_individual_membership` (`tim_indivmemid`, `tim_transcode`, `tim_amount`, `tim_date`, `tim_individ`, `tim_disid`, `tim_status`, `tim_activeflag`) VALUES
-(1, 'BL2grtTmxl', '150.00', '2019-03-30', 1, 2, 'Paid', 0),
-(2, 'Hagj0R3YFf', '150.00', '2019-03-30', 2, 2, 'Paid', 1),
-(3, 'Bqgl8h0Kxn', '150.00', '2019-03-29', 3, 2, 'Paid', 1),
-(4, 'UBx83sDEih', '150.00', '2019-04-17', 4, 4, 'Pending', 1),
-(5, 'l6jrhnZHRs', '150.00', '2019-04-18', 5, 2, 'Pending', 1);
+INSERT INTO `ems_t_individual_membership` (`tim_indivmemid`, `tim_transcode`, `tim_amount`, `tim_date`, `tim_individ`, `tim_disid`, `tim_region_id`, `tim_status`, `tim_activeflag`) VALUES
+(1, 'BL2grtTmxl', '150.00', '2019-03-30', 1, 2, 5, 'Paid', 0),
+(2, 'Hagj0R3YFf', '150.00', '2019-03-30', 2, 2, 4, 'Paid', 1),
+(3, 'Bqgl8h0Kxn', '150.00', '2019-03-29', 3, 2, 5, 'Paid', 1),
+(4, 'UBx83sDEih', '150.00', '2019-04-17', 4, 4, 9, 'Pending', 1),
+(5, 'l6jrhnZHRs', '150.00', '2019-04-18', 5, 2, 5, 'Paid', 1),
+(6, '9DaReSXo6H', '150.00', '2019-05-13', 6, 1, 1, 'Paid', 1);
 
 -- --------------------------------------------------------
 
@@ -719,7 +722,9 @@ CREATE TABLE `ems_t_payment_indivmem` (
 INSERT INTO `ems_t_payment_indivmem` (`tpi_paymentid`, `tpi_indivmemid`, `tpb_date`, `tpb_bank`, `tpb_branch`, `tpb_controlno`, `tpb_activeflag`) VALUES
 (1, 1, '2019-03-30', 'East West Bank', 'Tungkong Mangga', '9484029485', 1),
 (2, 2, '2019-03-30', 'East West Bank', 'Fairview', '457203496', 1),
-(3, 3, '2019-03-31', 'Landbank', 'Fairview', '0349572745', 1);
+(3, 3, '2019-03-31', 'Landbank', 'Fairview', '0349572745', 1),
+(4, 6, '0000-00-00', '', '', '', 1),
+(5, 5, '0000-00-00', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -1086,7 +1091,7 @@ ALTER TABLE `ems_r_event_type`
 -- AUTO_INCREMENT for table `ems_r_individual_info`
 --
 ALTER TABLE `ems_r_individual_info`
-  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `rii_individ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ems_r_logistics`
@@ -1182,7 +1187,7 @@ ALTER TABLE `ems_t_expenditures`
 -- AUTO_INCREMENT for table `ems_t_individual_membership`
 --
 ALTER TABLE `ems_t_individual_membership`
-  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tim_indivmemid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ems_t_org_membership`
@@ -1218,7 +1223,7 @@ ALTER TABLE `ems_t_payment_eventregnonmem_onsite`
 -- AUTO_INCREMENT for table `ems_t_payment_indivmem`
 --
 ALTER TABLE `ems_t_payment_indivmem`
-  MODIFY `tpi_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tpi_paymentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ems_t_payment_orgmem`

@@ -38,6 +38,12 @@
 
 	// $getdisid = mysqli_query($connection,"SELECT rd_dis_id, rd_dis_name, rd_dis_description FROM ems_r_district WHERE rd_dis_description LIKE '$region' rd_dis_status = 1");
 
+	$getregion_ID = mysqli_query($connection,"SELECT * FROM ems_r_region WHERE rr_name = '$region'");
+	while($rowreg = mysqli_fetch_assoc($getregion_ID))
+	{
+	  $region_ID = $rowreg['rr_id'];
+	}
+
 
 	if ($region == "Ilocos Region" || $region == "Cagayan Valley" || $region == "CAR"){
     	$district = 1;
@@ -62,7 +68,7 @@
 	// date_default_timezone_set('Asia/Manila');
 	// $date = date('m/d/Y');
 
-	$query1 = "INSERT INTO `ems_t_individual_membership` (tim_transcode, tim_amount, tim_date, tim_individ, tim_disid) VALUES ('$transno', '$amount', CURRENT_DATE, '$a', '$district')";
+	$query1 = "INSERT INTO `ems_t_individual_membership` (tim_transcode, tim_amount, tim_date, tim_individ, tim_disid, tim_region_id) VALUES ('$transno', '$amount', CURRENT_DATE, '$a', '$district', '$region_ID')";
 
 	$runquery1 = mysqli_query($connection, $query1);	
 

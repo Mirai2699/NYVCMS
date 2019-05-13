@@ -112,8 +112,8 @@
 				                           <?php
 				                              include("../../../dbconnection.php");  
 				                              $curryear = date('Y');
-				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` AS DIS
-				                              	WHERE DIS.rd_dis_status = 1");
+				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` 
+				                              	WHERE rd_dis_status = 1");
 				                              while($row = mysqli_fetch_assoc($view_query))
 				                                  {   
 				                                      $id = $row["rd_dis_id"];
@@ -123,13 +123,10 @@
 				                               name: '<?php echo $name?>',
 				                               y: <?php
 				                               $view_query2 = mysqli_query($connection,"SELECT COUNT(tim_indivmemid) AS NUM 
-				                               	FROM `ems_r_district` AS DIS
-				                               	INNER JOIN `ems_t_individual_membership` AS MEM
-				                                ON DIS.rd_dis_id = MEM.tim_disid
-				                               	WHERE MEM.tim_disid = '$id'
-				                               	AND MEM.tim_activeflag = 1
-				                               	AND MEM.tim_status = 'Paid'
-				                               	AND DIS.rd_dis_status = 1");
+				                               	FROM `ems_t_individual_membership` 
+				                               	WHERE tim_disid = '$id'
+				                               	AND tim_activeflag = 1
+				                               	AND tim_status = 'Paid'");
 				                                   while($row2 = mysqli_fetch_assoc($view_query2))
 				                                       {   
 				                                           $NoM = $row2["NUM"];
@@ -145,49 +142,62 @@
 			            },
 			           ],
 			           drilldown: {
-			           	series: [
-				           	{
-				           		data: [
-				           			<?php
-				                              include("../../../dbconnection.php");  
-				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` AS DIS
-				                              	INNER JOIN `ems_r_region` AS RG
-				                              	ON DIS.rd_dis_id = RG.rr_disid
-				                              	WHERE DIS.rd_dis_status = 1
-				                              	AND RG.rr_activeflag = 1");
-				                              while($row = mysqli_fetch_assoc($view_query))
-				                                  {   
-				                                      $disid = $row["rd_dis_id"];
-				                                      $regid = $row["rr_id"];
-				                                      $name = $row["rr_name"];
-				                           ?>
-				                           {
-				                               id: 'dis<?php echo $disid ?>',
-				                               name: '<?php echo $name ?>',
-				                               y: <?php
-				                               $view_query2 = mysqli_query($connection,"SELECT COUNT(tim_indivmemid) AS NUM1 
-				                               	FROM `ems_r_district` AS DIS
-				                               	INNER JOIN `ems_r_region` AS RG
-				                              	ON DIS.rd_dis_id = RG.rr_disid
-				                               	INNER JOIN `ems_t_individual_membership` AS MEM
-				                                ON DIS.rd_dis_id = MEM.tim_disid
-				                               	WHERE RG.rr_id = '$regid'
-				                               	AND MEM.tim_activeflag = 1
-				                               	AND MEM.tim_status = 'Paid'
-				                               	AND DIS.rd_dis_status = 1
-				                               	AND RG.rr_activeflag = 1");
-				                                   while($row2 = mysqli_fetch_assoc($view_query2))
+			           	     series: [
+			           	      //requisition types
+			           	     <?php
+			           	        
+			           	        $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` 
+			           	        	WHERE rd_dis_status = 1");
+			           	        while($row = mysqli_fetch_assoc($view_query))
+			           	            {   
+			           	                $id = $row["rd_dis_id"];
+			           	                $name = $row["rd_dis_name"];
+			           	     ?>
+			           	     {
+			           	        name: 'Total Number of Members',
+			           	        id: 'dis<?php echo $id ?>',
+			           	        type:'column',
+			           	        data: [
+			           	              <?php
+
+			           	                   $view_query3 = mysqli_query($connection,"SELECT * FROM `ems_r_region`
+			           	                                                          WHERE rr_disid = '$id'");
+			           	                    while($row3 = mysqli_fetch_assoc($view_query3))
+			           	                        {   
+			           	                            $reg_ID = $row3["rr_id"];
+			           	                            $display = $row3["rr_name"];
+			           	                          
+
+			           	              ?>
+
+			           	              { 
+			           	                  name: '<?php echo $display ?>',
+			           	                  y: <?php
+			           	                       $view_query4 = mysqli_query($connection,"SELECT COUNT(tim_indivmemid) AS NUM 
+				                               	FROM `ems_t_individual_membership` 
+				                               	WHERE tim_region_id = '$reg_ID'
+				                               	AND tim_activeflag = 1
+				                               	AND tim_status = 'Paid'");
+				                                   while($row4 = mysqli_fetch_assoc($view_query4))
 				                                       {   
-				                                           $NoM = $row2["NUM1"];
-				                                           echo ($NoM);
+				                                           $NoM = $row4["NUM"];
 				                                       }
-				                                  ?>,
-				                               
-				                               
-				                           },
-				                       <?php } ?>
-				           		]
-				           	}
+			           	                      echo $NoM;
+			           	                          
+			           	                        
+			           	                     ?>,
+			           	                  
+			           	              },
+			           	              <?php
+			           	              }?>
+			           	        ]
+			           	 
+			           	      }, 
+			           	  <?php
+			           	    }
+			           	  ?>
+			           	     
+
 			           	]
 			           }
 
