@@ -80,8 +80,11 @@
 			            title: {
 			                text: 'Total Number of Members per Disrtict For the Year <?php echo date("Y")?>'
 			            },
+			             subtitle: {
+						    text: 'Click the bars to view the total number of members per region.'
+						},
 			            xAxis: {
-			                categories: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6']
+			               type: 'category'
 			            },
 			            yAxis: {
 			                title: {
@@ -105,93 +108,88 @@
 			            series: [{
 			                name: 'Total number of Members',
 			                data: [
-			                          <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS1 
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 1 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS1"];
-                                                    echo ($dis);
-                                                }
-			                           ?>,
-			                           <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS2 
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 2 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS2"];
-                                                    echo ($dis);
-                                                }
-			                           ?>,
-			                           <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS3 
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 3 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS3"];
-                                                    echo ($dis);
-                                                }
-			                           ?>,
-			                           <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS4 
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 4 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS4"];
-                                                    echo ($dis);
-                                                }
-			                           ?>,
-			                           <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS5 
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 5 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS5"];
-                                                    echo ($dis);
-                                                }
-			                           ?>,
-			                           <?php
-			                              	include("../../../dbconnection.php");  
-			                              	$curryear = date('Y');
-			                              	$view_query1 = mysqli_query($connection, "SELECT COUNT(tim_indivmemid) AS DIS6
-			                              		FROM ems_t_individual_membership 
-			                                                 WHERE tim_status = 'Paid'
-			                                                 AND tim_activeflag = 1
-			                                                 AND tim_disid = 6 ");
-											while($row = mysqli_fetch_assoc($view_query1))
-                                                {   
-                                                    $dis = $row["DIS6"];
-                                                    echo ($dis);
-                                                }
-			                           ?>
-			                       ]
+				                          
+				                           <?php
+				                              include("../../../dbconnection.php");  
+				                              $curryear = date('Y');
+				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` AS DIS
+				                              	WHERE DIS.rd_dis_status = 1");
+				                              while($row = mysqli_fetch_assoc($view_query))
+				                                  {   
+				                                      $id = $row["rd_dis_id"];
+				                                      $name = $row["rd_dis_name"];
+				                           ?>
+				                           {
+				                               name: '<?php echo $name?>',
+				                               y: <?php
+				                               $view_query2 = mysqli_query($connection,"SELECT COUNT(tim_indivmemid) AS NUM 
+				                               	FROM `ems_r_district` AS DIS
+				                               	INNER JOIN `ems_t_individual_membership` AS MEM
+				                                ON DIS.rd_dis_id = MEM.tim_disid
+				                               	WHERE MEM.tim_disid = '$id'
+				                               	AND MEM.tim_activeflag = 1
+				                               	AND MEM.tim_status = 'Paid'
+				                               	AND DIS.rd_dis_status = 1");
+				                                   while($row2 = mysqli_fetch_assoc($view_query2))
+				                                       {   
+				                                           $NoM = $row2["NUM"];
+				                                           echo ($NoM);
+				                                       }
+				                                  ?>,
+				                                drilldown:  'dis<?php echo $id ?>',
+				                              
+				                               
+				                           },
+				                       <?php } ?>
+				                  ]
 			            },
-			           ]
+			           ],
+			           drilldown: {
+			           	series: [
+				           	{
+				           		data: [
+				           			<?php
+				                              include("../../../dbconnection.php");  
+				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_district` AS DIS
+				                              	INNER JOIN `ems_r_region` AS RG
+				                              	ON DIS.rd_dis_id = RG.rr_disid
+				                              	WHERE DIS.rd_dis_status = 1
+				                              	AND RG.rr_activeflag = 1");
+				                              while($row = mysqli_fetch_assoc($view_query))
+				                                  {   
+				                                      $disid = $row["rd_dis_id"];
+				                                      $regid = $row["rr_id"];
+				                                      $name = $row["rr_name"];
+				                           ?>
+				                           {
+				                               id: 'dis<?php echo $disid ?>',
+				                               name: '<?php echo $name ?>',
+				                               y: <?php
+				                               $view_query2 = mysqli_query($connection,"SELECT COUNT(tim_indivmemid) AS NUM1 
+				                               	FROM `ems_r_district` AS DIS
+				                               	INNER JOIN `ems_r_region` AS RG
+				                              	ON DIS.rd_dis_id = RG.rr_disid
+				                               	INNER JOIN `ems_t_individual_membership` AS MEM
+				                                ON DIS.rd_dis_id = MEM.tim_disid
+				                               	WHERE RG.rr_id = '$regid'
+				                               	AND MEM.tim_activeflag = 1
+				                               	AND MEM.tim_status = 'Paid'
+				                               	AND DIS.rd_dis_status = 1
+				                               	AND RG.rr_activeflag = 1");
+				                                   while($row2 = mysqli_fetch_assoc($view_query2))
+				                                       {   
+				                                           $NoM = $row2["NUM1"];
+				                                           echo ($NoM);
+				                                       }
+				                                  ?>,
+				                               
+				                               
+				                           },
+				                       <?php } ?>
+				           		]
+				           	}
+			           	]
+			           }
 
 			        });
 			    </script>               
@@ -210,7 +208,7 @@
 			            title: {
 			                text: 'Total Number of Organizations per Disrtict For the Year <?php echo date("Y")?>'
 			            },
-			            xAxis: {
+						xAxis: {
 			                categories: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6']
 			            },
 			            yAxis: {

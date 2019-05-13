@@ -21,7 +21,7 @@
 	$position = $_POST['_position'];
 	$advoc = $_POST['_advoc'];
 
-	$query = "INSERT INTO `ems_r_individual_info` (rii_name, rii_bday, rii_gender, rii_conno, rii_email, rii_barangay, rii_city, rii_province, rii_region, rii_conperson, rii_conpersonno, rii_educattainment, rii_yeargraduated, rii_degree, rii_awards, rii_company, rii_position, rii_advoc) VALUES ('$name', '$bday', '$gender', '$conno', '$email', '$address', '$conper', '$conperno', '$educattain', '$yeargrad', '$degree', '$barangay', '$city', '$province', '$region', '$company', '$position', '$advoc')";
+	$query = "INSERT INTO `ems_r_individual_info` (rii_name, rii_bday, rii_gender, rii_conno, rii_email, rii_barangay, rii_city, rii_province, rii_region, rii_conperson, rii_conpersonno, rii_educattainment, rii_yeargraduated, rii_degree, rii_awards, rii_company, rii_position, rii_advoc) VALUES ('$name', '$bday', '$gender', '$conno', '$email', '$barangay', '$city', '$province', '$region', '$conper', '$conperno', '$educattain', '$yeargrad', '$degree', '$award', '$company', '$position', '$advoc')";
 
 	$runquery = mysqli_query($connection, $query); 
 

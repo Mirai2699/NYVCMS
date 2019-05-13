@@ -341,7 +341,7 @@ if (isset($_GET['regEvent']))
                                 <div class="form-group">
 									<label class="control-label col-md-4 col-sm-4" for="message">Type of payment * :</label>
 									<div class="col-md-6 col-sm-6">
-                                        <select class="form-control" name="nmr_payment" data-parsley-required="true"placeholder="Gender">
+                                        <select class="form-control" name="nmr_payment" data-parsley-required="true" >
 		                                           				<option></option>
 		                                           				<option value="Onsite">On-site</option>	
 		                                           				<option value="Bank">Bank</option>	

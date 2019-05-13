@@ -109,85 +109,88 @@
 			<!-- end row -->
 			<!-- begin row -->
 			<div class="col-md-12" style="margin-bottom: 30px">
-			    <div id="daterep" style="width: 100%; height: 500px;border:1px solid black;"></div>
-			    <script type="text/javascript">
-			        Highcharts.chart('daterep', {
-			            chart: {
-			                type: 'line'
-			            },
-			            title: {
-			                text: 'Monthly Collective Number of Attendees in All Events in the Year <?php echo date('Y');?>'
-			            },
-			            xAxis: {
-			                categories: [<?php
-                                $curryear = date("Y");
+					<div id="attendance" style="width: 100%; height: 500px;border:1px solid black;"></div>
+				    <script type="text/javascript">
+					        Highcharts.chart('attendance', {
+					        chart: {
+					            type: 'column'
+					        },
+					        title: {
+					            text: 'Number of Attendees per Event'
+					        },
+					        
+					        xAxis: {
+					            type: 'category',
+					            title: {
+					                text: null
+					            },
+					            min: 0,
+					            scrollbar: {
+					                enabled: true
+					            },
+					            tickLength: 0
+					        },
+					        yAxis: {
+					            title: {
+					                text: null
+					            }
+					        },
+					        legend: {
+					            enabled: false
+					        },
+					        plotOptions: {
+					            series: {
+					            	colorByPoint: true,
+					                borderWidth: 0,
+					                dataLabels: {
+					                    enabled: true,
+					                    format: '{point.y:.0f}'
+					                }
+					            }
+					        },
 
-                                     $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month, monthname(re_event_enddate) AS Name from ems_r_event WHERE year(re_event_enddate) = '$curryear'");
-                                    while($row2 = mysqli_fetch_assoc($view_query2))
-                                        {   
-                                            $eventMonth = $row2["Month"];
-                                            $m_name = $row2["Name"];
-                                            echo '\''.$m_name.'\',';
-                                        }
-                             ?>]
-			            },
-			            yAxis: {
-			                title: {
-			                    text: 'Total Number of Attendees'
-			                }
-			            },
+					        tooltip: {
+					            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+					            pointFormat: '<span style="color:{point.color}">{point.name}</span>:Total of  <b>{point.y:.0sf}</b><br/>'
+					        },
+				            series: [{
+				                name: 'Number of Attendees',
+				                data: [
+				                          
+				                           <?php
+				                              include("../../../dbconnection.php");  
+				                              $curryear = date('Y');
+				                              $view_query = mysqli_query($connection,"SELECT * FROM `ems_r_event` AS EVENT
+				                              	INNER JOIN `ems_t_attendance` AS ATT
+				                              	ON EVENT.re_event_id = ATT.ta_event_id");
+				                              while($row = mysqli_fetch_assoc($view_query))
+				                                  {   
+				                                      $id = $row["re_event_id"];
+				                                      $name = $row["re_event_name"];
+				                           ?>
+				                           {
+				                               name: '<?php echo $name?>',
+				                               y: <?php
+				                               $view_query2 = mysqli_query($connection,"SELECT COUNT(ta_attendance_id) AS attendees 
+				                               	FROM `ems_t_attendance` AS A 
+				                               	INNER JOIN `ems_r_event` AS E
+				                               	ON A.ta_event_id = E.re_event_id
+				                               	WHERE A.ta_event_id = '$id'");
+				                                   while($row2 = mysqli_fetch_assoc($view_query2))
+				                                       {   
+				                                           $Att = $row2["attendees"];
+				                                           echo ($Att);
+				                                       }
+				                                  ?>,
+				                               
+				                           },
+				                       <?php } ?>
+				                       ]
+				            },
+				           ]
 
-			            plotOptions: {
-			                line: {
-			                    dataLabels: {
-			                        enabled: true
-			                    },
-			                    enableMouseTracking: true
-			                }
-			            },
-			            series: [{
-			                name: 'Number of attendees',
-			                data: [
-			                      <?php
-			                        $curryear = date("Y");
-			                        $baseyear = ($curryear - 1);
-
-			                        $view_query2 = mysqli_query($connection,"SELECT DISTINCT month(re_event_enddate) AS Month_End, monthname(re_event_enddate) AS Month_Name from ems_r_event WHERE year(re_event_enddate) = ".$curryear." ORDER BY month(re_event_enddate) ASC");
-			                            while($row2 = mysqli_fetch_assoc($view_query2))
-			                                {   
-			                                    $eventMonth = $row2["Month_End"];
-			                                    $eventMonthName = $row2["Month_Name"];
-			                      ?>
-			                    {
-			                            name: '<?php
-			                                      echo $eventMonthName; 
-			                                   ?>',
-			                            y: <?php 
-			                                  $view_query3 = mysqli_query($connection,"SELECT COUNT(ta_attendance_id) AS attendees
-			                                  											FROM `ems_t_attendance` AS ATT 
-			                                  											INNER JOIN `ems_r_event` AS EVE 
-			                                  											ON ATT.ta_event_id = EVE.re_event_id
-			                                  											WHERE month(ta_date_attended) = ".$eventMonth." AND year(ta_date_attended) = ".$curryear." ");
-			                                  $total = 0;
-			                                  while($row3 = mysqli_fetch_assoc($view_query3))
-			                                      {
-			                                        
-			                                        $eventMonthQty = $row3["attendees"];
-			                                        $total = $total + $eventMonthQty;
-			                                        echo($total);
-			                                      }
-			                               ?>
-			                    },
-			                      <?php
-			                      }
-			                      ?>
-			                      ]
-			            },
-			           
-			          ]
-
-			        });
-			    </script>
+				        });
+				    </script>    
 			</div>
 
 			<div class="col-md-6" style="margin-bottom: 30px">
@@ -262,7 +265,9 @@
 				                                  ?>,
 				                               
 				                           },
-				                       <?php } ?>
+				                       <?php 
+				                   } 
+				                   ?>
 				                       ]
 				            },
 				           ]

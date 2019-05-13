@@ -305,9 +305,12 @@
 									<!-- begin wizard step-5 -->
 									<div>
 									    <div class="jumbotron m-b-0 text-center">
-                                            <h3>Membership Registration Created Successfully</h3>
-                                            <p>Thank you for registering as member. Please do wait for the confirmation of your application,<br> we will contact you soon. :)</p>
-                                            <p><a class="btn btn-success btn-lg" id="btn_addindivmem" role="button">Ok</a></p>
+                                            <h3>Implementing Rules and Regulations of the Data Privacy Act of 2012</h3>
+                                            <p>By clicking the submission button, it means that you agree to the terms, conditions and provisionaries of the National Privacy Commission in regards to the compliance to the Data Privacy Act of 2012, in terms of collecting personal and senstitive information.</p>
+                                            <p>
+                                            	<a class="btn btn-primary btn-lg" data-toggle="modal" role="button" href="ui_modal_notification.html#modal-view">View IRR</a>
+                                            	<a class="btn btn-success btn-lg" id="btn_addindivmem" role="button">Submit</a>
+                                            </p>
                                         </div>
 									</div>
 									<!-- begin wizard step-5 -->
@@ -328,6 +331,79 @@
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
+
+	<div class='modal fade' id="modal-view">
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+					<h4 class='modal-title text-center'>Implementing Rules and Regulations of the Data Privacy Act of 2012</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert  m-b-0">
+						<p> Pursuant to the mandate of the National Privacy Commission to administer and implement the provisions of the Data Privacy Act of 2012, and to monitor and ensure compliance of the country with international standards set for data protection, the following rules and regulations are hereby promulgated to effectively implement the provisions of the Act:</p>
+						<br>
+						<strong>This modal discusses only the Section 19: Principles in Collection, Processing and Retention, under the Rule IV: Data Privacy Principles Section 19.</strong>
+						<br><br>
+						<p>General principles in collection, processing and retention. The processing of personal data shall adhere to the following general principles in the collection, processing, and retention of personal data:</p>
+						<br>
+						<span class="semi-bold"><em>a. Collection must be for a declared, specified, and legitimate purpose.</em></span>
+						<br><br>
+						<p>1. Consent is required prior to the collection and processing of personal data, subject to exemptions provided by the Act and other applicable laws and regulations. When consent is required, it must be time-bound in relation to the declared, specified and legitimate purpose. Consent given may be withdrawn. </p>
+						<br>
+						<p>2. The data subject must be provided specific information regarding the purpose and extent of processing, including, where applicable, the automated processing of his or her personal data for profiling, or processing for direct marketing, and data sharing. </p>
+						<br>
+						<p>3. Purpose should be determined and declared before, or as soon as reasonably practicable, after collection. </p>
+						<br>
+						<p>4. Only personal data that is necessary and compatible with declared, specified, and legitimate purpose shall be collected.</p>
+						<br>
+						<span class="semi-bold"><em>b. Personal data shall be processed fairly and lawfully.</em></span>
+						<br><br>
+						<p>1. Processing shall uphold the rights of the data subject, including the right to refuse, withdraw consent, or object. It shall likewise be transparent, and allow the data subject sufficient information to know the nature and extent of processing. </p>
+						<br>
+						<p>2. Information provided to a data subject must always be in clear and plain language to ensure that they are easy to understand and access. </p>
+						<br>
+						<p>3. Processing must be in a manner compatible with declared, specified, and legitimate purpose.</p>
+						<br>
+						<p>4. Processed personal data should be adequate, relevant, and limited to what is necessary in relation to the purposes for which they are processed.</p>
+						<br>
+						<p>5. Processing shall be undertaken in a manner that ensures appropriate privacy and security safeguards.</p>
+						<br>
+						<span class="semi-bold"><em>c. Processing should ensure data quality.</em></span>
+						<br><br>
+						<p>1. Personal data should be accurate and where necessary for declared, specified and legitimate purpose, kept up to date. </p>
+						<br>
+						<p>2. Inaccurate or incomplete data must be rectified, supplemented, destroyed or their further processing restricted.</p>
+						<br>
+						<span class="semi-bold"><em>d. Personal Data shall not be retained longer than necessary.</em></span>
+						<br><br>
+						<p>1. Retention of personal data shall only for as long as necessary: </p>
+						<br>
+						<p>(a) for the fulfillment of the declared, specified, and legitimate purpose, or when the processing relevant to the purpose has been terminated; </p>
+						<br>
+						<p>(b) for the establishment, exercise or defense of legal claims; or </p>
+						<br>
+						<p>(c) for legitimate business purposes, which must be consistent with standards followed by the applicable industry or approved by appropriate government agency. </p>
+						<br>
+						<p>2. Retention of personal data shall be allowed in cases provided by law. </p>
+						<br>
+						<p>3. Personal data shall be disposed or discarded in a secure manner that would prevent further processing, unauthorized access, or disclosure to any other party or the public, or prejudice the interests of the data subjects.</p>
+						<br>
+						<span class="semi-bold"><em>e. Any authorized further processing shall have adequate safeguards.</em></span>
+						<br><br>
+						<p>1. Personal data originally collected for a declared, specified, or legitimate purpose may be processed further for historical, statistical, or scientific purposes, and, in cases laid down in law, may be stored for longer periods, subject to implementation of the appropriate organizational, physical, and technical security measures required by the Act in order to safeguard the rights and freedoms of the data subject. </p>
+						<br>
+						<p>2. Personal data which is aggregated or kept in a form which does not permit identification of data subjects may be kept longer than necessary for the declared, specified, and legitimate purpose. </p>
+						<br>
+						<p>3. Personal data shall not be retained in perpetuity in contemplation of a possible future use yet to be determined.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a href='' class='btn btn-sm btn-primary' data-dismiss='modal'>Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="resources/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
@@ -424,11 +500,11 @@
     			url: 'functionalities/add_membership_indiv.php',
     			async: false,
     			success: function(data){
-    				// alert(data);
+    				alert("Membership Registration Created Successfully! Thank you for registering as a member. Please do wait for the confirmation of your application. We will contact you soon.");
     				setTimeout(location.reload.bind(location), 1000)
     			},
     			error: function(reponse){
-    				alert('something went wrong')
+    				alert('Oops, something went wrong.')
     			}
 
     		})

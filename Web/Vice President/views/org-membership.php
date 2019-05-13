@@ -67,7 +67,7 @@
 																<td>".$conno."</td>
 																<td>".$email."</td>
 											                    <td width='15%'>
-											                        <a onclick='btn_inactive(".$id.")' class='btn btn-danger btn_sm'>Inactive</i>
+											                        <a class='btn btn-danger btn_sm' data-toggle='modal' href='ui_modal_notification.html#modal-inactive".$id."'>Inactive</i>
 											                        </a>
 											                    </td>
 															</tr>";
@@ -224,6 +224,43 @@
 	</div>
 	<!-- end page container -->
 	
+	<!-- inactive modal -->
+	<?php
+
+		$query = "SELECT * FROM ems_t_org_membership AS M  INNER JOIN ems_r_org_info AS I ON M.tom_orgid = I.roi_orgid WHERE M.tom_status = 'Paid' AND M.tom_activeflag = 1";
+
+		$runquery = mysqli_query($connection, $query);
+
+		while ($row = mysqli_fetch_assoc($runquery)){
+
+			$name = $row['roi_orgname'];
+			$representative = $row['roi_repname'];
+			$conno = $row['roi_orgconno'];
+			$email = $row['roi_orgemail'];
+			$id = $row['tom_orgmemid'];	
+	?>
+
+	<div class='modal fade' id="modal-inactive<?php echo $id ?>">
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+					<h4 class='modal-title'>Change Status</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger m-b-0">
+						<p>Are you sure you want to change the status of this org?</p>
+					</div>
+				</div>
+				<div class='modal-footer'>
+					<a href='' class='btn btn-sm btn-white' data-dismiss='modal'>No</a>
+					<a href='' onclick="btn_inactive(<?php echo $id ?>)" class='btn btn-sm btn-danger'>Yes</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <?php } ?>
+    <!-- inactive modal -->
 	
 	<script>
 		$(document).ready(function() {
